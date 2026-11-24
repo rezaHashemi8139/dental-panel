@@ -1,0 +1,39 @@
+import { Code, ConnectError, createClient, type Interceptor } from "@connectrpc/connect";
+import { createConnectTransport } from "@connectrpc/connect-web";
+import { AdminService } from "@/gen/dental/v1/admin_pb";
+import { endSession, getSession } from "@/auth/store";
+
+/** Calls that take longer fail with DEADLINE_EXCEEDED (shown as "server unreachable"). */
+const TIMEOUT_MS = 20_000;
+
+/**
+ * Sends the admin session token with every call. A call the server refuses with
+ * UNAUTHENTICATED (session expired or revoked, administrator disabled) ends the
+ * session here too, so the panel goes back to the login screen and says why.
+ */
+const sessionInterceptor: Interceptor = (next) => async (req) => {
+  const session = getSession();
+  if (session) req.header.set("Authorization", `Bearer ${session.token}`);
+  try {
+    return await next(req);
+  } catch (error) {
+    // Only the session that was sent: not a failed login, not one that already changed.
+    if (session && getSession() === session && ConnectError.from(error).code === Code.Unauthenticated) {
+      endSession({ key: "errors.sessionEnded" });
+    }
+    throw error;
+  }
+};
+
+/**
+ * The RPCs are served on the panel's own origin: forwarded to the dental server by
+ * the Vite dev server (vite.config.ts) or, in production, by the web server in front
+ * of both (see README.md). Uses the Connect protocol with JSON.
+ */
+const transport = createConnectTransport({
+  baseUrl: window.location.origin,
+  interceptors: [sessionInterceptor],
+  defaultTimeoutMs: TIMEOUT_MS,
+});
+
+export const adminClient = createClient(AdminService, transport);

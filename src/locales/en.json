@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "code": "en",
+    "name": "English",
+    "abbr": "EN",
+    "dir": "ltr",
+    "version": 1
+  },
+  "app": {
+    "title": "Smart Management Base",
+    "panel": "Admin panel"
+  },
+  "nav": {
+    "label": "Main menu",
+    "home": "Home"
+  },
+  "theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "auth": {
+    "login": {
+      "title": "Administrator login",
+      "description": "Log in with your administrator username and password.",
+      "submit": "Log in",
+      "working": "Logging in..."
+    },
+    "fields": {
+      "username": "Username",
+      "password": "Password"
+    },
+    "validation": {
+      "required": "Please fill in this field."
+    }
+  },
+  "account": {
+    "label": "Account",
+    "logout": "Log out"
+  },
+  "home": {
+    "welcome": "Welcome, {{name}}",
+    "description": "Management sections will be added to the side menu step by step.",
+    "sessionExpires": "This session is valid until {{time}}."
+  },
+  "errors": {
+    "invalidCredentials": "Wrong username or password.",
+    "userDisabled": "This account has been disabled.",
+    "invalidInput": "Some of the information entered is not valid.",
+    "sessionEnded": "Your session has ended. Please log in again.",
+    "sessionExpired": "Your session has expired. Please log in again.",
+    "serverUnreachable": "Could not connect to the server. Check your network connection.",
+    "serverUnavailable": "The server is temporarily unavailable. Please try again shortly.",
+    "unsupported": "The server does not support this yet. Please update the server.",
+    "server": "The server returned an error. ({{details}})",
+    "unknown": "An unknown error occurred. ({{details}})"
+  }
+}

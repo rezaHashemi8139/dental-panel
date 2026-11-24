@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "code": "de",
+    "name": "Deutsch",
+    "abbr": "DE",
+    "dir": "ltr",
+    "version": 1
+  },
+  "app": {
+    "title": "Intelligente Verwaltungsbasis",
+    "panel": "Administrationsbereich"
+  },
+  "nav": {
+    "label": "Hauptmenü",
+    "home": "Startseite"
+  },
+  "theme": {
+    "label": "Design",
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "language": {
+    "label": "Sprache"
+  },
+  "auth": {
+    "login": {
+      "title": "Administrator-Anmeldung",
+      "description": "Melden Sie sich mit Ihrem Administrator-Benutzernamen und Passwort an.",
+      "submit": "Anmelden",
+      "working": "Anmeldung läuft..."
+    },
+    "fields": {
+      "username": "Benutzername",
+      "password": "Passwort"
+    },
+    "validation": {
+      "required": "Bitte füllen Sie dieses Feld aus."
+    }
+  },
+  "account": {
+    "label": "Konto",
+    "logout": "Abmelden"
+  },
+  "home": {
+    "welcome": "Willkommen, {{name}}",
+    "description": "Die Verwaltungsbereiche werden nach und nach im Seitenmenü ergänzt.",
+    "sessionExpires": "Diese Sitzung ist bis {{time}} gültig."
+  },
+  "errors": {
+    "invalidCredentials": "Falscher Benutzername oder falsches Passwort.",
+    "userDisabled": "Dieses Konto wurde deaktiviert.",
+    "invalidInput": "Einige der eingegebenen Angaben sind ungültig.",
+    "sessionEnded": "Ihre Sitzung wurde beendet. Bitte melden Sie sich erneut an.",
+    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+    "serverUnreachable": "Keine Verbindung zum Server. Prüfen Sie Ihre Netzwerkverbindung.",
+    "serverUnavailable": "Der Server ist vorübergehend nicht erreichbar. Bitte versuchen Sie es gleich noch einmal.",
+    "unsupported": "Der Server unterstützt dies noch nicht. Bitte aktualisieren Sie den Server.",
+    "server": "Der Server hat einen Fehler gemeldet. ({{details}})",
+    "unknown": "Ein unbekannter Fehler ist aufgetreten. ({{details}})"
+  }
+}

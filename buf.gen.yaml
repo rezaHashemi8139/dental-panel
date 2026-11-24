@@ -1,0 +1,15 @@
+# Generates TypeScript from the server's API definitions (../dental-server/proto)
+# into src/gen. Run: pnpm generate (after any change to the server's .proto files).
+# Plugins come from node_modules, so nothing has to be installed globally.
+version: v2
+inputs:
+  # The server's buf workspace: its buf.yaml and buf.lock bring in protovalidate.
+  - directory: ../dental-server
+plugins:
+  - local: protoc-gen-es
+    out: src/gen
+    # Also generates buf/validate, which the API files import. Well-known types
+    # (google/protobuf/*) come from @bufbuild/protobuf/wkt instead.
+    include_imports: true
+    opt: target=ts
+clean: true
