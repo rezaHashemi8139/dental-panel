@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/health.proto.
  */
 export const file_dental_v1_health: GenFile = /*@__PURE__*/
-  fileDesc("ChZkZW50YWwvdjEvaGVhbHRoLnByb3RvEglkZW50YWwudjEiDgoMQ2hlY2tSZXF1ZXN0ImYKDUNoZWNrUmVzcG9uc2USDwoHdmVyc2lvbhgBIAEoCRIvCgtzZXJ2ZXJfdGltZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLZGF0YWJhc2Vfb2sYAyABKAgyTQoNSGVhbHRoU2VydmljZRI8CgVDaGVjaxIXLmRlbnRhbC52MS5DaGVja1JlcXVlc3QaGC5kZW50YWwudjEuQ2hlY2tSZXNwb25zZSIAYgZwcm90bzM", [file_google_protobuf_timestamp]);
+  fileDesc("ChZkZW50YWwvdjEvaGVhbHRoLnByb3RvEglkZW50YWwudjEiDgoMQ2hlY2tSZXF1ZXN0IoMBCg1DaGVja1Jlc3BvbnNlEg8KB3ZlcnNpb24YASABKAkSLwoLc2VydmVyX3RpbWUYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC2RhdGFiYXNlX29rGAMgASgIEhsKE21pbmltdW1fYXBwX3ZlcnNpb24YBCABKAkyTQoNSGVhbHRoU2VydmljZRI8CgVDaGVjaxIXLmRlbnRhbC52MS5DaGVja1JlcXVlc3QaGC5kZW50YWwudjEuQ2hlY2tSZXNwb25zZSIAYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message dental.v1.CheckRequest
@@ -51,6 +51,16 @@ export type CheckResponse = Message<"dental.v1.CheckResponse"> & {
    * @generated from field: bool database_ok = 3;
    */
   databaseOk: boolean;
+
+  /**
+   * Desktop apps older than this ("major.minor.patch") must update before they
+   * may keep working: they stop until the update is installed, and the server
+   * refuses their other calls with FAILED_PRECONDITION "update_required" (see
+   * internal/releases). Empty when no update is forced.
+   *
+   * @generated from field: string minimum_app_version = 4;
+   */
+  minimumAppVersion: string;
 };
 
 /**

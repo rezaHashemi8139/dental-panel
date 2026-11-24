@@ -12,7 +12,9 @@
   },
   "nav": {
     "label": "Main menu",
-    "home": "Home"
+    "home": "Home",
+    "plans": "Plans",
+    "subscriptions": "Subscriptions"
   },
   "theme": {
     "label": "Theme",
@@ -44,8 +46,147 @@
   },
   "home": {
     "welcome": "Welcome, {{name}}",
-    "description": "Management sections will be added to the side menu step by step.",
+    "description": "Choose a section from the side menu to manage plans and subscriptions.",
     "sessionExpires": "This session is valid until {{time}}."
+  },
+  "common": {
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "loading": "Loading...",
+    "rials": "{{amount}} rials",
+    "days_one": "{{days}} day",
+    "days_other": "{{days}} days",
+    "clinics_one": "{{clinics}} clinic",
+    "clinics_other": "{{clinics}} clinics",
+    "devicesPerClinic_one": "{{devices}} device per clinic",
+    "devicesPerClinic_other": "{{devices}} devices per clinic",
+    "empty": "—"
+  },
+  "plans": {
+    "title": "Subscription plans",
+    "description": "Plans set the clinic and device limits, duration and price of a subscription. Only active plans can be sold.",
+    "new": "New plan",
+    "edit": "Edit",
+    "empty": "No plans have been created yet.",
+    "columns": {
+      "name": "Name",
+      "maxClinics": "Clinics",
+      "maxDevices": "Devices per clinic",
+      "duration": "Duration",
+      "price": "Price",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "dialog": {
+      "createTitle": "New plan",
+      "createDescription": "A new plan can be sold right away.",
+      "editTitle": "Edit plan",
+      "editDescription": "Subscriptions already sold keep the limits and price they were sold with.",
+      "create": "Create plan",
+      "save": "Save",
+      "working": "Saving..."
+    },
+    "fields": {
+      "name": "Plan name",
+      "maxClinics": "Maximum clinics",
+      "maxDevices": "Maximum devices per clinic",
+      "durationDays": "Duration (days)",
+      "priceRials": "Price (rials)",
+      "active": "For sale",
+      "activeHint": "An inactive plan can no longer be sold; subscriptions sold from it stay as they are."
+    },
+    "validation": {
+      "nameLength": "The plan name must be 1 to 100 characters.",
+      "limit": "Enter a whole number from 1 to 1000.",
+      "durationDays": "Enter a whole number of days from 1 to 3650.",
+      "price": "Enter the price in rials, using digits only."
+    }
+  },
+  "subscriptions": {
+    "title": "Subscriptions",
+    "description": "Find a clinic owner by national ID, or by FIDA code for foreign nationals, to see their subscriptions, sell one or cancel one.",
+    "search": {
+      "type": "ID type",
+      "national": "National ID (Iranian)",
+      "foreign": "FIDA code (foreign national)",
+      "nationalId": "National ID",
+      "fidaCode": "FIDA code",
+      "nationality": "Nationality",
+      "submit": "Search"
+    },
+    "notFound": "No user with ID {{number}} was found.",
+    "user": {
+      "username": "Username",
+      "nationalId": "National ID",
+      "fidaCode": "FIDA code",
+      "nationality": "Nationality",
+      "phone": "Mobile",
+      "createdAt": "Member since",
+      "disabled": "Account disabled",
+      "paidUntil": "Subscribed until {{date}}.",
+      "noPaidTime": "No subscription in force."
+    },
+    "list": {
+      "title": "Subscriptions",
+      "empty": "This user has not bought a subscription yet.",
+      "columns": {
+        "plan": "Plan",
+        "period": "Period",
+        "limits": "Limits",
+        "price": "Price",
+        "status": "Status",
+        "note": "Note"
+      },
+      "period": "{{start}} to {{end}}",
+      "limits": "{{clinics}}, {{devices}}"
+    },
+    "status": {
+      "active": "In force",
+      "upcoming": "Upcoming",
+      "ended": "Ended",
+      "canceled": "Canceled"
+    },
+    "clinics": {
+      "title": "Clinics of this user",
+      "empty": "This user has no clinics.",
+      "columns": {
+        "name": "Clinic name",
+        "licenseNumber": "License number",
+        "city": "City",
+        "installations": "Devices",
+        "createdAt": "Registered"
+      }
+    },
+    "sell": {
+      "button": "Sell subscription",
+      "title": "Sell subscription",
+      "description": "Subscription for {{name}}. If a subscription is still in force, the new one starts when it ends.",
+      "plan": "Plan",
+      "planPlaceholder": "Choose a plan",
+      "note": "Note (optional)",
+      "noteHint": "For example, the payment reference.",
+      "summary": "From {{start}} to {{end}}, for {{price}}.",
+      "noPlans": "There are no active plans. Create or activate one on the Plans page first.",
+      "submit": "Record sale",
+      "working": "Recording..."
+    },
+    "cancel": {
+      "button": "Cancel",
+      "title": "Cancel subscription",
+      "description": "The subscription \"{{plan}}\" ({{period}}) is canceled right now. If no other subscription is in force, this user's clinics lose access at once. This cannot be undone.",
+      "submit": "Cancel subscription",
+      "working": "Canceling..."
+    },
+    "validation": {
+      "nationalId": "The national ID is not valid. Enter its 10 digits correctly.",
+      "fidaCode": "The FIDA code must be 5 to 20 capital letters or digits.",
+      "nationality": "Choose a nationality.",
+      "plan": "Choose a plan.",
+      "noteLength": "The note can be at most 500 characters."
+    }
   },
   "errors": {
     "invalidCredentials": "Wrong username or password.",
@@ -57,6 +198,10 @@
     "serverUnavailable": "The server is temporarily unavailable. Please try again shortly.",
     "unsupported": "The server does not support this yet. Please update the server.",
     "server": "The server returned an error. ({{details}})",
-    "unknown": "An unknown error occurred. ({{details}})"
+    "unknown": "An unknown error occurred. ({{details}})",
+    "userNotFound": "User not found.",
+    "planNotFound": "This plan no longer exists.",
+    "planInactive": "This plan is inactive and cannot be sold.",
+    "subscriptionNotFound": "This subscription no longer exists."
   }
 }

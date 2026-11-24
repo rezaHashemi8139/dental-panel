@@ -7,6 +7,8 @@ import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2
 import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
 import type { User } from "./auth_pb";
 import { file_dental_v1_auth } from "./auth_pb";
+import type { PersonIdentity } from "./person_pb";
+import { file_dental_v1_person } from "./person_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
@@ -15,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/member.proto.
  */
 export const file_dental_v1_member: GenFile = /*@__PURE__*/
-  fileDesc("ChZkZW50YWwvdjEvbWVtYmVyLnByb3RvEglkZW50YWwudjEieQoGTWVtYmVyEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIQCghpc19vd25lchgCIAEoCBIQCghpc19hZG1pbhgDIAEoCBIsCghhZGRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSTGlzdE1lbWJlcnNSZXF1ZXN0IjkKE0xpc3RNZW1iZXJzUmVzcG9uc2USIgoHbWVtYmVycxgBIAMoCzIRLmRlbnRhbC52MS5NZW1iZXIiOgoPRmluZFVzZXJSZXF1ZXN0EicKC25hdGlvbmFsX2lkGAEgASgJQhK6SA9yDTILXlswLTldezEwfSQiMQoQRmluZFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXIioQMKEUNyZWF0ZVVzZXJSZXF1ZXN0EicKC25hdGlvbmFsX2lkGAEgASgJQhK6SA9yDTILXlswLTldezEwfSQSLwoIdXNlcm5hbWUYAiABKAlCHbpIGnIYMhZeW0EtWmEtejAtOS5fLV17MywzMn0kEusBChJ0ZW1wb3JhcnlfcGFzc3dvcmQYAyABKAlCzgG6SMoBugHBAQoNd2Vha19wYXNzd29yZBJUbXVzdCBoYXZlIGF0IGxlYXN0IDggY2hhcmFjdGVycywgYSBsb3dlcmNhc2UgbGV0dGVyLCBhbiB1cHBlcmNhc2UgbGV0dGVyIGFuZCBhIGRpZ2l0GlpzaXplKHRoaXMpID49IDggJiYgdGhpcy5tYXRjaGVzKCdbYS16XScpICYmIHRoaXMubWF0Y2hlcygnW0EtWl0nKSAmJiB0aGlzLm1hdGNoZXMoJ1swLTldJylyAxiAAhIcCglmdWxsX25hbWUYBCABKAlCCbpIBnIEEAEYZBImCgVwaG9uZRgFIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQiRAoSQ3JlYXRlVXNlclJlc3BvbnNlEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIPCgdjcmVhdGVkGAIgASgIIk4KEEFkZE1lbWJlclJlcXVlc3QSEAoIaXNfYWRtaW4YAiABKAgSGAoHdXNlcl9pZBgDIAEoDEIHukgEegJoEEoECAEQAlIIdXNlcm5hbWUiNgoRQWRkTWVtYmVyUmVzcG9uc2USIQoGbWVtYmVyGAEgASgLMhEuZGVudGFsLnYxLk1lbWJlciIvChNSZW1vdmVNZW1iZXJSZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBAiFgoUUmVtb3ZlTWVtYmVyUmVzcG9uc2UiQwoVU2V0TWVtYmVyQWRtaW5SZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBASEAoIaXNfYWRtaW4YAiABKAgiOwoWU2V0TWVtYmVyQWRtaW5SZXNwb25zZRIhCgZtZW1iZXIYASABKAsyES5kZW50YWwudjEuTWVtYmVyMukDCg1NZW1iZXJTZXJ2aWNlEk4KC0xpc3RNZW1iZXJzEh0uZGVudGFsLnYxLkxpc3RNZW1iZXJzUmVxdWVzdBoeLmRlbnRhbC52MS5MaXN0TWVtYmVyc1Jlc3BvbnNlIgASRQoIRmluZFVzZXISGi5kZW50YWwudjEuRmluZFVzZXJSZXF1ZXN0GhsuZGVudGFsLnYxLkZpbmRVc2VyUmVzcG9uc2UiABJLCgpDcmVhdGVVc2VyEhwuZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXF1ZXN0Gh0uZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXNwb25zZSIAEkgKCUFkZE1lbWJlchIbLmRlbnRhbC52MS5BZGRNZW1iZXJSZXF1ZXN0GhwuZGVudGFsLnYxLkFkZE1lbWJlclJlc3BvbnNlIgASUQoMUmVtb3ZlTWVtYmVyEh4uZGVudGFsLnYxLlJlbW92ZU1lbWJlclJlcXVlc3QaHy5kZW50YWwudjEuUmVtb3ZlTWVtYmVyUmVzcG9uc2UiABJXCg5TZXRNZW1iZXJBZG1pbhIgLmRlbnRhbC52MS5TZXRNZW1iZXJBZG1pblJlcXVlc3QaIS5kZW50YWwudjEuU2V0TWVtYmVyQWRtaW5SZXNwb25zZSIAYgZwcm90bzM", [file_buf_validate_validate, file_dental_v1_auth, file_google_protobuf_timestamp]);
+  fileDesc("ChZkZW50YWwvdjEvbWVtYmVyLnByb3RvEglkZW50YWwudjEieQoGTWVtYmVyEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIQCghpc19vd25lchgCIAEoCBIQCghpc19hZG1pbhgDIAEoCBIsCghhZGRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSTGlzdE1lbWJlcnNSZXF1ZXN0IjkKE0xpc3RNZW1iZXJzUmVzcG9uc2USIgoHbWVtYmVycxgBIAMoCzIRLmRlbnRhbC52MS5NZW1iZXIiRgoPRmluZFVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQEiMQoQRmluZFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXIirQMKEUNyZWF0ZVVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQESLwoIdXNlcm5hbWUYAiABKAlCHbpIGnIYMhZeW0EtWmEtejAtOS5fLV17MywzMn0kEusBChJ0ZW1wb3JhcnlfcGFzc3dvcmQYAyABKAlCzgG6SMoBugHBAQoNd2Vha19wYXNzd29yZBJUbXVzdCBoYXZlIGF0IGxlYXN0IDggY2hhcmFjdGVycywgYSBsb3dlcmNhc2UgbGV0dGVyLCBhbiB1cHBlcmNhc2UgbGV0dGVyIGFuZCBhIGRpZ2l0GlpzaXplKHRoaXMpID49IDggJiYgdGhpcy5tYXRjaGVzKCdbYS16XScpICYmIHRoaXMubWF0Y2hlcygnW0EtWl0nKSAmJiB0aGlzLm1hdGNoZXMoJ1swLTldJylyAxiAAhIcCglmdWxsX25hbWUYBCABKAlCCbpIBnIEEAEYZBImCgVwaG9uZRgFIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQiRAoSQ3JlYXRlVXNlclJlc3BvbnNlEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIPCgdjcmVhdGVkGAIgASgIIk4KEEFkZE1lbWJlclJlcXVlc3QSEAoIaXNfYWRtaW4YAiABKAgSGAoHdXNlcl9pZBgDIAEoDEIHukgEegJoEEoECAEQAlIIdXNlcm5hbWUiNgoRQWRkTWVtYmVyUmVzcG9uc2USIQoGbWVtYmVyGAEgASgLMhEuZGVudGFsLnYxLk1lbWJlciIvChNSZW1vdmVNZW1iZXJSZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBAiFgoUUmVtb3ZlTWVtYmVyUmVzcG9uc2UiQwoVU2V0TWVtYmVyQWRtaW5SZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBASEAoIaXNfYWRtaW4YAiABKAgiOwoWU2V0TWVtYmVyQWRtaW5SZXNwb25zZRIhCgZtZW1iZXIYASABKAsyES5kZW50YWwudjEuTWVtYmVyMukDCg1NZW1iZXJTZXJ2aWNlEk4KC0xpc3RNZW1iZXJzEh0uZGVudGFsLnYxLkxpc3RNZW1iZXJzUmVxdWVzdBoeLmRlbnRhbC52MS5MaXN0TWVtYmVyc1Jlc3BvbnNlIgASRQoIRmluZFVzZXISGi5kZW50YWwudjEuRmluZFVzZXJSZXF1ZXN0GhsuZGVudGFsLnYxLkZpbmRVc2VyUmVzcG9uc2UiABJLCgpDcmVhdGVVc2VyEhwuZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXF1ZXN0Gh0uZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXNwb25zZSIAEkgKCUFkZE1lbWJlchIbLmRlbnRhbC52MS5BZGRNZW1iZXJSZXF1ZXN0GhwuZGVudGFsLnYxLkFkZE1lbWJlclJlc3BvbnNlIgASUQoMUmVtb3ZlTWVtYmVyEh4uZGVudGFsLnYxLlJlbW92ZU1lbWJlclJlcXVlc3QaHy5kZW50YWwudjEuUmVtb3ZlTWVtYmVyUmVzcG9uc2UiABJXCg5TZXRNZW1iZXJBZG1pbhIgLmRlbnRhbC52MS5TZXRNZW1iZXJBZG1pblJlcXVlc3QaIS5kZW50YWwudjEuU2V0TWVtYmVyQWRtaW5SZXNwb25zZSIAYgZwcm90bzM", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message dental.v1.Member
@@ -88,11 +90,9 @@ export const ListMembersResponseSchema: GenMessage<ListMembersResponse> = /*@__P
  */
 export type FindUserRequest = Message<"dental.v1.FindUserRequest"> & {
   /**
-   * 10 digits.
-   *
-   * @generated from field: string national_id = 1;
+   * @generated from field: dental.v1.PersonIdentity identity = 1;
    */
-  nationalId: string;
+  identity?: PersonIdentity | undefined;
 };
 
 /**
@@ -124,11 +124,9 @@ export const FindUserResponseSchema: GenMessage<FindUserResponse> = /*@__PURE__*
  */
 export type CreateUserRequest = Message<"dental.v1.CreateUserRequest"> & {
   /**
-   * Iranian national ID: 10 digits, the last one a check digit.
-   *
-   * @generated from field: string national_id = 1;
+   * @generated from field: dental.v1.PersonIdentity identity = 1;
    */
-  nationalId: string;
+  identity?: PersonIdentity | undefined;
 
   /**
    * The fields below are only used when a new account is created.
@@ -316,7 +314,8 @@ export const SetMemberAdminResponseSchema: GenMessage<SetMemberAdminResponse> = 
  * a clinic can also keep people who have an account but no access to its app,
  * e.g. a doctor who only treats patients there (FindUser / CreateUser give their id).
  *
- * Accounts are unique by national ID: the same person has one account in every clinic.
+ * Accounts are unique by identity (national ID, or FIDA code for foreign nationals):
+ * the same person has one account in every clinic.
  *
  * @generated from service dental.v1.MemberService
  */
@@ -330,7 +329,8 @@ export const MemberService: GenService<{
     output: typeof ListMembersResponseSchema;
   },
   /**
-   * Finds the account with a national ID. Fails with NOT_FOUND "user_not_found".
+   * Finds the account with an identity (type and number; the nationality is not
+   * compared). Fails with NOT_FOUND "user_not_found".
    *
    * @generated from rpc dental.v1.MemberService.FindUser
    */
@@ -342,7 +342,7 @@ export const MemberService: GenService<{
   /**
    * Creates an account for someone who has none, with a temporary password they
    * must change before their first login (AuthService.ChangePassword). If an
-   * account with this national ID already exists, returns it instead (created =
+   * account with this identity already exists, returns it instead (created =
    * false) and changes nothing.
    *
    * Fails with "invalid_argument" / "weak_password", INVALID_ARGUMENT

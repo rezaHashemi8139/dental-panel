@@ -1,7 +1,11 @@
 # Dental admin panel
 
 Web panel for the system administrators of the dental server (`../dental-server`):
-subscription plans, users and subscriptions. For now: administrator login and logout.
+
+- **Plans** (`/plans`): list, create and edit subscription plans (limits, duration, price in rials, on sale or not).
+- **Subscriptions** (`/subscriptions`): find a clinic owner by national ID, or by FIDA code and
+  nationality for foreign nationals; see their account, clinics and subscriptions; sell a subscription
+  from an active plan (it starts when the paid time already bought ends) or cancel one.
 
 - **React** 19, **TypeScript**, **Vite**
 - **Tailwind CSS** 4 + **shadcn/ui** (radix-nova, RTL), same look and components as `../dental-desktop`
@@ -61,6 +65,7 @@ src/auth/           admin session store (sessionStorage), login/logout, form rul
 src/components/     app components; ui/ holds shadcn/ui components (shared with dental-desktop)
 src/gen/            generated from the server's .proto files — do not edit
 src/i18n/           languages, direction (RTL/LTR) and message helpers
+src/lib/            helpers: formatting (useFormat), identities, countries, subscription periods
 src/locales/        one JSON file per language; fa.json is the reference
 src/pages/          layouts and pages
 src/theme/          light/dark/system theme

@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { HouseIcon, type LucideIcon } from "lucide-react";
+import { HouseIcon, PackageIcon, ReceiptTextIcon, type LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
@@ -13,6 +13,8 @@ export function AppSidebar() {
     <aside className="flex w-60 shrink-0 flex-col overflow-y-auto border-e bg-muted/40 p-3">
       <nav aria-label={t("nav.label")} className="flex flex-col gap-1">
         <SidebarLink to="/home" icon={HouseIcon} label={t("nav.home")} />
+        <SidebarLink to="/plans" icon={PackageIcon} label={t("nav.plans")} />
+        <SidebarLink to="/subscriptions" icon={ReceiptTextIcon} label={t("nav.subscriptions")} />
       </nav>
     </aside>
   );

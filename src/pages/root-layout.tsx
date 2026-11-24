@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useRouterState } from "@tanstack/react-router";
+import { LoaderCircleIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSession } from "@/auth/store";
 import { AccountMenu } from "@/components/account-menu";
@@ -10,6 +11,8 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 export function RootLayout() {
   const { t } = useTranslation();
   const session = useSession();
+  // A page's data is loading: the current page stays until it is in.
+  const loading = useRouterState({ select: (state) => state.status === "pending" });
   return (
     <div className="flex h-svh flex-col">
       <header className="flex items-center justify-between gap-4 border-b px-4 py-2">
@@ -19,6 +22,9 @@ export function RootLayout() {
           <span className="hidden text-sm text-muted-foreground sm:inline">· {t("app.panel")}</span>
         </div>
         <div className="flex items-center gap-2">
+          {loading && (
+            <LoaderCircleIcon className="size-4 animate-spin text-muted-foreground" aria-label={t("common.loading")} />
+          )}
           <LanguageSwitcher />
           <ThemeSwitcher />
           {session && <AccountMenu session={session} />}

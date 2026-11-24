@@ -12,7 +12,9 @@
   },
   "nav": {
     "label": "Hauptmenü",
-    "home": "Startseite"
+    "home": "Startseite",
+    "plans": "Tarife",
+    "subscriptions": "Abonnements"
   },
   "theme": {
     "label": "Design",
@@ -44,8 +46,147 @@
   },
   "home": {
     "welcome": "Willkommen, {{name}}",
-    "description": "Die Verwaltungsbereiche werden nach und nach im Seitenmenü ergänzt.",
+    "description": "Wählen Sie im Seitenmenü einen Bereich, um Tarife und Abonnements zu verwalten.",
     "sessionExpires": "Diese Sitzung ist bis {{time}} gültig."
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "retry": "Erneut versuchen",
+    "loading": "Wird geladen...",
+    "rials": "{{amount}} Rial",
+    "days_one": "{{days}} Tag",
+    "days_other": "{{days}} Tage",
+    "clinics_one": "{{clinics}} Praxis",
+    "clinics_other": "{{clinics}} Praxen",
+    "devicesPerClinic_one": "{{devices}} Gerät pro Praxis",
+    "devicesPerClinic_other": "{{devices}} Geräte pro Praxis",
+    "empty": "—"
+  },
+  "plans": {
+    "title": "Abonnement-Tarife",
+    "description": "Tarife legen die Höchstzahl an Praxen und Geräten, die Laufzeit und den Preis eines Abonnements fest. Nur aktive Tarife können verkauft werden.",
+    "new": "Neuer Tarif",
+    "edit": "Bearbeiten",
+    "empty": "Es wurden noch keine Tarife angelegt.",
+    "columns": {
+      "name": "Name",
+      "maxClinics": "Praxen",
+      "maxDevices": "Geräte pro Praxis",
+      "duration": "Laufzeit",
+      "price": "Preis",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Inaktiv"
+    },
+    "dialog": {
+      "createTitle": "Neuer Tarif",
+      "createDescription": "Ein neuer Tarif kann sofort verkauft werden.",
+      "editTitle": "Tarif bearbeiten",
+      "editDescription": "Bereits verkaufte Abonnements behalten die Grenzen und den Preis, zu denen sie verkauft wurden.",
+      "create": "Tarif anlegen",
+      "save": "Speichern",
+      "working": "Wird gespeichert..."
+    },
+    "fields": {
+      "name": "Name des Tarifs",
+      "maxClinics": "Höchstzahl an Praxen",
+      "maxDevices": "Höchstzahl an Geräten pro Praxis",
+      "durationDays": "Laufzeit (Tage)",
+      "priceRials": "Preis (Rial)",
+      "active": "Im Verkauf",
+      "activeHint": "Ein inaktiver Tarif kann nicht mehr verkauft werden; bereits verkaufte Abonnements bleiben unverändert."
+    },
+    "validation": {
+      "nameLength": "Der Name muss 1 bis 100 Zeichen lang sein.",
+      "limit": "Geben Sie eine ganze Zahl von 1 bis 1000 ein.",
+      "durationDays": "Geben Sie eine ganze Zahl von 1 bis 3650 Tagen ein.",
+      "price": "Geben Sie den Preis in Rial nur mit Ziffern ein."
+    }
+  },
+  "subscriptions": {
+    "title": "Abonnements",
+    "description": "Suchen Sie einen Praxisinhaber über die nationale ID oder, bei ausländischen Staatsangehörigen, über den FIDA-Code, um seine Abonnements zu sehen, eines zu verkaufen oder zu kündigen.",
+    "search": {
+      "type": "Art der Kennung",
+      "national": "Nationale ID (iranisch)",
+      "foreign": "FIDA-Code (ausländische Staatsangehörige)",
+      "nationalId": "Nationale ID",
+      "fidaCode": "FIDA-Code",
+      "nationality": "Staatsangehörigkeit",
+      "submit": "Suchen"
+    },
+    "notFound": "Kein Benutzer mit der Kennung {{number}} gefunden.",
+    "user": {
+      "username": "Benutzername",
+      "nationalId": "Nationale ID",
+      "fidaCode": "FIDA-Code",
+      "nationality": "Staatsangehörigkeit",
+      "phone": "Mobilnummer",
+      "createdAt": "Mitglied seit",
+      "disabled": "Konto deaktiviert",
+      "paidUntil": "Abonniert bis {{date}}.",
+      "noPaidTime": "Kein laufendes Abonnement."
+    },
+    "list": {
+      "title": "Abonnements",
+      "empty": "Dieser Benutzer hat noch kein Abonnement gekauft.",
+      "columns": {
+        "plan": "Tarif",
+        "period": "Zeitraum",
+        "limits": "Grenzen",
+        "price": "Preis",
+        "status": "Status",
+        "note": "Notiz"
+      },
+      "period": "{{start}} bis {{end}}",
+      "limits": "{{clinics}}, {{devices}}"
+    },
+    "status": {
+      "active": "Laufend",
+      "upcoming": "Bevorstehend",
+      "ended": "Beendet",
+      "canceled": "Gekündigt"
+    },
+    "clinics": {
+      "title": "Praxen dieses Benutzers",
+      "empty": "Dieser Benutzer hat keine Praxen.",
+      "columns": {
+        "name": "Praxisname",
+        "licenseNumber": "Zulassungsnummer",
+        "city": "Stadt",
+        "installations": "Geräte",
+        "createdAt": "Registriert"
+      }
+    },
+    "sell": {
+      "button": "Abonnement verkaufen",
+      "title": "Abonnement verkaufen",
+      "description": "Abonnement für {{name}}. Läuft noch ein Abonnement, beginnt das neue, wenn es endet.",
+      "plan": "Tarif",
+      "planPlaceholder": "Tarif wählen",
+      "note": "Notiz (optional)",
+      "noteHint": "Zum Beispiel die Zahlungsreferenz.",
+      "summary": "Vom {{start}} bis {{end}}, für {{price}}.",
+      "noPlans": "Es gibt keine aktiven Tarife. Legen Sie zuerst auf der Seite „Tarife“ einen an oder aktivieren Sie einen.",
+      "submit": "Verkauf erfassen",
+      "working": "Wird erfasst..."
+    },
+    "cancel": {
+      "button": "Kündigen",
+      "title": "Abonnement kündigen",
+      "description": "Das Abonnement „{{plan}}“ ({{period}}) wird sofort gekündigt. Läuft kein anderes Abonnement, verlieren die Praxen dieses Benutzers sofort den Zugang. Dies kann nicht rückgängig gemacht werden.",
+      "submit": "Abonnement kündigen",
+      "working": "Wird gekündigt..."
+    },
+    "validation": {
+      "nationalId": "Die nationale ID ist ungültig. Geben Sie ihre 10 Ziffern korrekt ein.",
+      "fidaCode": "Der FIDA-Code muss aus 5 bis 20 Großbuchstaben oder Ziffern bestehen.",
+      "nationality": "Wählen Sie eine Staatsangehörigkeit.",
+      "plan": "Wählen Sie einen Tarif.",
+      "noteLength": "Die Notiz darf höchstens 500 Zeichen lang sein."
+    }
   },
   "errors": {
     "invalidCredentials": "Falscher Benutzername oder falsches Passwort.",
@@ -57,6 +198,10 @@
     "serverUnavailable": "Der Server ist vorübergehend nicht erreichbar. Bitte versuchen Sie es gleich noch einmal.",
     "unsupported": "Der Server unterstützt dies noch nicht. Bitte aktualisieren Sie den Server.",
     "server": "Der Server hat einen Fehler gemeldet. ({{details}})",
-    "unknown": "Ein unbekannter Fehler ist aufgetreten. ({{details}})"
+    "unknown": "Ein unbekannter Fehler ist aufgetreten. ({{details}})",
+    "userNotFound": "Benutzer nicht gefunden.",
+    "planNotFound": "Dieser Tarif existiert nicht mehr.",
+    "planInactive": "Dieser Tarif ist inaktiv und kann nicht verkauft werden.",
+    "subscriptionNotFound": "Dieses Abonnement existiert nicht mehr."
   }
 }

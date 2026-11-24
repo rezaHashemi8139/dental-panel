@@ -7,6 +7,8 @@ import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2
 import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
 import type { User } from "./auth_pb";
 import { file_dental_v1_auth } from "./auth_pb";
+import type { PersonIdentity } from "./person_pb";
+import { file_dental_v1_person } from "./person_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
@@ -15,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/installation.proto.
  */
 export const file_dental_v1_installation: GenFile = /*@__PURE__*/
-  fileDesc("ChxkZW50YWwvdjEvaW5zdGFsbGF0aW9uLnByb3RvEglkZW50YWwudjEijQIKC01hY2hpbmVJbmZvEiAKD21hY2hpbmVfaWRfaGFzaBgBIAEoDEIHukgEegJoIBIaCghob3N0bmFtZRgCIAEoCUIIukgFcgMY/wESGAoHb3NfbmFtZRgDIAEoCUIHukgEcgIYZBIbCgpvc192ZXJzaW9uGAQgASgJQge6SARyAhgyEhsKCWNwdV9tb2RlbBgFIAEoCUIIukgFcgMYyAESEQoJY3B1X2NvcmVzGAYgASgNEhQKDG1lbW9yeV9ieXRlcxgHIAEoBBIlCg1tYWNfYWRkcmVzc2VzGAggAygJQg66SAuSAQgQICIEcgIYQBIcCgthcHBfdmVyc2lvbhgJIAEoCUIHukgEcgIYMiLpAQoKQ2xpbmljSW5mbxIYCgRuYW1lGAEgASgJQgq6SAdyBRABGMgBEjUKDmxpY2Vuc2VfbnVtYmVyGAIgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JBImCgVwaG9uZRgDIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQSFwoEY2l0eRgEIAEoCUIJukgGcgQQARhkEhsKB2FkZHJlc3MYBSABKAlCCrpIB3IFEAEY9AMSLAoLcG9zdGFsX2NvZGUYBiABKAlCF7pIFHISMhBeKFswLTldezUsMTB9KT8kIo4DCghOZXdPd25lchIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQSJwoLbmF0aW9uYWxfaWQYBCABKAlCErpID3INMgteWzAtOV17MTB9JBImCgVwaG9uZRgFIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQicQoNRXhpc3RpbmdPd25lchIbCgh1c2VybmFtZRgBIAEoCUIJukgGcgQQARhAEhoKCHBhc3N3b3JkGAIgASgJQgi6SAVyAyiACBInCgtuYXRpb25hbF9pZBgDIAEoCUISukgPcg0yC15bMC05XXsxMH0kIkcKDkV4aXN0aW5nQ2xpbmljEjUKDmxpY2Vuc2VfbnVtYmVyGAEgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JCKgAgoPUmVnaXN0ZXJSZXF1ZXN0Ei8KB21hY2hpbmUYASABKAsyFi5kZW50YWwudjEuTWFjaGluZUluZm9CBrpIA8gBARInCgZjbGluaWMYAiABKAsyFS5kZW50YWwudjEuQ2xpbmljSW5mb0gAEjQKD2V4aXN0aW5nX2NsaW5pYxgGIAEoCzIZLmRlbnRhbC52MS5FeGlzdGluZ0NsaW5pY0gAEigKCW5ld19vd25lchgDIAEoCzITLmRlbnRhbC52MS5OZXdPd25lckgBEjIKDmV4aXN0aW5nX293bmVyGAQgASgLMhguZGVudGFsLnYxLkV4aXN0aW5nT3duZXJIAUIPCgZ0YXJnZXQSBbpIAggBQg4KBW93bmVyEgW6SAIIASLDAQoQUmVnaXN0ZXJSZXNwb25zZRIXCg9pbnN0YWxsYXRpb25faWQYASABKAwSGwoTaW5zdGFsbGF0aW9uX3NlY3JldBgCIAEoDBIVCg1rbm93bl9tYWNoaW5lGAMgASgIEi8KC3NlcnZlcl90aW1lGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIeCgVvd25lchgFIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhEKCWNsaW5pY19pZBgGIAEoDDJcChNJbnN0YWxsYXRpb25TZXJ2aWNlEkUKCFJlZ2lzdGVyEhouZGVudGFsLnYxLlJlZ2lzdGVyUmVxdWVzdBobLmRlbnRhbC52MS5SZWdpc3RlclJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_auth, file_google_protobuf_timestamp]);
+  fileDesc("ChxkZW50YWwvdjEvaW5zdGFsbGF0aW9uLnByb3RvEglkZW50YWwudjEijQIKC01hY2hpbmVJbmZvEiAKD21hY2hpbmVfaWRfaGFzaBgBIAEoDEIHukgEegJoIBIaCghob3N0bmFtZRgCIAEoCUIIukgFcgMY/wESGAoHb3NfbmFtZRgDIAEoCUIHukgEcgIYZBIbCgpvc192ZXJzaW9uGAQgASgJQge6SARyAhgyEhsKCWNwdV9tb2RlbBgFIAEoCUIIukgFcgMYyAESEQoJY3B1X2NvcmVzGAYgASgNEhQKDG1lbW9yeV9ieXRlcxgHIAEoBBIlCg1tYWNfYWRkcmVzc2VzGAggAygJQg66SAuSAQgQICIEcgIYQBIcCgthcHBfdmVyc2lvbhgJIAEoCUIHukgEcgIYMiLpAQoKQ2xpbmljSW5mbxIYCgRuYW1lGAEgASgJQgq6SAdyBRABGMgBEjUKDmxpY2Vuc2VfbnVtYmVyGAIgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JBImCgVwaG9uZRgDIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQSFwoEY2l0eRgEIAEoCUIJukgGcgQQARhkEhsKB2FkZHJlc3MYBSABKAlCCrpIB3IFEAEY9AMSLAoLcG9zdGFsX2NvZGUYBiABKAlCF7pIFHISMhBeKFswLTldezUsMTB9KT8kIq0DCghOZXdPd25lchIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQSJgoFcGhvbmUYBSABKAlCF7pIFHISMhBeXCs/WzAtOV17NywxNX0kEjMKCGlkZW50aXR5GAYgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQFKBAgEEAVSC25hdGlvbmFsX2lkIpABCg1FeGlzdGluZ093bmVyEhsKCHVzZXJuYW1lGAEgASgJQgm6SAZyBBABGEASGgoIcGFzc3dvcmQYAiABKAlCCLpIBXIDKIAIEjMKCGlkZW50aXR5GAQgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQFKBAgDEARSC25hdGlvbmFsX2lkIkcKDkV4aXN0aW5nQ2xpbmljEjUKDmxpY2Vuc2VfbnVtYmVyGAEgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JCKgAgoPUmVnaXN0ZXJSZXF1ZXN0Ei8KB21hY2hpbmUYASABKAsyFi5kZW50YWwudjEuTWFjaGluZUluZm9CBrpIA8gBARInCgZjbGluaWMYAiABKAsyFS5kZW50YWwudjEuQ2xpbmljSW5mb0gAEjQKD2V4aXN0aW5nX2NsaW5pYxgGIAEoCzIZLmRlbnRhbC52MS5FeGlzdGluZ0NsaW5pY0gAEigKCW5ld19vd25lchgDIAEoCzITLmRlbnRhbC52MS5OZXdPd25lckgBEjIKDmV4aXN0aW5nX293bmVyGAQgASgLMhguZGVudGFsLnYxLkV4aXN0aW5nT3duZXJIAUIPCgZ0YXJnZXQSBbpIAggBQg4KBW93bmVyEgW6SAIIASLDAQoQUmVnaXN0ZXJSZXNwb25zZRIXCg9pbnN0YWxsYXRpb25faWQYASABKAwSGwoTaW5zdGFsbGF0aW9uX3NlY3JldBgCIAEoDBIVCg1rbm93bl9tYWNoaW5lGAMgASgIEi8KC3NlcnZlcl90aW1lGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIeCgVvd25lchgFIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhEKCWNsaW5pY19pZBgGIAEoDDJcChNJbnN0YWxsYXRpb25TZXJ2aWNlEkUKCFJlZ2lzdGVyEhouZGVudGFsLnYxLlJlZ2lzdGVyUmVxdWVzdBobLmRlbnRhbC52MS5SZWdpc3RlclJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
 
 /**
  * Describes the computer, so the server knows where an installation runs.
@@ -177,18 +179,18 @@ export type NewOwner = Message<"dental.v1.NewOwner"> & {
   fullName: string;
 
   /**
-   * Iranian national ID: 10 digits, the last one a check digit. Unique across all accounts.
-   *
-   * @generated from field: string national_id = 4;
-   */
-  nationalId: string;
-
-  /**
    * Mobile number: 7–15 digits, optionally starting with '+'.
    *
    * @generated from field: string phone = 5;
    */
   phone: string;
+
+  /**
+   * National ID or FIDA code, and nationality. Unique across all accounts.
+   *
+   * @generated from field: dental.v1.PersonIdentity identity = 6;
+   */
+  identity?: PersonIdentity | undefined;
 };
 
 /**
@@ -216,11 +218,12 @@ export type ExistingOwner = Message<"dental.v1.ExistingOwner"> & {
   password: string;
 
   /**
-   * Must match the national ID on file. Saved if the account has none yet.
+   * Must match the identity on file (type and number). Saved if the account has
+   * none yet (accounts made before identities were required).
    *
-   * @generated from field: string national_id = 3;
+   * @generated from field: dental.v1.PersonIdentity identity = 4;
    */
-  nationalId: string;
+  identity?: PersonIdentity | undefined;
 };
 
 /**
@@ -381,12 +384,12 @@ export const InstallationService: GenService<{
    *
    * Besides the usual "invalid_argument" / "weak_password", fails with:
    * - ALREADY_EXISTS "license_number_taken": another clinic has this license number;
-   * - ALREADY_EXISTS "username_taken" / "national_id_taken": a new owner's username
-   *   or national ID belongs to another account;
+   * - ALREADY_EXISTS "username_taken" / "identity_taken": a new owner's username
+   *   or identity (national ID or FIDA code) belongs to another account;
    * - INVALID_ARGUMENT "invalid_national_id": the national ID's check digit is wrong;
    * - UNAUTHENTICATED "invalid_credentials": an existing owner's username or password is wrong;
    * - PERMISSION_DENIED "user_disabled": an existing owner's account is disabled;
-   * - FAILED_PRECONDITION "national_id_mismatch": an existing owner has another national ID on file;
+   * - FAILED_PRECONDITION "identity_mismatch": an existing owner has another identity on file;
    * - INVALID_ARGUMENT "invalid_argument": existing_clinic with a new_owner;
    * - NOT_FOUND "clinic_not_found": no clinic has existing_clinic.license_number;
    * - PERMISSION_DENIED "not_clinic_owner": the clinic belongs to someone else.

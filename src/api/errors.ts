@@ -12,9 +12,18 @@ const REASONS: Record<string, ParseKeys> = {
   invalid_credentials: "errors.invalidCredentials",
   user_disabled: "errors.userDisabled",
   unauthenticated: "errors.sessionEnded",
+  user_not_found: "errors.userNotFound",
+  plan_not_found: "errors.planNotFound",
+  plan_inactive: "errors.planInactive",
+  subscription_not_found: "errors.subscriptionNotFound",
   // The server is up but its database is not ready yet.
   unavailable: "errors.serverUnavailable",
 };
+
+/** Whether an API call failed with this reason (e.g. "user_not_found"). */
+export function hasReason(error: unknown, reason: string): boolean {
+  return error instanceof ConnectError && error.rawMessage === reason;
+}
 
 /** Turns anything an API call threw into a message to show. */
 export function toMessage(error: unknown): Message {

@@ -1,18 +1,27 @@
 import { createRootRoute, createRoute, createRouter, Navigate, redirect } from "@tanstack/react-router";
 import { getSession } from "@/auth/store";
+import { identityFromSearch, parseIdentitySearch, type IdentitySearch } from "@/lib/identity";
+import { RouteError } from "@/components/route-error";
 import { RootLayout } from "@/pages/root-layout";
 import { AppLayout } from "@/pages/app-layout";
 import { HomePage } from "@/pages/home-page";
 import { LoginPage } from "@/pages/login-page";
+import { loadPlans, PlansPage } from "@/pages/plans-page";
+import { loadSubscriptions, SubscriptionsPage } from "@/pages/subscriptions-page";
 
 /**
  * Pages.
  *
- * /            → /home or /login
- * /login       only when logged out
- * /home        ┐ "app" layout (sidebar): only when logged in; pages read the session with useSession()
- *              ┘ add new management pages here, next to it
- * anything else → /
+ * /                → /home or /login
+ * /login           only when logged out
+ * /home            ┐ "app" layout (sidebar): only when logged in; pages read the
+ * /plans           │ session with useSession() and their data with
+ * /subscriptions   ┘ getRouteApi("<route id>").useLoaderData()
+ *                    ?kind=national|foreign&number=…&nationality=… (the account searched for)
+ * anything else    → /
+ *
+ * Data is loaded by each route's loader, again on every visit; after a change, pages
+ * reload it with router.invalidate(). A failed load shows RouteError instead of the page.
  */
 
 const rootRoute = createRootRoute({
@@ -56,9 +65,32 @@ const homeRoute = createRoute({
   component: HomePage,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, loginRoute, appRoute.addChildren([homeRoute])]);
+const plansRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "plans",
+  loader: loadPlans,
+  component: PlansPage,
+});
 
-export const router = createRouter({ routeTree });
+const subscriptionsRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "subscriptions",
+  validateSearch: (search: Record<string, unknown>): IdentitySearch => parseIdentitySearch(search),
+  loaderDeps: ({ search }) => ({ kind: search.kind, number: search.number, nationality: search.nationality }),
+  loader: ({ deps }) => loadSubscriptions(identityFromSearch(deps)),
+  component: SubscriptionsPage,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  loginRoute,
+  appRoute.addChildren([homeRoute, plansRoute, subscriptionsRoute]),
+]);
+
+export const router = createRouter({
+  routeTree,
+  defaultErrorComponent: RouteError,
+});
 
 declare module "@tanstack/react-router" {
   interface Register {
