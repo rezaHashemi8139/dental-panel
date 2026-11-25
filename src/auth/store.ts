@@ -3,7 +3,11 @@ import type { Message } from "@/i18n/message";
 
 /** The logged-in administrator (AdminService.Login). */
 export interface AdminSession {
-  token: string;
+  /**
+   * Sent as `X-CSRF-Token` with every call. The session's JWT itself is an
+   * HttpOnly cookie that only the browser holds.
+   */
+  csrfToken: string;
   /** Milliseconds since the epoch. */
   expiresAt: number;
   admin: {
@@ -36,7 +40,7 @@ export function getSession(): AdminSession | null {
 function isSession(value: unknown): value is AdminSession {
   const s = value as AdminSession | null;
   return (
-    typeof s?.token === "string" &&
+    typeof s?.csrfToken === "string" &&
     typeof s.expiresAt === "number" &&
     typeof s.admin?.id === "string" &&
     typeof s.admin.username === "string" &&

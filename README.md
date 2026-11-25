@@ -62,7 +62,9 @@ pnpm check-locales       # every language file has every key of fa.json, same pl
 - forwards every path starting with `/dental.v1.` to the dental server, and
 - serves `dist/` for everything else, falling back to `dist/index.html` (the panel uses real URLs such as `/home`).
 
-Use HTTPS: the session token travels in the `Authorization` header.
+Use HTTPS: the session's JWT is a `Secure` cookie (browsers only send it over HTTPS, or to
+`localhost` in development) and its CSRF token travels in the `X-CSRF-Token` header.
+Keep the forwarded paths unchanged: the cookie is only sent to `/dental.v1.AdminService/`.
 
 ## Layout
 

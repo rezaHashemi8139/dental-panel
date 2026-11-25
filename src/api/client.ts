@@ -7,13 +7,15 @@ import { endSession, getSession } from "@/auth/store";
 const TIMEOUT_MS = 20_000;
 
 /**
- * Sends the admin session token with every call. A call the server refuses with
- * UNAUTHENTICATED (session expired or revoked, administrator disabled) ends the
- * session here too, so the panel goes back to the login screen and says why.
+ * Sends the admin session's CSRF token with every call. The session's JWT is an
+ * HttpOnly cookie the server set at login: the browser sends it by itself and
+ * scripts here can never read it. A call the server refuses with UNAUTHENTICATED
+ * (session expired or revoked, administrator disabled) ends the session here too,
+ * so the panel goes back to the login screen and says why.
  */
 const sessionInterceptor: Interceptor = (next) => async (req) => {
   const session = getSession();
-  if (session) req.header.set("Authorization", `Bearer ${session.token}`);
+  if (session) req.header.set("X-CSRF-Token", session.csrfToken);
   try {
     return await next(req);
   } catch (error) {
