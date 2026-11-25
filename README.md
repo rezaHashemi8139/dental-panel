@@ -22,7 +22,14 @@ pnpm install
 pnpm dev                 # http://localhost:5173
 ```
 
-The dev server forwards API calls (`/dental.v1.*`) to the dental server. Another address:
+The dev server forwards API calls (`/dental.v1.*`) to the dental server at `SERVER_URL`, set in
+[.env](.env). For another address on your machine, override it in `.env.local` (git-ignored):
+
+```dotenv
+SERVER_URL=http://192.168.1.10:8080
+```
+
+or for a single run:
 
 ```powershell
 $env:SERVER_URL = "http://192.168.1.10:8080"; pnpm dev
