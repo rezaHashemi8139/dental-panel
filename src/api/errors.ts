@@ -16,6 +16,12 @@ const REASONS: Record<string, ParseKeys> = {
   plan_not_found: "errors.planNotFound",
   plan_inactive: "errors.planInactive",
   subscription_not_found: "errors.subscriptionNotFound",
+  payment_not_found: "errors.paymentNotFound",
+  // Approved, rejected or canceled by the owner meanwhile.
+  payment_not_pending: "errors.paymentNotPending",
+  // An upgrade, but a later subscription was sold after it was reported.
+  renewal_queued: "errors.renewalQueued",
+  payment_account_not_found: "errors.paymentAccountNotFound",
   // The server is up but its database is not ready yet.
   unavailable: "errors.serverUnavailable",
 };

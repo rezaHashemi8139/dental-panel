@@ -4,7 +4,7 @@ import { LoaderCircleIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { toMessage } from "@/api/errors";
-import type { Subscription } from "@/gen/dental/v1/admin_pb";
+import type { Subscription } from "@/gen/dental/v1/subscription_pb";
 import { translateMessage, type Message } from "@/i18n/message";
 import { useFormat } from "@/lib/format";
 import { Alert, AlertDescription } from "@/components/ui/alert";

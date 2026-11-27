@@ -9,6 +9,8 @@ import type { User } from "./auth_pb";
 import { file_dental_v1_auth } from "./auth_pb";
 import type { PersonIdentity } from "./person_pb";
 import { file_dental_v1_person } from "./person_pb";
+import type { Payment, PaymentAccount, PaymentStatus, Plan, Subscription } from "./subscription_pb";
+import { file_dental_v1_subscription } from "./subscription_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
@@ -17,7 +19,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/admin.proto.
  */
 export const file_dental_v1_admin: GenFile = /*@__PURE__*/
-  fileDesc("ChVkZW50YWwvdjEvYWRtaW4ucHJvdG8SCWRlbnRhbC52MSI4CgVBZG1pbhIKCgJpZBgBIAEoDBIQCgh1c2VybmFtZRgCIAEoCRIRCglmdWxsX25hbWUYAyABKAkikQEKBFBsYW4SCgoCaWQYASABKAwSDAoEbmFtZRgCIAEoCRITCgttYXhfY2xpbmljcxgDIAEoDRIeChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAQgASgNEhUKDWR1cmF0aW9uX2RheXMYBSABKA0SEwoLcHJpY2VfcmlhbHMYBiABKAMSDgoGYWN0aXZlGAcgASgIIrQCCgxTdWJzY3JpcHRpb24SCgoCaWQYASABKAwSDwoHdXNlcl9pZBgCIAEoDBIPCgdwbGFuX2lkGAMgASgMEhEKCXBsYW5fbmFtZRgEIAEoCRITCgttYXhfY2xpbmljcxgFIAEoDRIeChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAYgASgNEhMKC3ByaWNlX3JpYWxzGAcgASgDEi0KCXN0YXJ0c19hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZW5kc19hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLwoLY2FuY2VsZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEgwKBG5vdGUYCyABKAkimwEKDUNsaW5pY1N1bW1hcnkSCgoCaWQYASABKAwSDAoEbmFtZRgCIAEoCRIWCg5saWNlbnNlX251bWJlchgDIAEoCRIMCgRjaXR5GAQgASgJEhoKEmluc3RhbGxhdGlvbl9jb3VudBgFIAEoDRIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJTChhBZG1pblNlcnZpY2VMb2dpblJlcXVlc3QSGwoIdXNlcm5hbWUYASABKAlCCbpIBnIEEAEYQBIaCghwYXNzd29yZBgCIAEoCUIIukgFcgMogAginQEKGUFkbWluU2VydmljZUxvZ2luUmVzcG9uc2USNgoSc2Vzc2lvbl9leHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIfCgVhZG1pbhgDIAEoCzIQLmRlbnRhbC52MS5BZG1pbhISCgpjc3JmX3Rva2VuGAQgASgJSgQIARACUg1zZXNzaW9uX3Rva2VuIhsKGUFkbWluU2VydmljZUxvZ291dFJlcXVlc3QiHAoaQWRtaW5TZXJ2aWNlTG9nb3V0UmVzcG9uc2UixwIKEkNyZWF0ZUFkbWluUmVxdWVzdBIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQiNgoTQ3JlYXRlQWRtaW5SZXNwb25zZRIfCgVhZG1pbhgBIAEoCzIQLmRlbnRhbC52MS5BZG1pbiISChBMaXN0UGxhbnNSZXF1ZXN0IjMKEUxpc3RQbGFuc1Jlc3BvbnNlEh4KBXBsYW5zGAEgAygLMg8uZGVudGFsLnYxLlBsYW4iugEKEUNyZWF0ZVBsYW5SZXF1ZXN0EhcKBG5hbWUYASABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgCIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAMgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBCABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBSABKANCB7pIBCICKAAiMwoSQ3JlYXRlUGxhblJlc3BvbnNlEh0KBHBsYW4YASABKAsyDy5kZW50YWwudjEuUGxhbiLfAQoRVXBkYXRlUGxhblJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBASFwoEbmFtZRgCIAEoCUIJukgGcgQQARhkEh8KC21heF9jbGluaWNzGAMgASgNQgq6SAcqBRjoBygBEioKFm1heF9kZXZpY2VzX3Blcl9jbGluaWMYBCABKA1CCrpIByoFGOgHKAESIQoNZHVyYXRpb25fZGF5cxgFIAEoDUIKukgHKgUYwhwoARIcCgtwcmljZV9yaWFscxgGIAEoA0IHukgEIgIoABIOCgZhY3RpdmUYByABKAgiMwoSVXBkYXRlUGxhblJlc3BvbnNlEh0KBHBsYW4YASABKAsyDy5kZW50YWwudjEuUGxhbiJFCg5HZXRVc2VyUmVxdWVzdBIzCghpZGVudGl0eRgBIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eUIGukgDyAEBIo8CCg9HZXRVc2VyUmVzcG9uc2USHQoEdXNlchgBIAEoCzIPLmRlbnRhbC52MS5Vc2VyEisKCGlkZW50aXR5GAIgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Eg0KBXBob25lGAMgASgJEhAKCGRpc2FibGVkGAQgASgIEi4KCmNyZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi8KDW93bmVkX2NsaW5pY3MYBiADKAsyGC5kZW50YWwudjEuQ2xpbmljU3VtbWFyeRIuCg1zdWJzY3JpcHRpb25zGAcgAygLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbiJlChdTZWxsU3Vic2NyaXB0aW9uUmVxdWVzdBIYCgd1c2VyX2lkGAEgASgMQge6SAR6AmgQEhgKB3BsYW5faWQYAiABKAxCB7pIBHoCaBASFgoEbm90ZRgDIAEoCUIIukgFcgMY9AMiSQoYU2VsbFN1YnNjcmlwdGlvblJlc3BvbnNlEi0KDHN1YnNjcmlwdGlvbhgBIAEoCzIXLmRlbnRhbC52MS5TdWJzY3JpcHRpb24iMAoZQ2FuY2VsU3Vic2NyaXB0aW9uUmVxdWVzdBITCgJpZBgBIAEoDEIHukgEegJoECJLChpDYW5jZWxTdWJzY3JpcHRpb25SZXNwb25zZRItCgxzdWJzY3JpcHRpb24YASABKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uMvkFCgxBZG1pblNlcnZpY2USVAoFTG9naW4SIy5kZW50YWwudjEuQWRtaW5TZXJ2aWNlTG9naW5SZXF1ZXN0GiQuZGVudGFsLnYxLkFkbWluU2VydmljZUxvZ2luUmVzcG9uc2UiABJXCgZMb2dvdXQSJC5kZW50YWwudjEuQWRtaW5TZXJ2aWNlTG9nb3V0UmVxdWVzdBolLmRlbnRhbC52MS5BZG1pblNlcnZpY2VMb2dvdXRSZXNwb25zZSIAEk4KC0NyZWF0ZUFkbWluEh0uZGVudGFsLnYxLkNyZWF0ZUFkbWluUmVxdWVzdBoeLmRlbnRhbC52MS5DcmVhdGVBZG1pblJlc3BvbnNlIgASSAoJTGlzdFBsYW5zEhsuZGVudGFsLnYxLkxpc3RQbGFuc1JlcXVlc3QaHC5kZW50YWwudjEuTGlzdFBsYW5zUmVzcG9uc2UiABJLCgpDcmVhdGVQbGFuEhwuZGVudGFsLnYxLkNyZWF0ZVBsYW5SZXF1ZXN0Gh0uZGVudGFsLnYxLkNyZWF0ZVBsYW5SZXNwb25zZSIAEksKClVwZGF0ZVBsYW4SHC5kZW50YWwudjEuVXBkYXRlUGxhblJlcXVlc3QaHS5kZW50YWwudjEuVXBkYXRlUGxhblJlc3BvbnNlIgASQgoHR2V0VXNlchIZLmRlbnRhbC52MS5HZXRVc2VyUmVxdWVzdBoaLmRlbnRhbC52MS5HZXRVc2VyUmVzcG9uc2UiABJdChBTZWxsU3Vic2NyaXB0aW9uEiIuZGVudGFsLnYxLlNlbGxTdWJzY3JpcHRpb25SZXF1ZXN0GiMuZGVudGFsLnYxLlNlbGxTdWJzY3JpcHRpb25SZXNwb25zZSIAEmMKEkNhbmNlbFN1YnNjcmlwdGlvbhIkLmRlbnRhbC52MS5DYW5jZWxTdWJzY3JpcHRpb25SZXF1ZXN0GiUuZGVudGFsLnYxLkNhbmNlbFN1YnNjcmlwdGlvblJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
+  fileDesc("ChVkZW50YWwvdjEvYWRtaW4ucHJvdG8SCWRlbnRhbC52MSI4CgVBZG1pbhIKCgJpZBgBIAEoDBIQCgh1c2VybmFtZRgCIAEoCRIRCglmdWxsX25hbWUYAyABKAkimwEKDUNsaW5pY1N1bW1hcnkSCgoCaWQYASABKAwSDAoEbmFtZRgCIAEoCRIWCg5saWNlbnNlX251bWJlchgDIAEoCRIMCgRjaXR5GAQgASgJEhoKEmluc3RhbGxhdGlvbl9jb3VudBgFIAEoDRIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJTChhBZG1pblNlcnZpY2VMb2dpblJlcXVlc3QSGwoIdXNlcm5hbWUYASABKAlCCbpIBnIEEAEYQBIaCghwYXNzd29yZBgCIAEoCUIIukgFcgMogAginQEKGUFkbWluU2VydmljZUxvZ2luUmVzcG9uc2USNgoSc2Vzc2lvbl9leHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIfCgVhZG1pbhgDIAEoCzIQLmRlbnRhbC52MS5BZG1pbhISCgpjc3JmX3Rva2VuGAQgASgJSgQIARACUg1zZXNzaW9uX3Rva2VuIhsKGUFkbWluU2VydmljZUxvZ291dFJlcXVlc3QiHAoaQWRtaW5TZXJ2aWNlTG9nb3V0UmVzcG9uc2UixwIKEkNyZWF0ZUFkbWluUmVxdWVzdBIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQiNgoTQ3JlYXRlQWRtaW5SZXNwb25zZRIfCgVhZG1pbhgBIAEoCzIQLmRlbnRhbC52MS5BZG1pbiISChBMaXN0UGxhbnNSZXF1ZXN0IjMKEUxpc3RQbGFuc1Jlc3BvbnNlEh4KBXBsYW5zGAEgAygLMg8uZGVudGFsLnYxLlBsYW4i5QEKEUNyZWF0ZVBsYW5SZXF1ZXN0EhcKBG5hbWUYASABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgCIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAMgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBCABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBSABKANCB7pIBCICKAASKQoXbWF4X3B1cmNoYXNlc19wZXJfb3duZXIYBiABKA1CCLpIBSoDGOgHIjMKEkNyZWF0ZVBsYW5SZXNwb25zZRIdCgRwbGFuGAEgASgLMg8uZGVudGFsLnYxLlBsYW4iigIKEVVwZGF0ZVBsYW5SZXF1ZXN0EhMKAmlkGAEgASgMQge6SAR6AmgQEhcKBG5hbWUYAiABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgDIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAQgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBSABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBiABKANCB7pIBCICKAASDgoGYWN0aXZlGAcgASgIEikKF21heF9wdXJjaGFzZXNfcGVyX293bmVyGAggASgNQgi6SAUqAxjoByIzChJVcGRhdGVQbGFuUmVzcG9uc2USHQoEcGxhbhgBIAEoCzIPLmRlbnRhbC52MS5QbGFuIkUKDkdldFVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQEitQIKD0dldFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXISKwoIaWRlbnRpdHkYAiABKAsyGS5kZW50YWwudjEuUGVyc29uSWRlbnRpdHkSDQoFcGhvbmUYAyABKAkSEAoIZGlzYWJsZWQYBCABKAgSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLwoNb3duZWRfY2xpbmljcxgGIAMoCzIYLmRlbnRhbC52MS5DbGluaWNTdW1tYXJ5Ei4KDXN1YnNjcmlwdGlvbnMYByADKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uEiQKCHBheW1lbnRzGAggAygLMhIuZGVudGFsLnYxLlBheW1lbnQiZQoXU2VsbFN1YnNjcmlwdGlvblJlcXVlc3QSGAoHdXNlcl9pZBgBIAEoDEIHukgEegJoEBIYCgdwbGFuX2lkGAIgASgMQge6SAR6AmgQEhYKBG5vdGUYAyABKAlCCLpIBXIDGPQDIkkKGFNlbGxTdWJzY3JpcHRpb25SZXNwb25zZRItCgxzdWJzY3JpcHRpb24YASABKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uIjAKGUNhbmNlbFN1YnNjcmlwdGlvblJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBAiSwoaQ2FuY2VsU3Vic2NyaXB0aW9uUmVzcG9uc2USLQoMc3Vic2NyaXB0aW9uGAEgASgLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbiJiChNMaXN0UGF5bWVudHNSZXF1ZXN0EjIKBnN0YXR1cxgBIAEoDjIYLmRlbnRhbC52MS5QYXltZW50U3RhdHVzQgi6SAWCAQIQARIXCgVsaW1pdBgCIAEoDUIIukgFKgMY9AMiQgoUTGlzdFBheW1lbnRzUmVzcG9uc2USKgoIcGF5bWVudHMYASADKAsyGC5kZW50YWwudjEuUGF5bWVudFJldmlldyK7AQoNUGF5bWVudFJldmlldxIjCgdwYXltZW50GAEgASgLMhIuZGVudGFsLnYxLlBheW1lbnQSHQoEdXNlchgCIAEoCzIPLmRlbnRhbC52MS5Vc2VyEisKCGlkZW50aXR5GAMgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Eg0KBXBob25lGAQgASgJEioKB2FjY291bnQYBSABKAsyGS5kZW50YWwudjEuUGF5bWVudEFjY291bnQiRAoVQXBwcm92ZVBheW1lbnRSZXF1ZXN0EhMKAmlkGAEgASgMQge6SAR6AmgQEhYKBG5vdGUYAiABKAlCCLpIBXIDGPQDImwKFkFwcHJvdmVQYXltZW50UmVzcG9uc2USIwoHcGF5bWVudBgBIAEoCzISLmRlbnRhbC52MS5QYXltZW50Ei0KDHN1YnNjcmlwdGlvbhgCIAEoCzIXLmRlbnRhbC52MS5TdWJzY3JpcHRpb24iRwoUUmVqZWN0UGF5bWVudFJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBASGgoGcmVhc29uGAIgASgJQgq6SAdyBRABGPQDIjwKFVJlamVjdFBheW1lbnRSZXNwb25zZRIjCgdwYXltZW50GAEgASgLMhIuZGVudGFsLnYxLlBheW1lbnQiHAoaTGlzdFBheW1lbnRBY2NvdW50c1JlcXVlc3QiSgobTGlzdFBheW1lbnRBY2NvdW50c1Jlc3BvbnNlEisKCGFjY291bnRzGAEgAygLMhkuZGVudGFsLnYxLlBheW1lbnRBY2NvdW50Iq4CChtDcmVhdGVQYXltZW50QWNjb3VudFJlcXVlc3QSHAoJYmFua19uYW1lGAEgASgJQgm6SAZyBBABGGQSHgoLaG9sZGVyX25hbWUYAiABKAlCCbpIBnIEEAEYZBIqCgtjYXJkX251bWJlchgDIAEoCUIVukgSchAyDl4oWzAtOV17MTZ9KT8kEiUKBGliYW4YBCABKAlCF7pIFHISMhBeKElSWzAtOV17MjR9KT8kEhAKCHBvc2l0aW9uGAUgASgFOmy6SGkaZwoUZGVzdGluYXRpb25fcmVxdWlyZWQSJGEgY2FyZCBudW1iZXIgb3IgYW4gSUJBTiBpcyByZXF1aXJlZBopdGhpcy5jYXJkX251bWJlciAhPSAnJyB8fCB0aGlzLmliYW4gIT0gJyciSgocQ3JlYXRlUGF5bWVudEFjY291bnRSZXNwb25zZRIqCgdhY2NvdW50GAEgASgLMhkuZGVudGFsLnYxLlBheW1lbnRBY2NvdW50ItMCChtVcGRhdGVQYXltZW50QWNjb3VudFJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBASHAoJYmFua19uYW1lGAIgASgJQgm6SAZyBBABGGQSHgoLaG9sZGVyX25hbWUYAyABKAlCCbpIBnIEEAEYZBIqCgtjYXJkX251bWJlchgEIAEoCUIVukgSchAyDl4oWzAtOV17MTZ9KT8kEiUKBGliYW4YBSABKAlCF7pIFHISMhBeKElSWzAtOV17MjR9KT8kEhAKCHBvc2l0aW9uGAYgASgFEg4KBmFjdGl2ZRgHIAEoCDpsukhpGmcKFGRlc3RpbmF0aW9uX3JlcXVpcmVkEiRhIGNhcmQgbnVtYmVyIG9yIGFuIElCQU4gaXMgcmVxdWlyZWQaKXRoaXMuY2FyZF9udW1iZXIgIT0gJycgfHwgdGhpcy5pYmFuICE9ICcnIkoKHFVwZGF0ZVBheW1lbnRBY2NvdW50UmVzcG9uc2USKgoHYWNjb3VudBgBIAEoCzIZLmRlbnRhbC52MS5QYXltZW50QWNjb3VudDK5CgoMQWRtaW5TZXJ2aWNlElQKBUxvZ2luEiMuZGVudGFsLnYxLkFkbWluU2VydmljZUxvZ2luUmVxdWVzdBokLmRlbnRhbC52MS5BZG1pblNlcnZpY2VMb2dpblJlc3BvbnNlIgASVwoGTG9nb3V0EiQuZGVudGFsLnYxLkFkbWluU2VydmljZUxvZ291dFJlcXVlc3QaJS5kZW50YWwudjEuQWRtaW5TZXJ2aWNlTG9nb3V0UmVzcG9uc2UiABJOCgtDcmVhdGVBZG1pbhIdLmRlbnRhbC52MS5DcmVhdGVBZG1pblJlcXVlc3QaHi5kZW50YWwudjEuQ3JlYXRlQWRtaW5SZXNwb25zZSIAEkgKCUxpc3RQbGFucxIbLmRlbnRhbC52MS5MaXN0UGxhbnNSZXF1ZXN0GhwuZGVudGFsLnYxLkxpc3RQbGFuc1Jlc3BvbnNlIgASSwoKQ3JlYXRlUGxhbhIcLmRlbnRhbC52MS5DcmVhdGVQbGFuUmVxdWVzdBodLmRlbnRhbC52MS5DcmVhdGVQbGFuUmVzcG9uc2UiABJLCgpVcGRhdGVQbGFuEhwuZGVudGFsLnYxLlVwZGF0ZVBsYW5SZXF1ZXN0Gh0uZGVudGFsLnYxLlVwZGF0ZVBsYW5SZXNwb25zZSIAEkIKB0dldFVzZXISGS5kZW50YWwudjEuR2V0VXNlclJlcXVlc3QaGi5kZW50YWwudjEuR2V0VXNlclJlc3BvbnNlIgASXQoQU2VsbFN1YnNjcmlwdGlvbhIiLmRlbnRhbC52MS5TZWxsU3Vic2NyaXB0aW9uUmVxdWVzdBojLmRlbnRhbC52MS5TZWxsU3Vic2NyaXB0aW9uUmVzcG9uc2UiABJjChJDYW5jZWxTdWJzY3JpcHRpb24SJC5kZW50YWwudjEuQ2FuY2VsU3Vic2NyaXB0aW9uUmVxdWVzdBolLmRlbnRhbC52MS5DYW5jZWxTdWJzY3JpcHRpb25SZXNwb25zZSIAElEKDExpc3RQYXltZW50cxIeLmRlbnRhbC52MS5MaXN0UGF5bWVudHNSZXF1ZXN0Gh8uZGVudGFsLnYxLkxpc3RQYXltZW50c1Jlc3BvbnNlIgASVwoOQXBwcm92ZVBheW1lbnQSIC5kZW50YWwudjEuQXBwcm92ZVBheW1lbnRSZXF1ZXN0GiEuZGVudGFsLnYxLkFwcHJvdmVQYXltZW50UmVzcG9uc2UiABJUCg1SZWplY3RQYXltZW50Eh8uZGVudGFsLnYxLlJlamVjdFBheW1lbnRSZXF1ZXN0GiAuZGVudGFsLnYxLlJlamVjdFBheW1lbnRSZXNwb25zZSIAEmYKE0xpc3RQYXltZW50QWNjb3VudHMSJS5kZW50YWwudjEuTGlzdFBheW1lbnRBY2NvdW50c1JlcXVlc3QaJi5kZW50YWwudjEuTGlzdFBheW1lbnRBY2NvdW50c1Jlc3BvbnNlIgASaQoUQ3JlYXRlUGF5bWVudEFjY291bnQSJi5kZW50YWwudjEuQ3JlYXRlUGF5bWVudEFjY291bnRSZXF1ZXN0GicuZGVudGFsLnYxLkNyZWF0ZVBheW1lbnRBY2NvdW50UmVzcG9uc2UiABJpChRVcGRhdGVQYXltZW50QWNjb3VudBImLmRlbnRhbC52MS5VcGRhdGVQYXltZW50QWNjb3VudFJlcXVlc3QaJy5kZW50YWwudjEuVXBkYXRlUGF5bWVudEFjY291bnRSZXNwb25zZSIAYgZwcm90bzM", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_dental_v1_subscription, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message dental.v1.Admin
@@ -47,140 +49,6 @@ export type Admin = Message<"dental.v1.Admin"> & {
  */
 export const AdminSchema: GenMessage<Admin> = /*@__PURE__*/
   messageDesc(file_dental_v1_admin, 0);
-
-/**
- * @generated from message dental.v1.Plan
- */
-export type Plan = Message<"dental.v1.Plan"> & {
-  /**
-   * 16 raw UUID bytes.
-   *
-   * @generated from field: bytes id = 1;
-   */
-  id: Uint8Array;
-
-  /**
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * How many clinics the owner may have.
-   *
-   * @generated from field: uint32 max_clinics = 3;
-   */
-  maxClinics: number;
-
-  /**
-   * How many installations (not revoked) each clinic may have.
-   *
-   * @generated from field: uint32 max_devices_per_clinic = 4;
-   */
-  maxDevicesPerClinic: number;
-
-  /**
-   * @generated from field: uint32 duration_days = 5;
-   */
-  durationDays: number;
-
-  /**
-   * In Iranian rials.
-   *
-   * @generated from field: int64 price_rials = 6;
-   */
-  priceRials: bigint;
-
-  /**
-   * Only active plans can be sold.
-   *
-   * @generated from field: bool active = 7;
-   */
-  active: boolean;
-};
-
-/**
- * Describes the message dental.v1.Plan.
- * Use `create(PlanSchema)` to create a new message.
- */
-export const PlanSchema: GenMessage<Plan> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 1);
-
-/**
- * @generated from message dental.v1.Subscription
- */
-export type Subscription = Message<"dental.v1.Subscription"> & {
-  /**
-   * 16 raw UUID bytes.
-   *
-   * @generated from field: bytes id = 1;
-   */
-  id: Uint8Array;
-
-  /**
-   * 16 raw UUID bytes: the clinic owner.
-   *
-   * @generated from field: bytes user_id = 2;
-   */
-  userId: Uint8Array;
-
-  /**
-   * 16 raw UUID bytes.
-   *
-   * @generated from field: bytes plan_id = 3;
-   */
-  planId: Uint8Array;
-
-  /**
-   * @generated from field: string plan_name = 4;
-   */
-  planName: string;
-
-  /**
-   * Limits and price as sold, whatever the plan says now.
-   *
-   * @generated from field: uint32 max_clinics = 5;
-   */
-  maxClinics: number;
-
-  /**
-   * @generated from field: uint32 max_devices_per_clinic = 6;
-   */
-  maxDevicesPerClinic: number;
-
-  /**
-   * @generated from field: int64 price_rials = 7;
-   */
-  priceRials: bigint;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp starts_at = 8;
-   */
-  startsAt?: Timestamp | undefined;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp ends_at = 9;
-   */
-  endsAt?: Timestamp | undefined;
-
-  /**
-   * Unset unless canceled.
-   *
-   * @generated from field: google.protobuf.Timestamp canceled_at = 10;
-   */
-  canceledAt?: Timestamp | undefined;
-
-  /**
-   * @generated from field: string note = 11;
-   */
-  note: string;
-};
-
-/**
- * Describes the message dental.v1.Subscription.
- * Use `create(SubscriptionSchema)` to create a new message.
- */
-export const SubscriptionSchema: GenMessage<Subscription> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 2);
 
 /**
  * A clinic as the admin panel lists it.
@@ -228,7 +96,7 @@ export type ClinicSummary = Message<"dental.v1.ClinicSummary"> & {
  * Use `create(ClinicSummarySchema)` to create a new message.
  */
 export const ClinicSummarySchema: GenMessage<ClinicSummary> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 3);
+  messageDesc(file_dental_v1_admin, 1);
 
 /**
  * @generated from message dental.v1.AdminServiceLoginRequest
@@ -250,7 +118,7 @@ export type AdminServiceLoginRequest = Message<"dental.v1.AdminServiceLoginReque
  * Use `create(AdminServiceLoginRequestSchema)` to create a new message.
  */
 export const AdminServiceLoginRequestSchema: GenMessage<AdminServiceLoginRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 4);
+  messageDesc(file_dental_v1_admin, 2);
 
 /**
  * @generated from message dental.v1.AdminServiceLoginResponse
@@ -280,7 +148,7 @@ export type AdminServiceLoginResponse = Message<"dental.v1.AdminServiceLoginResp
  * Use `create(AdminServiceLoginResponseSchema)` to create a new message.
  */
 export const AdminServiceLoginResponseSchema: GenMessage<AdminServiceLoginResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 5);
+  messageDesc(file_dental_v1_admin, 3);
 
 /**
  * @generated from message dental.v1.AdminServiceLogoutRequest
@@ -293,7 +161,7 @@ export type AdminServiceLogoutRequest = Message<"dental.v1.AdminServiceLogoutReq
  * Use `create(AdminServiceLogoutRequestSchema)` to create a new message.
  */
 export const AdminServiceLogoutRequestSchema: GenMessage<AdminServiceLogoutRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 6);
+  messageDesc(file_dental_v1_admin, 4);
 
 /**
  * @generated from message dental.v1.AdminServiceLogoutResponse
@@ -306,7 +174,7 @@ export type AdminServiceLogoutResponse = Message<"dental.v1.AdminServiceLogoutRe
  * Use `create(AdminServiceLogoutResponseSchema)` to create a new message.
  */
 export const AdminServiceLogoutResponseSchema: GenMessage<AdminServiceLogoutResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 7);
+  messageDesc(file_dental_v1_admin, 5);
 
 /**
  * @generated from message dental.v1.CreateAdminRequest
@@ -339,7 +207,7 @@ export type CreateAdminRequest = Message<"dental.v1.CreateAdminRequest"> & {
  * Use `create(CreateAdminRequestSchema)` to create a new message.
  */
 export const CreateAdminRequestSchema: GenMessage<CreateAdminRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 8);
+  messageDesc(file_dental_v1_admin, 6);
 
 /**
  * @generated from message dental.v1.CreateAdminResponse
@@ -356,7 +224,7 @@ export type CreateAdminResponse = Message<"dental.v1.CreateAdminResponse"> & {
  * Use `create(CreateAdminResponseSchema)` to create a new message.
  */
 export const CreateAdminResponseSchema: GenMessage<CreateAdminResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 9);
+  messageDesc(file_dental_v1_admin, 7);
 
 /**
  * @generated from message dental.v1.ListPlansRequest
@@ -369,7 +237,7 @@ export type ListPlansRequest = Message<"dental.v1.ListPlansRequest"> & {
  * Use `create(ListPlansRequestSchema)` to create a new message.
  */
 export const ListPlansRequestSchema: GenMessage<ListPlansRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 10);
+  messageDesc(file_dental_v1_admin, 8);
 
 /**
  * @generated from message dental.v1.ListPlansResponse
@@ -386,7 +254,7 @@ export type ListPlansResponse = Message<"dental.v1.ListPlansResponse"> & {
  * Use `create(ListPlansResponseSchema)` to create a new message.
  */
 export const ListPlansResponseSchema: GenMessage<ListPlansResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 11);
+  messageDesc(file_dental_v1_admin, 9);
 
 /**
  * @generated from message dental.v1.CreatePlanRequest
@@ -426,6 +294,14 @@ export type CreatePlanRequest = Message<"dental.v1.CreatePlanRequest"> & {
    * @generated from field: int64 price_rials = 5;
    */
   priceRials: bigint;
+
+  /**
+   * How many times each owner may buy it in the desktop app (BillingService), 0 for
+   * no limit, at most 1000. SellSubscription is not limited.
+   *
+   * @generated from field: uint32 max_purchases_per_owner = 6;
+   */
+  maxPurchasesPerOwner: number;
 };
 
 /**
@@ -433,7 +309,7 @@ export type CreatePlanRequest = Message<"dental.v1.CreatePlanRequest"> & {
  * Use `create(CreatePlanRequestSchema)` to create a new message.
  */
 export const CreatePlanRequestSchema: GenMessage<CreatePlanRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 12);
+  messageDesc(file_dental_v1_admin, 10);
 
 /**
  * @generated from message dental.v1.CreatePlanResponse
@@ -450,7 +326,7 @@ export type CreatePlanResponse = Message<"dental.v1.CreatePlanResponse"> & {
  * Use `create(CreatePlanResponseSchema)` to create a new message.
  */
 export const CreatePlanResponseSchema: GenMessage<CreatePlanResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 13);
+  messageDesc(file_dental_v1_admin, 11);
 
 /**
  * @generated from message dental.v1.UpdatePlanRequest
@@ -494,6 +370,11 @@ export type UpdatePlanRequest = Message<"dental.v1.UpdatePlanRequest"> & {
    * @generated from field: bool active = 7;
    */
   active: boolean;
+
+  /**
+   * @generated from field: uint32 max_purchases_per_owner = 8;
+   */
+  maxPurchasesPerOwner: number;
 };
 
 /**
@@ -501,7 +382,7 @@ export type UpdatePlanRequest = Message<"dental.v1.UpdatePlanRequest"> & {
  * Use `create(UpdatePlanRequestSchema)` to create a new message.
  */
 export const UpdatePlanRequestSchema: GenMessage<UpdatePlanRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 14);
+  messageDesc(file_dental_v1_admin, 12);
 
 /**
  * @generated from message dental.v1.UpdatePlanResponse
@@ -518,7 +399,7 @@ export type UpdatePlanResponse = Message<"dental.v1.UpdatePlanResponse"> & {
  * Use `create(UpdatePlanResponseSchema)` to create a new message.
  */
 export const UpdatePlanResponseSchema: GenMessage<UpdatePlanResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 15);
+  messageDesc(file_dental_v1_admin, 13);
 
 /**
  * @generated from message dental.v1.GetUserRequest
@@ -535,7 +416,7 @@ export type GetUserRequest = Message<"dental.v1.GetUserRequest"> & {
  * Use `create(GetUserRequestSchema)` to create a new message.
  */
 export const GetUserRequestSchema: GenMessage<GetUserRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 16);
+  messageDesc(file_dental_v1_admin, 14);
 
 /**
  * @generated from message dental.v1.GetUserResponse
@@ -579,6 +460,13 @@ export type GetUserResponse = Message<"dental.v1.GetUserResponse"> & {
    * @generated from field: repeated dental.v1.Subscription subscriptions = 7;
    */
   subscriptions: Subscription[];
+
+  /**
+   * Payments reported in the desktop app, newest first.
+   *
+   * @generated from field: repeated dental.v1.Payment payments = 8;
+   */
+  payments: Payment[];
 };
 
 /**
@@ -586,7 +474,7 @@ export type GetUserResponse = Message<"dental.v1.GetUserResponse"> & {
  * Use `create(GetUserResponseSchema)` to create a new message.
  */
 export const GetUserResponseSchema: GenMessage<GetUserResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 17);
+  messageDesc(file_dental_v1_admin, 15);
 
 /**
  * @generated from message dental.v1.SellSubscriptionRequest
@@ -619,7 +507,7 @@ export type SellSubscriptionRequest = Message<"dental.v1.SellSubscriptionRequest
  * Use `create(SellSubscriptionRequestSchema)` to create a new message.
  */
 export const SellSubscriptionRequestSchema: GenMessage<SellSubscriptionRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 18);
+  messageDesc(file_dental_v1_admin, 16);
 
 /**
  * @generated from message dental.v1.SellSubscriptionResponse
@@ -636,7 +524,7 @@ export type SellSubscriptionResponse = Message<"dental.v1.SellSubscriptionRespon
  * Use `create(SellSubscriptionResponseSchema)` to create a new message.
  */
 export const SellSubscriptionResponseSchema: GenMessage<SellSubscriptionResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 19);
+  messageDesc(file_dental_v1_admin, 17);
 
 /**
  * @generated from message dental.v1.CancelSubscriptionRequest
@@ -655,7 +543,7 @@ export type CancelSubscriptionRequest = Message<"dental.v1.CancelSubscriptionReq
  * Use `create(CancelSubscriptionRequestSchema)` to create a new message.
  */
 export const CancelSubscriptionRequestSchema: GenMessage<CancelSubscriptionRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 20);
+  messageDesc(file_dental_v1_admin, 18);
 
 /**
  * @generated from message dental.v1.CancelSubscriptionResponse
@@ -672,7 +560,346 @@ export type CancelSubscriptionResponse = Message<"dental.v1.CancelSubscriptionRe
  * Use `create(CancelSubscriptionResponseSchema)` to create a new message.
  */
 export const CancelSubscriptionResponseSchema: GenMessage<CancelSubscriptionResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 19);
+
+/**
+ * @generated from message dental.v1.ListPaymentsRequest
+ */
+export type ListPaymentsRequest = Message<"dental.v1.ListPaymentsRequest"> & {
+  /**
+   * Only payments with this status; PAYMENT_STATUS_UNSPECIFIED for all.
+   *
+   * @generated from field: dental.v1.PaymentStatus status = 1;
+   */
+  status: PaymentStatus;
+
+  /**
+   * At most this many, up to 500; 0 means 100.
+   *
+   * @generated from field: uint32 limit = 2;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message dental.v1.ListPaymentsRequest.
+ * Use `create(ListPaymentsRequestSchema)` to create a new message.
+ */
+export const ListPaymentsRequestSchema: GenMessage<ListPaymentsRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 20);
+
+/**
+ * @generated from message dental.v1.ListPaymentsResponse
+ */
+export type ListPaymentsResponse = Message<"dental.v1.ListPaymentsResponse"> & {
+  /**
+   * @generated from field: repeated dental.v1.PaymentReview payments = 1;
+   */
+  payments: PaymentReview[];
+};
+
+/**
+ * Describes the message dental.v1.ListPaymentsResponse.
+ * Use `create(ListPaymentsResponseSchema)` to create a new message.
+ */
+export const ListPaymentsResponseSchema: GenMessage<ListPaymentsResponse> = /*@__PURE__*/
   messageDesc(file_dental_v1_admin, 21);
+
+/**
+ * A payment with what an administrator needs to check it.
+ *
+ * @generated from message dental.v1.PaymentReview
+ */
+export type PaymentReview = Message<"dental.v1.PaymentReview"> & {
+  /**
+   * @generated from field: dental.v1.Payment payment = 1;
+   */
+  payment?: Payment | undefined;
+
+  /**
+   * The clinic owner who reported it.
+   *
+   * @generated from field: dental.v1.User user = 2;
+   */
+  user?: User | undefined;
+
+  /**
+   * @generated from field: dental.v1.PersonIdentity identity = 3;
+   */
+  identity?: PersonIdentity | undefined;
+
+  /**
+   * @generated from field: string phone = 4;
+   */
+  phone: string;
+
+  /**
+   * Where the money was sent; unset for payments without a manual transfer.
+   *
+   * @generated from field: dental.v1.PaymentAccount account = 5;
+   */
+  account?: PaymentAccount | undefined;
+};
+
+/**
+ * Describes the message dental.v1.PaymentReview.
+ * Use `create(PaymentReviewSchema)` to create a new message.
+ */
+export const PaymentReviewSchema: GenMessage<PaymentReview> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 22);
+
+/**
+ * @generated from message dental.v1.ApprovePaymentRequest
+ */
+export type ApprovePaymentRequest = Message<"dental.v1.ApprovePaymentRequest"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+
+  /**
+   * Saved as the subscription's note. At most 500 characters.
+   *
+   * @generated from field: string note = 2;
+   */
+  note: string;
+};
+
+/**
+ * Describes the message dental.v1.ApprovePaymentRequest.
+ * Use `create(ApprovePaymentRequestSchema)` to create a new message.
+ */
+export const ApprovePaymentRequestSchema: GenMessage<ApprovePaymentRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 23);
+
+/**
+ * @generated from message dental.v1.ApprovePaymentResponse
+ */
+export type ApprovePaymentResponse = Message<"dental.v1.ApprovePaymentResponse"> & {
+  /**
+   * @generated from field: dental.v1.Payment payment = 1;
+   */
+  payment?: Payment | undefined;
+
+  /**
+   * The subscription added.
+   *
+   * @generated from field: dental.v1.Subscription subscription = 2;
+   */
+  subscription?: Subscription | undefined;
+};
+
+/**
+ * Describes the message dental.v1.ApprovePaymentResponse.
+ * Use `create(ApprovePaymentResponseSchema)` to create a new message.
+ */
+export const ApprovePaymentResponseSchema: GenMessage<ApprovePaymentResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 24);
+
+/**
+ * @generated from message dental.v1.RejectPaymentRequest
+ */
+export type RejectPaymentRequest = Message<"dental.v1.RejectPaymentRequest"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+
+  /**
+   * Shown to the owner. 1–500 characters.
+   *
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+};
+
+/**
+ * Describes the message dental.v1.RejectPaymentRequest.
+ * Use `create(RejectPaymentRequestSchema)` to create a new message.
+ */
+export const RejectPaymentRequestSchema: GenMessage<RejectPaymentRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 25);
+
+/**
+ * @generated from message dental.v1.RejectPaymentResponse
+ */
+export type RejectPaymentResponse = Message<"dental.v1.RejectPaymentResponse"> & {
+  /**
+   * @generated from field: dental.v1.Payment payment = 1;
+   */
+  payment?: Payment | undefined;
+};
+
+/**
+ * Describes the message dental.v1.RejectPaymentResponse.
+ * Use `create(RejectPaymentResponseSchema)` to create a new message.
+ */
+export const RejectPaymentResponseSchema: GenMessage<RejectPaymentResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 26);
+
+/**
+ * @generated from message dental.v1.ListPaymentAccountsRequest
+ */
+export type ListPaymentAccountsRequest = Message<"dental.v1.ListPaymentAccountsRequest"> & {
+};
+
+/**
+ * Describes the message dental.v1.ListPaymentAccountsRequest.
+ * Use `create(ListPaymentAccountsRequestSchema)` to create a new message.
+ */
+export const ListPaymentAccountsRequestSchema: GenMessage<ListPaymentAccountsRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 27);
+
+/**
+ * @generated from message dental.v1.ListPaymentAccountsResponse
+ */
+export type ListPaymentAccountsResponse = Message<"dental.v1.ListPaymentAccountsResponse"> & {
+  /**
+   * @generated from field: repeated dental.v1.PaymentAccount accounts = 1;
+   */
+  accounts: PaymentAccount[];
+};
+
+/**
+ * Describes the message dental.v1.ListPaymentAccountsResponse.
+ * Use `create(ListPaymentAccountsResponseSchema)` to create a new message.
+ */
+export const ListPaymentAccountsResponseSchema: GenMessage<ListPaymentAccountsResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 28);
+
+/**
+ * @generated from message dental.v1.CreatePaymentAccountRequest
+ */
+export type CreatePaymentAccountRequest = Message<"dental.v1.CreatePaymentAccountRequest"> & {
+  /**
+   * 1–100 characters.
+   *
+   * @generated from field: string bank_name = 1;
+   */
+  bankName: string;
+
+  /**
+   * 1–100 characters.
+   *
+   * @generated from field: string holder_name = 2;
+   */
+  holderName: string;
+
+  /**
+   * Empty, or 16 digits.
+   *
+   * @generated from field: string card_number = 3;
+   */
+  cardNumber: string;
+
+  /**
+   * Empty, or "IR" and 24 digits.
+   *
+   * @generated from field: string iban = 4;
+   */
+  iban: string;
+
+  /**
+   * @generated from field: int32 position = 5;
+   */
+  position: number;
+};
+
+/**
+ * Describes the message dental.v1.CreatePaymentAccountRequest.
+ * Use `create(CreatePaymentAccountRequestSchema)` to create a new message.
+ */
+export const CreatePaymentAccountRequestSchema: GenMessage<CreatePaymentAccountRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 29);
+
+/**
+ * @generated from message dental.v1.CreatePaymentAccountResponse
+ */
+export type CreatePaymentAccountResponse = Message<"dental.v1.CreatePaymentAccountResponse"> & {
+  /**
+   * @generated from field: dental.v1.PaymentAccount account = 1;
+   */
+  account?: PaymentAccount | undefined;
+};
+
+/**
+ * Describes the message dental.v1.CreatePaymentAccountResponse.
+ * Use `create(CreatePaymentAccountResponseSchema)` to create a new message.
+ */
+export const CreatePaymentAccountResponseSchema: GenMessage<CreatePaymentAccountResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 30);
+
+/**
+ * @generated from message dental.v1.UpdatePaymentAccountRequest
+ */
+export type UpdatePaymentAccountRequest = Message<"dental.v1.UpdatePaymentAccountRequest"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+
+  /**
+   * The other fields replace the account's; same rules as CreatePaymentAccountRequest.
+   *
+   * @generated from field: string bank_name = 2;
+   */
+  bankName: string;
+
+  /**
+   * @generated from field: string holder_name = 3;
+   */
+  holderName: string;
+
+  /**
+   * @generated from field: string card_number = 4;
+   */
+  cardNumber: string;
+
+  /**
+   * @generated from field: string iban = 5;
+   */
+  iban: string;
+
+  /**
+   * @generated from field: int32 position = 6;
+   */
+  position: number;
+
+  /**
+   * @generated from field: bool active = 7;
+   */
+  active: boolean;
+};
+
+/**
+ * Describes the message dental.v1.UpdatePaymentAccountRequest.
+ * Use `create(UpdatePaymentAccountRequestSchema)` to create a new message.
+ */
+export const UpdatePaymentAccountRequestSchema: GenMessage<UpdatePaymentAccountRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 31);
+
+/**
+ * @generated from message dental.v1.UpdatePaymentAccountResponse
+ */
+export type UpdatePaymentAccountResponse = Message<"dental.v1.UpdatePaymentAccountResponse"> & {
+  /**
+   * @generated from field: dental.v1.PaymentAccount account = 1;
+   */
+  account?: PaymentAccount | undefined;
+};
+
+/**
+ * Describes the message dental.v1.UpdatePaymentAccountResponse.
+ * Use `create(UpdatePaymentAccountResponseSchema)` to create a new message.
+ */
+export const UpdatePaymentAccountResponseSchema: GenMessage<UpdatePaymentAccountResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 32);
 
 /**
  * The admin panel: system administrators, subscription plans and selling
@@ -794,6 +1021,75 @@ export const AdminService: GenService<{
     methodKind: "unary";
     input: typeof CancelSubscriptionRequestSchema;
     output: typeof CancelSubscriptionResponseSchema;
+  },
+  /**
+   * Payments reported by clinic owners (BillingService.CreatePayment), with who paid.
+   * Pending ones oldest first (the queue to review), the others newest first.
+   *
+   * @generated from rpc dental.v1.AdminService.ListPayments
+   */
+  listPayments: {
+    methodKind: "unary";
+    input: typeof ListPaymentsRequestSchema;
+    output: typeof ListPaymentsResponseSchema;
+  },
+  /**
+   * Approves a pending payment after checking the bank statement, and adds the
+   * subscription it pays for, as the payment says (PurchaseMode):
+   * - PURCHASE_MODE_EXTEND: like SellSubscription, from when the paid time ends;
+   * - PURCHASE_MODE_UPGRADE_NOW: from now; the subscription in force ends now.
+   * The limits, duration and price are the ones fixed when the payment was reported.
+   *
+   * Fails with NOT_FOUND "payment_not_found", FAILED_PRECONDITION "payment_not_pending"
+   * or, for an upgrade, FAILED_PRECONDITION "renewal_queued": a subscription was sold
+   * after the payment that starts after the one in force (reject the payment instead).
+   *
+   * @generated from rpc dental.v1.AdminService.ApprovePayment
+   */
+  approvePayment: {
+    methodKind: "unary";
+    input: typeof ApprovePaymentRequestSchema;
+    output: typeof ApprovePaymentResponseSchema;
+  },
+  /**
+   * Rejects a pending payment; the owner sees the reason.
+   * Fails with NOT_FOUND "payment_not_found" or FAILED_PRECONDITION "payment_not_pending".
+   *
+   * @generated from rpc dental.v1.AdminService.RejectPayment
+   */
+  rejectPayment: {
+    methodKind: "unary";
+    input: typeof RejectPaymentRequestSchema;
+    output: typeof RejectPaymentResponseSchema;
+  },
+  /**
+   * Every payment account, the active ones first, in position order.
+   *
+   * @generated from rpc dental.v1.AdminService.ListPaymentAccounts
+   */
+  listPaymentAccounts: {
+    methodKind: "unary";
+    input: typeof ListPaymentAccountsRequestSchema;
+    output: typeof ListPaymentAccountsResponseSchema;
+  },
+  /**
+   * @generated from rpc dental.v1.AdminService.CreatePaymentAccount
+   */
+  createPaymentAccount: {
+    methodKind: "unary";
+    input: typeof CreatePaymentAccountRequestSchema;
+    output: typeof CreatePaymentAccountResponseSchema;
+  },
+  /**
+   * Changes an account. Payments already reported keep pointing to it.
+   * Fails with NOT_FOUND "payment_account_not_found".
+   *
+   * @generated from rpc dental.v1.AdminService.UpdatePaymentAccount
+   */
+  updatePaymentAccount: {
+    methodKind: "unary";
+    input: typeof UpdatePaymentAccountRequestSchema;
+    output: typeof UpdatePaymentAccountResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_dental_v1_admin, 0);

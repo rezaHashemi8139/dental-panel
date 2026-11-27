@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { toMessage } from "@/api/errors";
 import { planSchema, type PlanValues } from "@/auth/schemas";
-import type { Plan } from "@/gen/dental/v1/admin_pb";
+import type { Plan } from "@/gen/dental/v1/subscription_pb";
 import { translateMessage, type Message } from "@/i18n/message";
 import { fieldError } from "@/lib/form";
 import { useFormat } from "@/lib/format";
@@ -38,6 +38,7 @@ const NEW_PLAN: PlanValues = {
   maxDevicesPerClinic: "1",
   durationDays: "365",
   priceRials: "",
+  maxPurchasesPerOwner: "",
   active: true,
 };
 
@@ -48,6 +49,7 @@ function toValues(plan: Plan): PlanValues {
     maxDevicesPerClinic: String(plan.maxDevicesPerClinic),
     durationDays: String(plan.durationDays),
     priceRials: plan.priceRials.toString(),
+    maxPurchasesPerOwner: plan.maxPurchasesPerOwner === 0 ? "" : String(plan.maxPurchasesPerOwner),
     active: plan.active,
   };
 }
@@ -80,6 +82,8 @@ export function PlanDialog({ open, onOpenChange, plan }: PlanDialogProps) {
       maxDevicesPerClinic: Number(values.maxDevicesPerClinic),
       durationDays: Number(values.durationDays),
       priceRials: BigInt(values.priceRials),
+      // Always sent: UpdatePlan replaces every field, and 0 means unlimited.
+      maxPurchasesPerOwner: Number(values.maxPurchasesPerOwner || "0"),
     };
     try {
       if (plan) await adminClient.updatePlan({ id: plan.id, ...fields, active: values.active });
@@ -149,6 +153,16 @@ export function PlanDialog({ open, onOpenChange, plan }: PlanDialogProps) {
             inputMode="numeric"
             latin
             {...register("priceRials")}
+          />
+          <FormField
+            id="plan-max-purchases"
+            label={t("plans.fields.maxPurchases")}
+            error={fieldError(errors.maxPurchasesPerOwner)}
+            hint={t("plans.fields.maxPurchasesHint")}
+            placeholder={t("plans.unlimited")}
+            inputMode="numeric"
+            latin
+            {...register("maxPurchasesPerOwner")}
           />
 
           {plan && (

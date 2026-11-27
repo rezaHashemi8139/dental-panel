@@ -3,7 +3,7 @@ import { getRouteApi } from "@tanstack/react-router";
 import { PencilIcon, PlusIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
-import type { Plan } from "@/gen/dental/v1/admin_pb";
+import type { Plan } from "@/gen/dental/v1/subscription_pb";
 import { useFormat } from "@/lib/format";
 import { uuidToString } from "@/lib/uuid";
 import { PlanDialog } from "@/components/plan-dialog";
@@ -52,6 +52,7 @@ export function PlansPage() {
                 <TableHead>{t("plans.columns.maxDevices")}</TableHead>
                 <TableHead>{t("plans.columns.duration")}</TableHead>
                 <TableHead>{t("plans.columns.price")}</TableHead>
+                <TableHead>{t("plans.columns.maxPurchases")}</TableHead>
                 <TableHead>{t("plans.columns.status")}</TableHead>
                 <TableHead />
               </TableRow>
@@ -64,6 +65,11 @@ export function PlansPage() {
                   <TableCell>{format.number(plan.maxDevicesPerClinic)}</TableCell>
                   <TableCell>{format.days(plan.durationDays)}</TableCell>
                   <TableCell>{format.rials(plan.priceRials)}</TableCell>
+                  <TableCell>
+                    {plan.maxPurchasesPerOwner === 0
+                      ? t("plans.unlimited")
+                      : format.number(plan.maxPurchasesPerOwner)}
+                  </TableCell>
                   <TableCell>
                     <Badge variant={plan.active ? "default" : "outline"}>
                       {t(plan.active ? "plans.status.active" : "plans.status.inactive")}

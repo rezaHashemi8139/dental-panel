@@ -14,7 +14,9 @@
     "label": "Hauptmenü",
     "home": "Startseite",
     "plans": "Tarife",
-    "subscriptions": "Abonnements"
+    "subscriptions": "Abonnements",
+    "payments": "Zahlungen",
+    "paymentAccounts": "Zahlungskonten"
   },
   "theme": {
     "label": "Design",
@@ -68,12 +70,14 @@
     "new": "Neuer Tarif",
     "edit": "Bearbeiten",
     "empty": "Es wurden noch keine Tarife angelegt.",
+    "unlimited": "Unbegrenzt",
     "columns": {
       "name": "Name",
       "maxClinics": "Praxen",
       "maxDevices": "Geräte pro Praxis",
       "duration": "Laufzeit",
       "price": "Preis",
+      "maxPurchases": "Käufe pro Inhaber",
       "status": "Status"
     },
     "status": {
@@ -95,6 +99,8 @@
       "maxDevices": "Höchstzahl an Geräten pro Praxis",
       "durationDays": "Laufzeit (Tage)",
       "priceRials": "Preis (Rial)",
+      "maxPurchases": "Käufe pro Inhaber",
+      "maxPurchasesHint": "Wie oft jeder Praxisinhaber diesen Tarif in der Desktop-App kaufen darf. Leer oder 0 bedeutet unbegrenzt. Verkäufe über dieses Panel sind nicht begrenzt.",
       "active": "Im Verkauf",
       "activeHint": "Ein inaktiver Tarif kann nicht mehr verkauft werden; bereits verkaufte Abonnements bleiben unverändert."
     },
@@ -102,7 +108,8 @@
       "nameLength": "Der Name muss 1 bis 100 Zeichen lang sein.",
       "limit": "Geben Sie eine ganze Zahl von 1 bis 1000 ein.",
       "durationDays": "Geben Sie eine ganze Zahl von 1 bis 3650 Tagen ein.",
-      "price": "Geben Sie den Preis in Rial nur mit Ziffern ein."
+      "price": "Geben Sie den Preis in Rial nur mit Ziffern ein.",
+      "maxPurchases": "Leer lassen oder eine ganze Zahl von 0 bis 1000 eingeben."
     }
   },
   "subscriptions": {
@@ -142,6 +149,11 @@
       },
       "period": "{{start}} bis {{end}}",
       "limits": "{{clinics}}, {{devices}}"
+    },
+    "payments": {
+      "title": "Zahlungen",
+      "description": "Zahlungen, die dieser Benutzer in der App gemeldet hat. Mit der Bestätigung wird das Abonnement hinzugefügt.",
+      "empty": "Dieser Benutzer hat noch keine Zahlung gemeldet."
     },
     "status": {
       "active": "Laufend",
@@ -188,6 +200,132 @@
       "noteLength": "Die Notiz darf höchstens 500 Zeichen lang sein."
     }
   },
+  "payments": {
+    "title": "Zahlungen",
+    "description": "Praxisinhaber überweisen den Betrag auf eines der Zahlungskonten und melden ihn in der App. Prüfen Sie jede Zahlung anhand des Kontoauszugs und bestätigen Sie sie, wodurch das Abonnement hinzugefügt wird, oder lehnen Sie sie mit einer Begründung ab, die der Inhaber sieht.",
+    "filter": {
+      "label": "Nach Status filtern",
+      "pending": "Zu prüfen",
+      "approved": "Bestätigt",
+      "rejected": "Abgelehnt",
+      "canceled": "Zurückgezogen",
+      "all": "Alle"
+    },
+    "empty": "Keine Zahlungen.",
+    "emptyPending": "Keine Zahlungen warten auf Prüfung.",
+    "limited": "Es werden nur die ersten {{limit}} angezeigt.",
+    "columns": {
+      "reportedAt": "Gemeldet",
+      "owner": "Praxisinhaber",
+      "plan": "Tarif",
+      "amount": "Betrag",
+      "transfer": "Referenz",
+      "status": "Status"
+    },
+    "status": {
+      "pending": "Zu prüfen",
+      "approved": "Bestätigt",
+      "rejected": "Abgelehnt",
+      "canceled": "Zurückgezogen"
+    },
+    "method": {
+      "cardToCard": "Karte zu Karte",
+      "bankTransfer": "Banküberweisung (IBAN)",
+      "free": "Kostenlos",
+      "unknown": "Sonstige"
+    },
+    "mode": {
+      "extend": "Verlängerung",
+      "upgradeNow": "Sofortiges Upgrade",
+      "unknown": "Sonstige"
+    },
+    "details": {
+      "owner": "Praxisinhaber",
+      "plan": "Tarif",
+      "mode": "Kauf",
+      "amount": "Betrag auf dem Kontoauszug",
+      "credit": "Preis {{price}}, abzüglich {{credit}} Guthaben für das ungenutzte Abonnement.",
+      "method": "Zahlungsart",
+      "freeHint": "Es war nichts zu zahlen, daher wurde der Kauf automatisch genehmigt.",
+      "account": "Gezahlt an",
+      "reference": "Bankreferenz",
+      "paidAt": "Bezahlt am",
+      "payerCard": "Karte des Zahlers",
+      "reportedAt": "Gemeldet am"
+    },
+    "approve": {
+      "button": "Bestätigen",
+      "title": "Zahlung bestätigen",
+      "description": "Bestätigen Sie erst, wenn genau dieser Betrag mit dieser Referenz auf dem Kontoauszug erscheint. Mit der Bestätigung wird das Abonnement sofort hinzugefügt.",
+      "extend": "Das Abonnement beginnt, wenn die bezahlte Zeit des Inhabers endet, oder sofort, wenn keine mehr übrig ist.",
+      "upgradeNow": "Das Abonnement beginnt jetzt und ersetzt das laufende; dessen ungenutzter Teil wurde auf den Preis angerechnet.",
+      "note": "Notiz (optional)",
+      "noteHint": "Wird als Notiz des Abonnements gespeichert. Der Inhaber sieht sie nicht.",
+      "submit": "Bestätigen und Abonnement hinzufügen",
+      "working": "Wird bestätigt..."
+    },
+    "reject": {
+      "button": "Ablehnen",
+      "title": "Zahlung ablehnen",
+      "description": "Es wird kein Abonnement hinzugefügt. Der Inhaber sieht die Begründung in der App und kann die Zahlung erneut melden.",
+      "reason": "Begründung",
+      "reasonHint": "Wird dem Inhaber wörtlich angezeigt, z. B. „Es ging keine Überweisung mit dieser Referenz ein.“",
+      "submit": "Zahlung ablehnen",
+      "working": "Wird abgelehnt..."
+    },
+    "validation": {
+      "reasonRequired": "Geben Sie an, warum die Zahlung abgelehnt wird.",
+      "reasonLength": "Die Begründung darf höchstens 500 Zeichen lang sein."
+    }
+  },
+  "paymentAccounts": {
+    "title": "Zahlungskonten",
+    "description": "Bankkonten, auf die Praxisinhaber Abonnementzahlungen überweisen können. Inhaber sehen nur aktive Konten, in der festgelegten Reihenfolge.",
+    "new": "Neues Konto",
+    "edit": "Bearbeiten",
+    "empty": "Es wurden noch keine Zahlungskonten angelegt. Solange keines existiert, können Inhaber in der App nicht bezahlen.",
+    "columns": {
+      "bank": "Bank",
+      "holder": "Kontoinhaber",
+      "cardNumber": "Kartennummer",
+      "iban": "IBAN",
+      "position": "Reihenfolge",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Inaktiv"
+    },
+    "dialog": {
+      "createTitle": "Neues Zahlungskonto",
+      "createDescription": "Inhaber sehen es sofort in der App.",
+      "editTitle": "Zahlungskonto bearbeiten",
+      "editDescription": "Bereits gemeldete Zahlungen verweisen weiterhin auf dieses Konto.",
+      "create": "Konto hinzufügen",
+      "save": "Speichern",
+      "working": "Wird gespeichert..."
+    },
+    "fields": {
+      "bankName": "Name der Bank",
+      "holderName": "Kontoinhaber",
+      "holderNameHint": "So, wie die Bank ihn anzeigt, damit Inhaber ihn vor dem Bezahlen prüfen können.",
+      "cardNumber": "Kartennummer",
+      "cardNumberHint": "16 Ziffern. Für Zahlungen von Karte zu Karte erforderlich.",
+      "iban": "IBAN",
+      "ibanHint": "IR und 24 Ziffern. Für Banküberweisungen erforderlich.",
+      "position": "Reihenfolge",
+      "positionHint": "Konten mit einer kleineren Zahl werden zuerst angezeigt.",
+      "active": "Für Inhaber sichtbar",
+      "activeHint": "Ein inaktives Konto wird nicht mehr angeboten; bereits darauf gezahlte Beträge können weiterhin geprüft werden."
+    },
+    "validation": {
+      "nameLength": "Geben Sie 1 bis 100 Zeichen ein.",
+      "cardNumber": "Die Kartennummer muss 16 Ziffern haben.",
+      "iban": "Die IBAN muss aus IR und 24 Ziffern bestehen.",
+      "position": "Geben Sie eine ganze Zahl ein.",
+      "destinationRequired": "Geben Sie eine Kartennummer, eine IBAN oder beides ein."
+    }
+  },
   "errors": {
     "invalidCredentials": "Falscher Benutzername oder falsches Passwort.",
     "userDisabled": "Dieses Konto wurde deaktiviert.",
@@ -202,6 +340,10 @@
     "userNotFound": "Benutzer nicht gefunden.",
     "planNotFound": "Dieser Tarif existiert nicht mehr.",
     "planInactive": "Dieser Tarif ist inaktiv und kann nicht verkauft werden.",
-    "subscriptionNotFound": "Dieses Abonnement existiert nicht mehr."
+    "subscriptionNotFound": "Dieses Abonnement existiert nicht mehr.",
+    "paymentNotFound": "Diese Zahlung existiert nicht mehr.",
+    "paymentNotPending": "Diese Zahlung wurde bereits geprüft oder vom Inhaber zurückgezogen.",
+    "renewalQueued": "Nach der Meldung dieses Upgrades wurde ein weiteres Abonnement verkauft, daher kann es nicht mehr angewendet werden. Lehnen Sie die Zahlung stattdessen ab.",
+    "paymentAccountNotFound": "Dieses Zahlungskonto existiert nicht mehr."
   }
 }

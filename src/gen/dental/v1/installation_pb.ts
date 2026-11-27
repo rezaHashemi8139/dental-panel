@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/installation.proto.
  */
 export const file_dental_v1_installation: GenFile = /*@__PURE__*/
-  fileDesc("ChxkZW50YWwvdjEvaW5zdGFsbGF0aW9uLnByb3RvEglkZW50YWwudjEijQIKC01hY2hpbmVJbmZvEiAKD21hY2hpbmVfaWRfaGFzaBgBIAEoDEIHukgEegJoIBIaCghob3N0bmFtZRgCIAEoCUIIukgFcgMY/wESGAoHb3NfbmFtZRgDIAEoCUIHukgEcgIYZBIbCgpvc192ZXJzaW9uGAQgASgJQge6SARyAhgyEhsKCWNwdV9tb2RlbBgFIAEoCUIIukgFcgMYyAESEQoJY3B1X2NvcmVzGAYgASgNEhQKDG1lbW9yeV9ieXRlcxgHIAEoBBIlCg1tYWNfYWRkcmVzc2VzGAggAygJQg66SAuSAQgQICIEcgIYQBIcCgthcHBfdmVyc2lvbhgJIAEoCUIHukgEcgIYMiLpAQoKQ2xpbmljSW5mbxIYCgRuYW1lGAEgASgJQgq6SAdyBRABGMgBEjUKDmxpY2Vuc2VfbnVtYmVyGAIgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JBImCgVwaG9uZRgDIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQSFwoEY2l0eRgEIAEoCUIJukgGcgQQARhkEhsKB2FkZHJlc3MYBSABKAlCCrpIB3IFEAEY9AMSLAoLcG9zdGFsX2NvZGUYBiABKAlCF7pIFHISMhBeKFswLTldezUsMTB9KT8kIq0DCghOZXdPd25lchIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQSJgoFcGhvbmUYBSABKAlCF7pIFHISMhBeXCs/WzAtOV17NywxNX0kEjMKCGlkZW50aXR5GAYgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQFKBAgEEAVSC25hdGlvbmFsX2lkIpABCg1FeGlzdGluZ093bmVyEhsKCHVzZXJuYW1lGAEgASgJQgm6SAZyBBABGEASGgoIcGFzc3dvcmQYAiABKAlCCLpIBXIDKIAIEjMKCGlkZW50aXR5GAQgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQFKBAgDEARSC25hdGlvbmFsX2lkIkcKDkV4aXN0aW5nQ2xpbmljEjUKDmxpY2Vuc2VfbnVtYmVyGAEgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JCKgAgoPUmVnaXN0ZXJSZXF1ZXN0Ei8KB21hY2hpbmUYASABKAsyFi5kZW50YWwudjEuTWFjaGluZUluZm9CBrpIA8gBARInCgZjbGluaWMYAiABKAsyFS5kZW50YWwudjEuQ2xpbmljSW5mb0gAEjQKD2V4aXN0aW5nX2NsaW5pYxgGIAEoCzIZLmRlbnRhbC52MS5FeGlzdGluZ0NsaW5pY0gAEigKCW5ld19vd25lchgDIAEoCzITLmRlbnRhbC52MS5OZXdPd25lckgBEjIKDmV4aXN0aW5nX293bmVyGAQgASgLMhguZGVudGFsLnYxLkV4aXN0aW5nT3duZXJIAUIPCgZ0YXJnZXQSBbpIAggBQg4KBW93bmVyEgW6SAIIASLDAQoQUmVnaXN0ZXJSZXNwb25zZRIXCg9pbnN0YWxsYXRpb25faWQYASABKAwSGwoTaW5zdGFsbGF0aW9uX3NlY3JldBgCIAEoDBIVCg1rbm93bl9tYWNoaW5lGAMgASgIEi8KC3NlcnZlcl90aW1lGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIeCgVvd25lchgFIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhEKCWNsaW5pY19pZBgGIAEoDDJcChNJbnN0YWxsYXRpb25TZXJ2aWNlEkUKCFJlZ2lzdGVyEhouZGVudGFsLnYxLlJlZ2lzdGVyUmVxdWVzdBobLmRlbnRhbC52MS5SZWdpc3RlclJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
+  fileDesc("ChxkZW50YWwvdjEvaW5zdGFsbGF0aW9uLnByb3RvEglkZW50YWwudjEijQIKC01hY2hpbmVJbmZvEiAKD21hY2hpbmVfaWRfaGFzaBgBIAEoDEIHukgEegJoIBIaCghob3N0bmFtZRgCIAEoCUIIukgFcgMY/wESGAoHb3NfbmFtZRgDIAEoCUIHukgEcgIYZBIbCgpvc192ZXJzaW9uGAQgASgJQge6SARyAhgyEhsKCWNwdV9tb2RlbBgFIAEoCUIIukgFcgMYyAESEQoJY3B1X2NvcmVzGAYgASgNEhQKDG1lbW9yeV9ieXRlcxgHIAEoBBIlCg1tYWNfYWRkcmVzc2VzGAggAygJQg66SAuSAQgQICIEcgIYQBIcCgthcHBfdmVyc2lvbhgJIAEoCUIHukgEcgIYMiKoAgoKQ2xpbmljSW5mbxIYCgRuYW1lGAEgASgJQgq6SAdyBRABGMgBEjUKDmxpY2Vuc2VfbnVtYmVyGAIgASgJQh26SBpyGDIWXltBLVphLXowLTkuLy1dezMsMzJ9JBImCgVwaG9uZRgDIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQSGAoHY2l0eV9pZBgIIAEoDUIHukgEKgIgABIbCgdhZGRyZXNzGAUgASgJQgq6SAdyBRABGPQDEiwKC3Bvc3RhbF9jb2RlGAYgASgJQhe6SBRyEjIQXihbMC05XXs1LDEwfSk/JBIwCghsb2NhdGlvbhgHIAEoCzIWLmRlbnRhbC52MS5HZW9Mb2NhdGlvbkIGukgDyAEBSgQIBBAFUgRjaXR5ItMBCgtHZW9Mb2NhdGlvbhIpCghsYXRpdHVkZRgBIAEoAUIXukgUEhIZAAAAAACAVkApAAAAAACAVsASKgoJbG9uZ2l0dWRlGAIgASgBQhe6SBQSEhkAAAAAAIBmQCkAAAAAAIBmwDptukhqGmgKDGxvY2F0aW9uX3NldBIpbGF0aXR1ZGUgYW5kIGxvbmdpdHVkZSBtdXN0IG5vdCBib3RoIGJlIDAaLXRoaXMubGF0aXR1ZGUgIT0gMC4wIHx8IHRoaXMubG9uZ2l0dWRlICE9IDAuMCKtAwoITmV3T3duZXISLwoIdXNlcm5hbWUYASABKAlCHbpIGnIYMhZeW0EtWmEtejAtOS5fLV17MywzMn0kEuEBCghwYXNzd29yZBgCIAEoCULOAbpIygG6AcEBCg13ZWFrX3Bhc3N3b3JkElRtdXN0IGhhdmUgYXQgbGVhc3QgOCBjaGFyYWN0ZXJzLCBhIGxvd2VyY2FzZSBsZXR0ZXIsIGFuIHVwcGVyY2FzZSBsZXR0ZXIgYW5kIGEgZGlnaXQaWnNpemUodGhpcykgPj0gOCAmJiB0aGlzLm1hdGNoZXMoJ1thLXpdJykgJiYgdGhpcy5tYXRjaGVzKCdbQS1aXScpICYmIHRoaXMubWF0Y2hlcygnWzAtOV0nKXIDGIACEhwKCWZ1bGxfbmFtZRgDIAEoCUIJukgGcgQQARhkEiYKBXBob25lGAUgASgJQhe6SBRyEjIQXlwrP1swLTldezcsMTV9JBIzCghpZGVudGl0eRgGIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eUIGukgDyAEBSgQIBBAFUgtuYXRpb25hbF9pZCKIAQoNRXhpc3RpbmdPd25lchIbCgh1c2VybmFtZRgBIAEoCUIJukgGcgQQARhAEhoKCHBhc3N3b3JkGAIgASgJQgi6SAVyAyiACBIrCghpZGVudGl0eRgEIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eUoECAMQBFILbmF0aW9uYWxfaWQiRwoORXhpc3RpbmdDbGluaWMSNQoObGljZW5zZV9udW1iZXIYASABKAlCHbpIGnIYMhZeW0EtWmEtejAtOS4vLV17MywzMn0kIqACCg9SZWdpc3RlclJlcXVlc3QSLwoHbWFjaGluZRgBIAEoCzIWLmRlbnRhbC52MS5NYWNoaW5lSW5mb0IGukgDyAEBEicKBmNsaW5pYxgCIAEoCzIVLmRlbnRhbC52MS5DbGluaWNJbmZvSAASNAoPZXhpc3RpbmdfY2xpbmljGAYgASgLMhkuZGVudGFsLnYxLkV4aXN0aW5nQ2xpbmljSAASKAoJbmV3X293bmVyGAMgASgLMhMuZGVudGFsLnYxLk5ld093bmVySAESMgoOZXhpc3Rpbmdfb3duZXIYBCABKAsyGC5kZW50YWwudjEuRXhpc3RpbmdPd25lckgBQg8KBnRhcmdldBIFukgCCAFCDgoFb3duZXISBbpIAggBIsMBChBSZWdpc3RlclJlc3BvbnNlEhcKD2luc3RhbGxhdGlvbl9pZBgBIAEoDBIbChNpbnN0YWxsYXRpb25fc2VjcmV0GAIgASgMEhUKDWtub3duX21hY2hpbmUYAyABKAgSLwoLc2VydmVyX3RpbWUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEh4KBW93bmVyGAUgASgLMg8uZGVudGFsLnYxLlVzZXISEQoJY2xpbmljX2lkGAYgASgMIk8KFExpc3RNeUNsaW5pY3NSZXF1ZXN0EhsKCHVzZXJuYW1lGAEgASgJQgm6SAZyBBABGEASGgoIcGFzc3dvcmQYAiABKAlCCLpIBXIDKIAIIuEBChVMaXN0TXlDbGluaWNzUmVzcG9uc2USHQoEdXNlchgBIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhgKEGlkZW50aXR5X29uX2ZpbGUYAiABKAgSJAoHY2xpbmljcxgDIAMoCzITLmRlbnRhbC52MS5NeUNsaW5pYxI4ChRzdWJzY3JpcHRpb25fZW5kc19hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASEwoLbWF4X2NsaW5pY3MYBSABKA0SGgoSb3duZWRfY2xpbmljX2NvdW50GAYgASgNIqMCCghNeUNsaW5pYxIKCgJpZBgBIAEoDBIMCgRuYW1lGAIgASgJEhYKDmxpY2Vuc2VfbnVtYmVyGAMgASgJEgwKBGNpdHkYBCABKAkSDwoHY2l0eV9pZBgMIAEoDRIPCgdhZGRyZXNzGAUgASgJEhAKCGlzX293bmVyGAYgASgIEhcKD293bmVyX2Z1bGxfbmFtZRgHIAEoCRIaChJpbnN0YWxsYXRpb25fY291bnQYCCABKA0SGQoRbWF4X2luc3RhbGxhdGlvbnMYCSABKA0SOAoUc3Vic2NyaXB0aW9uX2VuZHNfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhkKEWNhbm5vdF9hZGRfcmVhc29uGAsgASgJIhMKEUxpc3RDaXRpZXNSZXF1ZXN0IjwKEkxpc3RDaXRpZXNSZXNwb25zZRImCglwcm92aW5jZXMYASADKAsyEy5kZW50YWwudjEuUHJvdmluY2UiRQoIUHJvdmluY2USCgoCaWQYASABKA0SDAoEbmFtZRgCIAEoCRIfCgZjaXRpZXMYAyADKAsyDy5kZW50YWwudjEuQ2l0eSIgCgRDaXR5EgoKAmlkGAEgASgNEgwKBG5hbWUYAiABKAky/wEKE0luc3RhbGxhdGlvblNlcnZpY2USRQoIUmVnaXN0ZXISGi5kZW50YWwudjEuUmVnaXN0ZXJSZXF1ZXN0GhsuZGVudGFsLnYxLlJlZ2lzdGVyUmVzcG9uc2UiABJUCg1MaXN0TXlDbGluaWNzEh8uZGVudGFsLnYxLkxpc3RNeUNsaW5pY3NSZXF1ZXN0GiAuZGVudGFsLnYxLkxpc3RNeUNsaW5pY3NSZXNwb25zZSIAEksKCkxpc3RDaXRpZXMSHC5kZW50YWwudjEuTGlzdENpdGllc1JlcXVlc3QaHS5kZW50YWwudjEuTGlzdENpdGllc1Jlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
 
 /**
  * Describes the computer, so the server knows where an installation runs.
@@ -123,11 +123,11 @@ export type ClinicInfo = Message<"dental.v1.ClinicInfo"> & {
   phone: string;
 
   /**
-   * 1–100 characters.
+   * Where the clinic is: a City.id from ListCities. Its province comes with it.
    *
-   * @generated from field: string city = 4;
+   * @generated from field: uint32 city_id = 8;
    */
-  city: string;
+  cityId: number;
 
   /**
    * 1–500 characters.
@@ -142,6 +142,13 @@ export type ClinicInfo = Message<"dental.v1.ClinicInfo"> & {
    * @generated from field: string postal_code = 6;
    */
   postalCode: string;
+
+  /**
+   * Where the clinic is, e.g. picked on a map. Required.
+   *
+   * @generated from field: dental.v1.GeoLocation location = 7;
+   */
+  location?: GeoLocation | undefined;
 };
 
 /**
@@ -150,6 +157,34 @@ export type ClinicInfo = Message<"dental.v1.ClinicInfo"> & {
  */
 export const ClinicInfoSchema: GenMessage<ClinicInfo> = /*@__PURE__*/
   messageDesc(file_dental_v1_installation, 1);
+
+/**
+ * A point on the map: WGS 84 degrees, as GPS and web maps use them.
+ *
+ * @generated from message dental.v1.GeoLocation
+ */
+export type GeoLocation = Message<"dental.v1.GeoLocation"> & {
+  /**
+   * -90 (south) to 90 (north).
+   *
+   * @generated from field: double latitude = 1;
+   */
+  latitude: number;
+
+  /**
+   * -180 (west) to 180 (east).
+   *
+   * @generated from field: double longitude = 2;
+   */
+  longitude: number;
+};
+
+/**
+ * Describes the message dental.v1.GeoLocation.
+ * Use `create(GeoLocationSchema)` to create a new message.
+ */
+export const GeoLocationSchema: GenMessage<GeoLocation> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 2);
 
 /**
  * A clinic owner who has no account yet: the account is created by Register.
@@ -198,7 +233,7 @@ export type NewOwner = Message<"dental.v1.NewOwner"> & {
  * Use `create(NewOwnerSchema)` to create a new message.
  */
 export const NewOwnerSchema: GenMessage<NewOwner> = /*@__PURE__*/
-  messageDesc(file_dental_v1_installation, 2);
+  messageDesc(file_dental_v1_installation, 3);
 
 /**
  * A clinic owner who already has an account (AuthService.SignUp, MemberService.CreateUser,
@@ -218,8 +253,9 @@ export type ExistingOwner = Message<"dental.v1.ExistingOwner"> & {
   password: string;
 
   /**
-   * Must match the identity on file (type and number). Saved if the account has
-   * none yet (accounts made before identities were required).
+   * Optional when the account has an identity on file (ListMyClinicsResponse.identity_on_file);
+   * if sent, it must match it (type and number). Required for accounts made before
+   * identities were required, and saved for them.
    *
    * @generated from field: dental.v1.PersonIdentity identity = 4;
    */
@@ -231,7 +267,7 @@ export type ExistingOwner = Message<"dental.v1.ExistingOwner"> & {
  * Use `create(ExistingOwnerSchema)` to create a new message.
  */
 export const ExistingOwnerSchema: GenMessage<ExistingOwner> = /*@__PURE__*/
-  messageDesc(file_dental_v1_installation, 3);
+  messageDesc(file_dental_v1_installation, 4);
 
 /**
  * A clinic registered earlier, to add another installation to it.
@@ -252,7 +288,7 @@ export type ExistingClinic = Message<"dental.v1.ExistingClinic"> & {
  * Use `create(ExistingClinicSchema)` to create a new message.
  */
 export const ExistingClinicSchema: GenMessage<ExistingClinic> = /*@__PURE__*/
-  messageDesc(file_dental_v1_installation, 4);
+  messageDesc(file_dental_v1_installation, 5);
 
 /**
  * @generated from message dental.v1.RegisterRequest
@@ -307,7 +343,7 @@ export type RegisterRequest = Message<"dental.v1.RegisterRequest"> & {
  * Use `create(RegisterRequestSchema)` to create a new message.
  */
 export const RegisterRequestSchema: GenMessage<RegisterRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_installation, 5);
+  messageDesc(file_dental_v1_installation, 6);
 
 /**
  * @generated from message dental.v1.RegisterResponse
@@ -360,7 +396,271 @@ export type RegisterResponse = Message<"dental.v1.RegisterResponse"> & {
  * Use `create(RegisterResponseSchema)` to create a new message.
  */
 export const RegisterResponseSchema: GenMessage<RegisterResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_installation, 6);
+  messageDesc(file_dental_v1_installation, 7);
+
+/**
+ * @generated from message dental.v1.ListMyClinicsRequest
+ */
+export type ListMyClinicsRequest = Message<"dental.v1.ListMyClinicsRequest"> & {
+  /**
+   * Same rules as ExistingOwner.
+   *
+   * @generated from field: string username = 1;
+   */
+  username: string;
+
+  /**
+   * @generated from field: string password = 2;
+   */
+  password: string;
+};
+
+/**
+ * Describes the message dental.v1.ListMyClinicsRequest.
+ * Use `create(ListMyClinicsRequestSchema)` to create a new message.
+ */
+export const ListMyClinicsRequestSchema: GenMessage<ListMyClinicsRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 8);
+
+/**
+ * @generated from message dental.v1.ListMyClinicsResponse
+ */
+export type ListMyClinicsResponse = Message<"dental.v1.ListMyClinicsResponse"> & {
+  /**
+   * @generated from field: dental.v1.User user = 1;
+   */
+  user?: User | undefined;
+
+  /**
+   * False only for accounts made before identities were required: Register then
+   * needs ExistingOwner.identity.
+   *
+   * @generated from field: bool identity_on_file = 2;
+   */
+  identityOnFile: boolean;
+
+  /**
+   * Clinics the account owns or administers: owned ones first, then oldest first.
+   *
+   * @generated from field: repeated dental.v1.MyClinic clinics = 3;
+   */
+  clinics: MyClinic[];
+
+  /**
+   * The account's own subscription in force, for a clinic it would add. Unset if none
+   * is in force; a new clinic can still be registered, but nobody can log in to it
+   * until there is one (AuthService.Login fails with "subscription_inactive").
+   *
+   * @generated from field: google.protobuf.Timestamp subscription_ends_at = 4;
+   */
+  subscriptionEndsAt?: Timestamp | undefined;
+
+  /**
+   * How many clinics that subscription allows (0 if none is in force), and how many
+   * the account owns. Owning more is allowed, but logins to the newest ones fail
+   * with "clinic_limit_exceeded".
+   *
+   * @generated from field: uint32 max_clinics = 5;
+   */
+  maxClinics: number;
+
+  /**
+   * @generated from field: uint32 owned_clinic_count = 6;
+   */
+  ownedClinicCount: number;
+};
+
+/**
+ * Describes the message dental.v1.ListMyClinicsResponse.
+ * Use `create(ListMyClinicsResponseSchema)` to create a new message.
+ */
+export const ListMyClinicsResponseSchema: GenMessage<ListMyClinicsResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 9);
+
+/**
+ * A clinic as ListMyClinics shows it to its owner or one of its admins.
+ *
+ * @generated from message dental.v1.MyClinic
+ */
+export type MyClinic = Message<"dental.v1.MyClinic"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * Identifies the clinic in ExistingClinic.
+   *
+   * @generated from field: string license_number = 3;
+   */
+  licenseNumber: string;
+
+  /**
+   * The city's name, also for clinics registered before cities had IDs.
+   *
+   * @generated from field: string city = 4;
+   */
+  city: string;
+
+  /**
+   * A City.id from ListCities; 0 for clinics registered before cities had IDs.
+   *
+   * @generated from field: uint32 city_id = 12;
+   */
+  cityId: number;
+
+  /**
+   * @generated from field: string address = 5;
+   */
+  address: string;
+
+  /**
+   * Whether the account owns the clinic. Otherwise it is one of its admins.
+   *
+   * @generated from field: bool is_owner = 6;
+   */
+  isOwner: boolean;
+
+  /**
+   * @generated from field: string owner_full_name = 7;
+   */
+  ownerFullName: string;
+
+  /**
+   * Installations that are not revoked.
+   *
+   * @generated from field: uint32 installation_count = 8;
+   */
+  installationCount: number;
+
+  /**
+   * How many installations the owner's subscription in force allows (0 if none).
+   *
+   * @generated from field: uint32 max_installations = 9;
+   */
+  maxInstallations: number;
+
+  /**
+   * When the owner's paid time ends. Unset if no subscription is in force.
+   *
+   * @generated from field: google.protobuf.Timestamp subscription_ends_at = 10;
+   */
+  subscriptionEndsAt?: Timestamp | undefined;
+
+  /**
+   * Whether the account can register this computer to the clinic now and log in
+   * on it. Empty when it can; otherwise why not, with the same reasons Register and
+   * AuthService.Login fail with:
+   * - "not_clinic_owner": only the owner can add a computer;
+   * - "subscription_inactive": the owner has no subscription in force;
+   * - "clinic_limit_exceeded": the clinic is beyond the owner's clinic limit;
+   * - "device_limit_exceeded": the clinic already has max_installations.
+   *
+   * @generated from field: string cannot_add_reason = 11;
+   */
+  cannotAddReason: string;
+};
+
+/**
+ * Describes the message dental.v1.MyClinic.
+ * Use `create(MyClinicSchema)` to create a new message.
+ */
+export const MyClinicSchema: GenMessage<MyClinic> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 10);
+
+/**
+ * @generated from message dental.v1.ListCitiesRequest
+ */
+export type ListCitiesRequest = Message<"dental.v1.ListCitiesRequest"> & {
+};
+
+/**
+ * Describes the message dental.v1.ListCitiesRequest.
+ * Use `create(ListCitiesRequestSchema)` to create a new message.
+ */
+export const ListCitiesRequestSchema: GenMessage<ListCitiesRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 11);
+
+/**
+ * @generated from message dental.v1.ListCitiesResponse
+ */
+export type ListCitiesResponse = Message<"dental.v1.ListCitiesResponse"> & {
+  /**
+   * Ordered by ID, not by name: sort them for display.
+   *
+   * @generated from field: repeated dental.v1.Province provinces = 1;
+   */
+  provinces: Province[];
+};
+
+/**
+ * Describes the message dental.v1.ListCitiesResponse.
+ * Use `create(ListCitiesResponseSchema)` to create a new message.
+ */
+export const ListCitiesResponseSchema: GenMessage<ListCitiesResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 12);
+
+/**
+ * @generated from message dental.v1.Province
+ */
+export type Province = Message<"dental.v1.Province"> & {
+  /**
+   * @generated from field: uint32 id = 1;
+   */
+  id: number;
+
+  /**
+   * Official Persian name.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * Ordered by ID, not by name.
+   *
+   * @generated from field: repeated dental.v1.City cities = 3;
+   */
+  cities: City[];
+};
+
+/**
+ * Describes the message dental.v1.Province.
+ * Use `create(ProvinceSchema)` to create a new message.
+ */
+export const ProvinceSchema: GenMessage<Province> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 13);
+
+/**
+ * @generated from message dental.v1.City
+ */
+export type City = Message<"dental.v1.City"> & {
+  /**
+   * @generated from field: uint32 id = 1;
+   */
+  id: number;
+
+  /**
+   * Official Persian name. Different provinces may have cities of the same name.
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message dental.v1.City.
+ * Use `create(CitySchema)` to create a new message.
+ */
+export const CitySchema: GenMessage<City> = /*@__PURE__*/
+  messageDesc(file_dental_v1_installation, 14);
 
 /**
  * An installation is one copy of the desktop app on one computer, with its own
@@ -382,14 +682,21 @@ export const InstallationService: GenService<{
    * Registering needs no subscription, but nobody can log in until the owner has
    * one (see AuthService.Login).
    *
+   * A new clinic needs its license number, phone, city, address and location (ClinicInfo).
+   *
    * Besides the usual "invalid_argument" / "weak_password", fails with:
+   * - NOT_FOUND "city_not_found": no city has ClinicInfo.city_id;
    * - ALREADY_EXISTS "license_number_taken": another clinic has this license number;
    * - ALREADY_EXISTS "username_taken" / "identity_taken": a new owner's username
    *   or identity (national ID or FIDA code) belongs to another account;
    * - INVALID_ARGUMENT "invalid_national_id": the national ID's check digit is wrong;
    * - UNAUTHENTICATED "invalid_credentials": an existing owner's username or password is wrong;
    * - PERMISSION_DENIED "user_disabled": an existing owner's account is disabled;
+   * - FAILED_PRECONDITION "password_change_required": an existing owner has a temporary
+   *   password (see AuthService.ChangePassword);
    * - FAILED_PRECONDITION "identity_mismatch": an existing owner has another identity on file;
+   * - FAILED_PRECONDITION "identity_required": an existing owner has no identity on file
+   *   and none was sent (ExistingOwner.identity);
    * - INVALID_ARGUMENT "invalid_argument": existing_clinic with a new_owner;
    * - NOT_FOUND "clinic_not_found": no clinic has existing_clinic.license_number;
    * - PERMISSION_DENIED "not_clinic_owner": the clinic belongs to someone else.
@@ -400,6 +707,34 @@ export const InstallationService: GenService<{
     methodKind: "unary";
     input: typeof RegisterRequestSchema;
     output: typeof RegisterResponseSchema;
+  },
+  /**
+   * The clinics an account owns or administers, for a first start where the person
+   * logs in before this computer is registered: with none, the app offers to add a
+   * clinic; otherwise the person picks the clinic this computer belongs to (Register
+   * with existing_clinic and existing_owner) or adds another one. No login needed:
+   * the account is proven with its password, like ExistingOwner.
+   *
+   * Fails with UNAUTHENTICATED "invalid_credentials", PERMISSION_DENIED "user_disabled",
+   * FAILED_PRECONDITION "password_change_required" or INVALID_ARGUMENT "invalid_argument".
+   *
+   * @generated from rpc dental.v1.InstallationService.ListMyClinics
+   */
+  listMyClinics: {
+    methodKind: "unary";
+    input: typeof ListMyClinicsRequestSchema;
+    output: typeof ListMyClinicsResponseSchema;
+  },
+  /**
+   * Iran's provinces and their cities, for ClinicInfo.city_id. No login needed.
+   * The list rarely changes; IDs are never reused for another place.
+   *
+   * @generated from rpc dental.v1.InstallationService.ListCities
+   */
+  listCities: {
+    methodKind: "unary";
+    input: typeof ListCitiesRequestSchema;
+    output: typeof ListCitiesResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_dental_v1_installation, 0);

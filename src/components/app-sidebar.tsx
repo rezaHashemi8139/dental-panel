@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { HouseIcon, PackageIcon, ReceiptTextIcon, type LucideIcon } from "lucide-react";
+import { BanknoteIcon, HouseIcon, LandmarkIcon, PackageIcon, ReceiptTextIcon, type LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +15,8 @@ export function AppSidebar() {
         <SidebarLink to="/home" icon={HouseIcon} label={t("nav.home")} />
         <SidebarLink to="/plans" icon={PackageIcon} label={t("nav.plans")} />
         <SidebarLink to="/subscriptions" icon={ReceiptTextIcon} label={t("nav.subscriptions")} />
+        <SidebarLink to="/payments" icon={BanknoteIcon} label={t("nav.payments")} />
+        <SidebarLink to="/payment-accounts" icon={LandmarkIcon} label={t("nav.paymentAccounts")} />
       </nav>
     </aside>
   );

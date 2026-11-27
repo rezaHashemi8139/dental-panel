@@ -4,8 +4,13 @@ Web panel for the system administrators of the dental server (`../dental-server`
 
 - **Plans** (`/plans`): list, create and edit subscription plans (limits, duration, price in rials, on sale or not).
 - **Subscriptions** (`/subscriptions`): find a clinic owner by national ID, or by FIDA code and
-  nationality for foreign nationals; see their account, clinics and subscriptions; sell a subscription
+  nationality for foreign nationals; see their account, clinics, subscriptions and payments; sell a subscription
   from an active plan (it starts when the paid time already bought ends) or cancel one.
+- **Payments** (`/payments`): payments clinic owners reported in the desktop app, pending ones first as
+  a review queue; check each against the bank statement, then approve it (adds the subscription) or
+  reject it with a reason the owner sees. Filter by status with `?status=approved|rejected|canceled|all`.
+- **Payment accounts** (`/payment-accounts`): the bank accounts (card number and/or IBAN) owners transfer to;
+  create, edit, order and deactivate them.
 
 - **React** 19, **TypeScript**, **Vite**
 - **Tailwind CSS** 4 + **shadcn/ui** (radix-nova, RTL), same look and components as `../dental-desktop`

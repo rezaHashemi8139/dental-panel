@@ -8,17 +8,21 @@ import { HomePage } from "@/pages/home-page";
 import { LoginPage } from "@/pages/login-page";
 import { loadPlans, PlansPage } from "@/pages/plans-page";
 import { loadSubscriptions, SubscriptionsPage } from "@/pages/subscriptions-page";
+import { loadPayments, parsePaymentsSearch, PaymentsPage, type PaymentsSearch } from "@/pages/payments-page";
+import { loadPaymentAccounts, PaymentAccountsPage } from "@/pages/payment-accounts-page";
 
 /**
  * Pages.
  *
- * /                → /home or /login
- * /login           only when logged out
- * /home            ┐ "app" layout (sidebar): only when logged in; pages read the
- * /plans           │ session with useSession() and their data with
- * /subscriptions   ┘ getRouteApi("<route id>").useLoaderData()
- *                    ?kind=national|foreign&number=…&nationality=… (the account searched for)
- * anything else    → /
+ * /                  → /home or /login
+ * /login             only when logged out
+ * /home              ┐ "app" layout (sidebar): only when logged in; pages read the
+ * /plans             │ session with useSession() and their data with
+ * /subscriptions     │ getRouteApi("<route id>").useLoaderData()
+ *                    │   ?kind=national|foreign&number=…&nationality=… (the account searched for)
+ * /payments          │   ?status=approved|rejected|canceled|all (none: pending, the queue to review)
+ * /payment-accounts  ┘
+ * anything else      → /
  *
  * Data is loaded by each route's loader, again on every visit; after a change, pages
  * reload it with router.invalidate(). A failed load shows RouteError instead of the page.
@@ -81,10 +85,26 @@ const subscriptionsRoute = createRoute({
   component: SubscriptionsPage,
 });
 
+const paymentsRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "payments",
+  validateSearch: (search: Record<string, unknown>): PaymentsSearch => parsePaymentsSearch(search),
+  loaderDeps: ({ search }) => ({ status: search.status }),
+  loader: ({ deps }) => loadPayments(deps),
+  component: PaymentsPage,
+});
+
+const paymentAccountsRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "payment-accounts",
+  loader: loadPaymentAccounts,
+  component: PaymentAccountsPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
-  appRoute.addChildren([homeRoute, plansRoute, subscriptionsRoute]),
+  appRoute.addChildren([homeRoute, plansRoute, subscriptionsRoute, paymentsRoute, paymentAccountsRoute]),
 ]);
 
 export const router = createRouter({

@@ -1,5 +1,5 @@
 import { timestampMs } from "@bufbuild/protobuf/wkt";
-import type { Subscription } from "@/gen/dental/v1/admin_pb";
+import type { Subscription } from "@/gen/dental/v1/subscription_pb";
 
 export type SubscriptionStatus = "active" | "upcoming" | "ended" | "canceled";
 

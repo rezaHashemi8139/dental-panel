@@ -14,7 +14,9 @@
     "label": "Main menu",
     "home": "Home",
     "plans": "Plans",
-    "subscriptions": "Subscriptions"
+    "subscriptions": "Subscriptions",
+    "payments": "Payments",
+    "paymentAccounts": "Payment accounts"
   },
   "theme": {
     "label": "Theme",
@@ -68,12 +70,14 @@
     "new": "New plan",
     "edit": "Edit",
     "empty": "No plans have been created yet.",
+    "unlimited": "Unlimited",
     "columns": {
       "name": "Name",
       "maxClinics": "Clinics",
       "maxDevices": "Devices per clinic",
       "duration": "Duration",
       "price": "Price",
+      "maxPurchases": "Purchases per owner",
       "status": "Status"
     },
     "status": {
@@ -95,6 +99,8 @@
       "maxDevices": "Maximum devices per clinic",
       "durationDays": "Duration (days)",
       "priceRials": "Price (rials)",
+      "maxPurchases": "Purchases per owner",
+      "maxPurchasesHint": "How many times each clinic owner may buy this plan in the desktop app. Empty or 0 means unlimited. Sales from this panel are not limited.",
       "active": "For sale",
       "activeHint": "An inactive plan can no longer be sold; subscriptions sold from it stay as they are."
     },
@@ -102,7 +108,8 @@
       "nameLength": "The plan name must be 1 to 100 characters.",
       "limit": "Enter a whole number from 1 to 1000.",
       "durationDays": "Enter a whole number of days from 1 to 3650.",
-      "price": "Enter the price in rials, using digits only."
+      "price": "Enter the price in rials, using digits only.",
+      "maxPurchases": "Leave empty or enter a whole number from 0 to 1000."
     }
   },
   "subscriptions": {
@@ -142,6 +149,11 @@
       },
       "period": "{{start}} to {{end}}",
       "limits": "{{clinics}}, {{devices}}"
+    },
+    "payments": {
+      "title": "Payments",
+      "description": "Payments this user reported in the app. Approving one adds its subscription.",
+      "empty": "This user has not reported any payments."
     },
     "status": {
       "active": "In force",
@@ -188,6 +200,132 @@
       "noteLength": "The note can be at most 500 characters."
     }
   },
+  "payments": {
+    "title": "Payments",
+    "description": "Clinic owners transfer the amount to one of the payment accounts and report it in the app. Check each one against the bank statement, then approve it, which adds the subscription, or reject it with a reason the owner sees.",
+    "filter": {
+      "label": "Filter by status",
+      "pending": "To review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "canceled": "Withdrawn",
+      "all": "All"
+    },
+    "empty": "No payments.",
+    "emptyPending": "No payments are waiting for review.",
+    "limited": "Only the first {{limit}} are shown.",
+    "columns": {
+      "reportedAt": "Reported",
+      "owner": "Clinic owner",
+      "plan": "Plan",
+      "amount": "Amount",
+      "transfer": "Reference",
+      "status": "Status"
+    },
+    "status": {
+      "pending": "To review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "canceled": "Withdrawn"
+    },
+    "method": {
+      "cardToCard": "Card to card",
+      "bankTransfer": "Bank transfer (IBAN)",
+      "free": "Free",
+      "unknown": "Other"
+    },
+    "mode": {
+      "extend": "Extension",
+      "upgradeNow": "Immediate upgrade",
+      "unknown": "Other"
+    },
+    "details": {
+      "owner": "Clinic owner",
+      "plan": "Plan",
+      "mode": "Purchase",
+      "amount": "Amount to find on the statement",
+      "credit": "Price {{price}}, less {{credit}} credit for the unused subscription.",
+      "method": "Payment method",
+      "freeHint": "Nothing to pay, so it was approved automatically.",
+      "account": "Paid to",
+      "reference": "Bank reference",
+      "paidAt": "Paid at",
+      "payerCard": "Payer's card",
+      "reportedAt": "Reported at"
+    },
+    "approve": {
+      "button": "Approve",
+      "title": "Approve payment",
+      "description": "Approve only once this exact amount and reference appear on the account's bank statement. Approving adds the subscription at once.",
+      "extend": "The subscription starts when the owner's paid time ends, or now if none is left.",
+      "upgradeNow": "The subscription starts now and replaces the one in force; the unused part of that one was credited against the price.",
+      "note": "Note (optional)",
+      "noteHint": "Saved as the subscription's note. The owner does not see it.",
+      "submit": "Approve and add subscription",
+      "working": "Approving..."
+    },
+    "reject": {
+      "button": "Reject",
+      "title": "Reject payment",
+      "description": "No subscription is added. The owner sees the reason in the app and can report the payment again.",
+      "reason": "Reason",
+      "reasonHint": "Shown to the owner as written, e.g. \"No transfer with this reference was received.\"",
+      "submit": "Reject payment",
+      "working": "Rejecting..."
+    },
+    "validation": {
+      "reasonRequired": "Write why the payment is rejected.",
+      "reasonLength": "The reason can be at most 500 characters."
+    }
+  },
+  "paymentAccounts": {
+    "title": "Payment accounts",
+    "description": "Bank accounts clinic owners can transfer subscription payments to. Owners see only active accounts, in position order.",
+    "new": "New account",
+    "edit": "Edit",
+    "empty": "No payment accounts have been added yet. Owners cannot pay in the app until one is.",
+    "columns": {
+      "bank": "Bank",
+      "holder": "Account holder",
+      "cardNumber": "Card number",
+      "iban": "IBAN",
+      "position": "Order",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "dialog": {
+      "createTitle": "New payment account",
+      "createDescription": "Owners see it in the app right away.",
+      "editTitle": "Edit payment account",
+      "editDescription": "Payments already reported keep pointing to this account.",
+      "create": "Add account",
+      "save": "Save",
+      "working": "Saving..."
+    },
+    "fields": {
+      "bankName": "Bank name",
+      "holderName": "Account holder",
+      "holderNameHint": "As the bank shows it, so owners can check it before paying.",
+      "cardNumber": "Card number",
+      "cardNumberHint": "16 digits. Needed for card-to-card payments.",
+      "iban": "IBAN",
+      "ibanHint": "IR and 24 digits. Needed for bank transfers.",
+      "position": "Order",
+      "positionHint": "Accounts with a lower number are shown first.",
+      "active": "Shown to owners",
+      "activeHint": "An inactive account is no longer offered; payments already sent to it can still be reviewed."
+    },
+    "validation": {
+      "nameLength": "Enter 1 to 100 characters.",
+      "cardNumber": "The card number must be 16 digits.",
+      "iban": "The IBAN must be IR followed by 24 digits.",
+      "position": "Enter a whole number.",
+      "destinationRequired": "Enter a card number, an IBAN, or both."
+    }
+  },
   "errors": {
     "invalidCredentials": "Wrong username or password.",
     "userDisabled": "This account has been disabled.",
@@ -202,6 +340,10 @@
     "userNotFound": "User not found.",
     "planNotFound": "This plan no longer exists.",
     "planInactive": "This plan is inactive and cannot be sold.",
-    "subscriptionNotFound": "This subscription no longer exists."
+    "subscriptionNotFound": "This subscription no longer exists.",
+    "paymentNotFound": "This payment no longer exists.",
+    "paymentNotPending": "This payment has already been reviewed, or the owner withdrew it.",
+    "renewalQueued": "Another subscription was sold after this upgrade was reported, so it cannot be applied now. Reject the payment instead.",
+    "paymentAccountNotFound": "This payment account no longer exists."
   }
 }

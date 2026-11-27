@@ -1,4 +1,5 @@
 import { useMemo, useState, type ReactNode } from "react";
+import { create } from "@bufbuild/protobuf";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getRouteApi, useNavigate, useRouter } from "@tanstack/react-router";
@@ -7,15 +8,19 @@ import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { hasReason } from "@/api/errors";
 import { findUserSchema, toIdentity, type FindUserValues } from "@/auth/schemas";
-import type { GetUserResponse, Plan, Subscription } from "@/gen/dental/v1/admin_pb";
+import { PaymentReviewSchema, type GetUserResponse, type PaymentReview } from "@/gen/dental/v1/admin_pb";
+import type { PaymentAccount, Plan, Subscription } from "@/gen/dental/v1/subscription_pb";
 import { countryName, foreignCountries } from "@/lib/countries";
 import { fieldError } from "@/lib/form";
 import { useFormat } from "@/lib/format";
 import { fromPersonIdentity, toIdentitySearch, toPersonIdentity, type Identity } from "@/lib/identity";
+import { accountsById, manualTransfer } from "@/lib/payment";
 import { paidUntil, subscriptionStatus, type SubscriptionStatus } from "@/lib/subscription";
 import { uuidToString } from "@/lib/uuid";
 import { CancelSubscriptionDialog } from "@/components/cancel-subscription-dialog";
+import { Detail } from "@/components/detail";
 import { FormField } from "@/components/form-field";
+import { PaymentsTable } from "@/components/payments-table";
 import { SellSubscriptionDialog } from "@/components/sell-subscription-dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +29,7 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { loadPaymentAccounts } from "./payment-accounts-page";
 import { loadPlans } from "./plans-page";
 
 const subscriptionsRoute = getRouteApi("/app/subscriptions");
@@ -35,23 +41,26 @@ export interface SubscriptionsData {
   user: GetUserResponse | null;
   /** Plans on sale, for selling a subscription. */
   plans: Plan[];
+  /** Every payment account, to show where the user's payments were sent. */
+  accounts: PaymentAccount[];
 }
 
 /** Data of /subscriptions?kind=…&number=…&nationality=… (src/router.tsx). */
 export async function loadSubscriptions(identity: Identity | null): Promise<SubscriptionsData> {
-  if (!identity) return { identity: null, user: null, plans: [] };
-  const [user, plans] = await Promise.all([
+  if (!identity) return { identity: null, user: null, plans: [], accounts: [] };
+  const [user, plans, accounts] = await Promise.all([
     adminClient.getUser({ identity: toPersonIdentity(identity) }).catch((error: unknown) => {
       if (hasReason(error, "user_not_found")) return null;
       throw error;
     }),
     loadPlans(),
+    loadPaymentAccounts(),
   ]);
-  return { identity, user, plans: plans.filter((plan) => plan.active) };
+  return { identity, user, plans: plans.filter((plan) => plan.active), accounts };
 }
 
 export function SubscriptionsPage() {
-  const { identity, user, plans } = subscriptionsRoute.useLoaderData();
+  const { identity, user, plans, accounts } = subscriptionsRoute.useLoaderData();
   const { t } = useTranslation();
   const searchKey = identity ? `${identity.kind}:${identity.number}:${identity.nationality}` : "";
 
@@ -74,7 +83,7 @@ export function SubscriptionsPage() {
           <AlertDescription>{t("subscriptions.notFound", { number: identity.number })}</AlertDescription>
         </Alert>
       )}
-      {user && <UserDetails user={user} plans={plans} />}
+      {user && <UserDetails user={user} plans={plans} accounts={accounts} />}
     </div>
   );
 }
@@ -198,12 +207,36 @@ const STATUS_BADGE: Record<SubscriptionStatus, "default" | "secondary" | "outlin
   canceled: "destructive",
 };
 
-function UserDetails({ user, plans }: { user: GetUserResponse; plans: Plan[] }) {
+/** The user's payments as the payments page shows them, with who paid and where the money went. */
+function toReviews(user: GetUserResponse, accounts: readonly PaymentAccount[]): PaymentReview[] {
+  const byId = accountsById(accounts);
+  return user.payments.map((payment) => {
+    const transfer = manualTransfer(payment);
+    return create(PaymentReviewSchema, {
+      payment,
+      user: user.user,
+      identity: user.identity,
+      phone: user.phone,
+      account: transfer && byId.get(uuidToString(transfer.paymentAccountId)),
+    });
+  });
+}
+
+function UserDetails({
+  user,
+  plans,
+  accounts,
+}: {
+  user: GetUserResponse;
+  plans: Plan[];
+  accounts: PaymentAccount[];
+}) {
   const { t, i18n } = useTranslation();
   const format = useFormat();
   const identity = fromPersonIdentity(user.identity);
   const [selling, setSelling] = useState(false);
   const [canceling, setCanceling] = useState<Subscription | null>(null);
+  const reviews = useMemo(() => toReviews(user, accounts), [user, accounts]);
   const now = Date.now();
   const until = paidUntil(user.subscriptions, now);
 
@@ -316,6 +349,20 @@ function UserDetails({ user, plans }: { user: GetUserResponse; plans: Plan[] }) 
 
       <Card>
         <CardHeader>
+          <CardTitle>{t("subscriptions.payments.title")}</CardTitle>
+          <CardDescription>{t("subscriptions.payments.description")}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {reviews.length === 0 ? (
+            <Empty>{t("subscriptions.payments.empty")}</Empty>
+          ) : (
+            <PaymentsTable reviews={reviews} />
+          )}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
           <CardTitle>{t("subscriptions.clinics.title")}</CardTitle>
         </CardHeader>
         <CardContent>
@@ -355,16 +402,6 @@ function UserDetails({ user, plans }: { user: GetUserResponse; plans: Plan[] }) 
         <CancelSubscriptionDialog subscription={canceling} onOpenChange={(open) => !open && setCanceling(null)} />
       )}
     </>
-  );
-}
-
-function Detail({ label, ltr, children }: { label: string; ltr?: boolean; children: ReactNode }) {
-  return (
-    <div className="flex flex-col gap-1">
-      <dt className="text-xs text-muted-foreground">{label}</dt>
-      {/* Latin values keep their own order, aligned like the rest of the page. */}
-      <dd className="text-sm font-medium">{ltr ? <span dir="ltr">{children}</span> : children}</dd>
-    </div>
   );
 }
 
