@@ -370,6 +370,9 @@ function UserDetails({
             <Detail label={t("subscriptions.user.phone")} ltr>
               {user.phone || t("common.empty")}
             </Detail>
+            <Detail label={t("subscriptions.user.email")} ltr>
+              {user.email || t("common.empty")}
+            </Detail>
             <Detail label={t("subscriptions.user.createdAt")}>{format.date(user.createdAt)}</Detail>
           </dl>
         </CardContent>

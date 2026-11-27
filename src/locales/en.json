@@ -13,6 +13,7 @@
   "nav": {
     "label": "Main menu",
     "home": "Home",
+    "users": "Users",
     "plans": "Plans",
     "subscriptions": "Subscriptions",
     "payments": "Payments",
@@ -127,7 +128,7 @@
     "description": "Every subscription bought, newest first. Search by the clinic owner's name, username, identification code or phone, and open an owner to see their account, sell a subscription or cancel one.",
     "search": {
       "label": "Search subscriptions",
-      "placeholder": "Name, username, identification code or phone"
+      "placeholder": "Name, username, identification code, phone or email"
     },
     "filter": {
       "label": "Filter by status",
@@ -139,6 +140,7 @@
       "username": "Username",
       "identityCode": "Identification code",
       "phone": "Mobile",
+      "email": "Email",
       "createdAt": "Member since",
       "disabled": "Account disabled",
       "paidUntil": "Subscribed until {{date}}.",
@@ -236,7 +238,7 @@
     "description": "Clinic owners transfer the amount to one of the payment accounts and report it in the app. Check each one against the bank statement, then approve it, which adds the subscription, or reject it with a reason the owner sees.",
     "search": {
       "label": "Search payments",
-      "placeholder": "Name, username, identification code, phone or reference"
+      "placeholder": "Name, username, identification code, phone, email or reference"
     },
     "filter": {
       "label": "Filter by status",
@@ -360,12 +362,38 @@
       "destinationRequired": "Enter a card number, an IBAN, or both."
     }
   },
+  "users": {
+    "title": "Users",
+    "description": "Desktop app accounts, newest first. Panel administrators are not listed here.",
+    "search": {
+      "label": "Search users",
+      "placeholder": "Name, username, identification code, phone or email"
+    },
+    "empty": "No one has signed up yet.",
+    "noResults": "No users match this search.",
+    "columns": {
+      "name": "Name",
+      "username": "Username",
+      "identityCode": "Identification code",
+      "phone": "Phone",
+      "email": "Email",
+      "subscription": "Subscription",
+      "ownedClinics": "Owned clinics",
+      "memberClinics": "Member clinics",
+      "lastLogin": "Last login",
+      "createdAt": "Signed up"
+    },
+    "disabled": "Disabled",
+    "noSubscription": "No subscription",
+    "paidUntil": "Until {{date}}",
+    "neverLoggedIn": "Never"
+  },
   "patients": {
     "title": "Patients",
     "description": "Patients the clinics have recorded and synced, newest first. Addresses, medical notes and treatments are not shown here.",
     "search": {
       "label": "Search patients",
-      "placeholder": "Name, identification code or phone"
+      "placeholder": "Name, identification code, phone or email"
     },
     "empty": "No patients yet.",
     "noResults": "No patients match this search.",
@@ -373,6 +401,7 @@
       "patient": "Patient",
       "identityCode": "Identification code",
       "phone": "Phone",
+      "email": "Email",
       "birthDate": "Date of birth",
       "gender": "Gender",
       "clinics": "Clinics",

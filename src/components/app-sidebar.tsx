@@ -1,6 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import {
   BanknoteIcon,
+  CircleUserRoundIcon,
   HouseIcon,
   LandmarkIcon,
   PackageIcon,
@@ -21,6 +22,7 @@ export function AppSidebar() {
     <aside className="flex w-60 shrink-0 flex-col overflow-y-auto border-e bg-muted/40 p-3">
       <nav aria-label={t("nav.label")} className="flex flex-col gap-1">
         <SidebarLink to="/home" icon={HouseIcon} label={t("nav.home")} />
+        <SidebarLink to="/users" icon={CircleUserRoundIcon} label={t("nav.users")} />
         <SidebarLink to="/plans" icon={PackageIcon} label={t("nav.plans")} />
         <SidebarLink to="/subscriptions" icon={ReceiptTextIcon} label={t("nav.subscriptions")} />
         <SidebarLink to="/payments" icon={BanknoteIcon} label={t("nav.payments")} />

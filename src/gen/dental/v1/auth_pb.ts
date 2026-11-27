@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/auth.proto.
  */
 export const file_dental_v1_auth: GenFile = /*@__PURE__*/
-  fileDesc("ChRkZW50YWwvdjEvYXV0aC5wcm90bxIJZGVudGFsLnYxIjcKBFVzZXISCgoCaWQYASABKAwSEAoIdXNlcm5hbWUYAiABKAkSEQoJZnVsbF9uYW1lGAMgASgJIp8DCg1TaWduVXBSZXF1ZXN0Ei8KCHVzZXJuYW1lGAEgASgJQh26SBpyGDIWXltBLVphLXowLTkuXy1dezMsMzJ9JBLhAQoIcGFzc3dvcmQYAiABKAlCzgG6SMoBugHBAQoNd2Vha19wYXNzd29yZBJUbXVzdCBoYXZlIGF0IGxlYXN0IDggY2hhcmFjdGVycywgYSBsb3dlcmNhc2UgbGV0dGVyLCBhbiB1cHBlcmNhc2UgbGV0dGVyIGFuZCBhIGRpZ2l0GlpzaXplKHRoaXMpID49IDggJiYgdGhpcy5tYXRjaGVzKCdbYS16XScpICYmIHRoaXMubWF0Y2hlcygnW0EtWl0nKSAmJiB0aGlzLm1hdGNoZXMoJ1swLTldJylyAxiAAhIcCglmdWxsX25hbWUYAyABKAlCCbpIBnIEEAEYZBIzCghpZGVudGl0eRgEIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eUIGukgDyAEBEiYKBXBob25lGAUgASgJQhe6SBRyEjIQXlwrP1swLTldezcsMTV9JCIvCg5TaWduVXBSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXIiswEKDExvZ2luUmVxdWVzdBIgCg9pbnN0YWxsYXRpb25faWQYASABKAxCB7pIBHoCaBASJAoTaW5zdGFsbGF0aW9uX3NlY3JldBgCIAEoDEIHukgEegJoIBIbCgh1c2VybmFtZRgDIAEoCUIJukgGcgQQARhAEhoKCHBhc3N3b3JkGAQgASgJQgi6SAVyAyiACBIiChFjbGllbnRfcHVibGljX2tleRgFIAEoDEIHukgEegJoICKdAwoNTG9naW5SZXNwb25zZRIVCg1zZXNzaW9uX3Rva2VuGAEgASgJEjYKEnNlc3Npb25fZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHQoEdXNlchgDIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhAKCGlzX293bmVyGAQgASgIEhAKCGlzX2FkbWluGAUgASgIEisKDWRhdGFiYXNlX2tleXMYBiABKAsyFC5kZW50YWwudjEuU2VhbGVkQm94EjQKDW9mZmxpbmVfZ3JhbnQYByABKAsyHS5kZW50YWwudjEuU2lnbmVkT2ZmbGluZUdyYW50Ei8KC3NlcnZlcl90aW1lGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI4ChRzdWJzY3JpcHRpb25fZW5kc19hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFAoMYmlsbGluZ19vbmx5GAogASgIEhYKDmJpbGxpbmdfcmVhc29uGAsgASgJIsACChVDaGFuZ2VQYXNzd29yZFJlcXVlc3QSGwoIdXNlcm5hbWUYASABKAlCCbpIBnIEEAEYQBIiChBjdXJyZW50X3Bhc3N3b3JkGAIgASgJQgi6SAVyAyiACBLlAQoMbmV3X3Bhc3N3b3JkGAMgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAIiGAoWQ2hhbmdlUGFzc3dvcmRSZXNwb25zZSIwChlDb25maXJtS2V5Um90YXRpb25SZXF1ZXN0EhMKC25ld192ZXJzaW9uGAEgASgNIjUKGkNvbmZpcm1LZXlSb3RhdGlvblJlc3BvbnNlEhcKD2N1cnJlbnRfdmVyc2lvbhgBIAEoDSIPCg1Mb2dvdXRSZXF1ZXN0IhAKDkxvZ291dFJlc3BvbnNlMosDCgtBdXRoU2VydmljZRI/CgZTaWduVXASGC5kZW50YWwudjEuU2lnblVwUmVxdWVzdBoZLmRlbnRhbC52MS5TaWduVXBSZXNwb25zZSIAEjwKBUxvZ2luEhcuZGVudGFsLnYxLkxvZ2luUmVxdWVzdBoYLmRlbnRhbC52MS5Mb2dpblJlc3BvbnNlIgASVwoOQ2hhbmdlUGFzc3dvcmQSIC5kZW50YWwudjEuQ2hhbmdlUGFzc3dvcmRSZXF1ZXN0GiEuZGVudGFsLnYxLkNoYW5nZVBhc3N3b3JkUmVzcG9uc2UiABJjChJDb25maXJtS2V5Um90YXRpb24SJC5kZW50YWwudjEuQ29uZmlybUtleVJvdGF0aW9uUmVxdWVzdBolLmRlbnRhbC52MS5Db25maXJtS2V5Um90YXRpb25SZXNwb25zZSIAEj8KBkxvZ291dBIYLmRlbnRhbC52MS5Mb2dvdXRSZXF1ZXN0GhkuZGVudGFsLnYxLkxvZ291dFJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_crypto, file_dental_v1_person, file_google_protobuf_timestamp]);
+  fileDesc("ChRkZW50YWwvdjEvYXV0aC5wcm90bxIJZGVudGFsLnYxIjcKBFVzZXISCgoCaWQYASABKAwSEAoIdXNlcm5hbWUYAiABKAkSEQoJZnVsbF9uYW1lGAMgASgJIr0DCg1TaWduVXBSZXF1ZXN0Ei8KCHVzZXJuYW1lGAEgASgJQh26SBpyGDIWXltBLVphLXowLTkuXy1dezMsMzJ9JBLhAQoIcGFzc3dvcmQYAiABKAlCzgG6SMoBugHBAQoNd2Vha19wYXNzd29yZBJUbXVzdCBoYXZlIGF0IGxlYXN0IDggY2hhcmFjdGVycywgYSBsb3dlcmNhc2UgbGV0dGVyLCBhbiB1cHBlcmNhc2UgbGV0dGVyIGFuZCBhIGRpZ2l0GlpzaXplKHRoaXMpID49IDggJiYgdGhpcy5tYXRjaGVzKCdbYS16XScpICYmIHRoaXMubWF0Y2hlcygnW0EtWl0nKSAmJiB0aGlzLm1hdGNoZXMoJ1swLTldJylyAxiAAhIcCglmdWxsX25hbWUYAyABKAlCCbpIBnIEEAEYZBIzCghpZGVudGl0eRgEIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eUIGukgDyAEBEiYKBXBob25lGAUgASgJQhe6SBRyEjIQXlwrP1swLTldezcsMTV9JBIcCgVlbWFpbBgGIAEoCUINukgK2AEBcgUY/gFgASIvCg5TaWduVXBSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXIiswEKDExvZ2luUmVxdWVzdBIgCg9pbnN0YWxsYXRpb25faWQYASABKAxCB7pIBHoCaBASJAoTaW5zdGFsbGF0aW9uX3NlY3JldBgCIAEoDEIHukgEegJoIBIbCgh1c2VybmFtZRgDIAEoCUIJukgGcgQQARhAEhoKCHBhc3N3b3JkGAQgASgJQgi6SAVyAyiACBIiChFjbGllbnRfcHVibGljX2tleRgFIAEoDEIHukgEegJoICKdAwoNTG9naW5SZXNwb25zZRIVCg1zZXNzaW9uX3Rva2VuGAEgASgJEjYKEnNlc3Npb25fZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASHQoEdXNlchgDIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhAKCGlzX293bmVyGAQgASgIEhAKCGlzX2FkbWluGAUgASgIEisKDWRhdGFiYXNlX2tleXMYBiABKAsyFC5kZW50YWwudjEuU2VhbGVkQm94EjQKDW9mZmxpbmVfZ3JhbnQYByABKAsyHS5kZW50YWwudjEuU2lnbmVkT2ZmbGluZUdyYW50Ei8KC3NlcnZlcl90aW1lGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI4ChRzdWJzY3JpcHRpb25fZW5kc19hdBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFAoMYmlsbGluZ19vbmx5GAogASgIEhYKDmJpbGxpbmdfcmVhc29uGAsgASgJIsACChVDaGFuZ2VQYXNzd29yZFJlcXVlc3QSGwoIdXNlcm5hbWUYASABKAlCCbpIBnIEEAEYQBIiChBjdXJyZW50X3Bhc3N3b3JkGAIgASgJQgi6SAVyAyiACBLlAQoMbmV3X3Bhc3N3b3JkGAMgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAIiGAoWQ2hhbmdlUGFzc3dvcmRSZXNwb25zZSIwChlDb25maXJtS2V5Um90YXRpb25SZXF1ZXN0EhMKC25ld192ZXJzaW9uGAEgASgNIjUKGkNvbmZpcm1LZXlSb3RhdGlvblJlc3BvbnNlEhcKD2N1cnJlbnRfdmVyc2lvbhgBIAEoDSIPCg1Mb2dvdXRSZXF1ZXN0IhAKDkxvZ291dFJlc3BvbnNlInMKB1Byb2ZpbGUSHQoEdXNlchgBIAEoCzIPLmRlbnRhbC52MS5Vc2VyEisKCGlkZW50aXR5GAIgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Eg0KBXBob25lGAMgASgJEg0KBWVtYWlsGAQgASgJIhMKEUdldFByb2ZpbGVSZXF1ZXN0IjkKEkdldFByb2ZpbGVSZXNwb25zZRIjCgdwcm9maWxlGAEgASgLMhIuZGVudGFsLnYxLlByb2ZpbGUiegoUVXBkYXRlUHJvZmlsZVJlcXVlc3QSHAoJZnVsbF9uYW1lGAEgASgJQgm6SAZyBBABGGQSJgoFcGhvbmUYAiABKAlCF7pIFHISMhBeXCs/WzAtOV17NywxNX0kEhwKBWVtYWlsGAMgASgJQg26SArYAQFyBRj+AWABIjwKFVVwZGF0ZVByb2ZpbGVSZXNwb25zZRIjCgdwcm9maWxlGAEgASgLMhIuZGVudGFsLnYxLlByb2ZpbGUyrgQKC0F1dGhTZXJ2aWNlEj8KBlNpZ25VcBIYLmRlbnRhbC52MS5TaWduVXBSZXF1ZXN0GhkuZGVudGFsLnYxLlNpZ25VcFJlc3BvbnNlIgASPAoFTG9naW4SFy5kZW50YWwudjEuTG9naW5SZXF1ZXN0GhguZGVudGFsLnYxLkxvZ2luUmVzcG9uc2UiABJXCg5DaGFuZ2VQYXNzd29yZBIgLmRlbnRhbC52MS5DaGFuZ2VQYXNzd29yZFJlcXVlc3QaIS5kZW50YWwudjEuQ2hhbmdlUGFzc3dvcmRSZXNwb25zZSIAEmMKEkNvbmZpcm1LZXlSb3RhdGlvbhIkLmRlbnRhbC52MS5Db25maXJtS2V5Um90YXRpb25SZXF1ZXN0GiUuZGVudGFsLnYxLkNvbmZpcm1LZXlSb3RhdGlvblJlc3BvbnNlIgASPwoGTG9nb3V0EhguZGVudGFsLnYxLkxvZ291dFJlcXVlc3QaGS5kZW50YWwudjEuTG9nb3V0UmVzcG9uc2UiABJLCgpHZXRQcm9maWxlEhwuZGVudGFsLnYxLkdldFByb2ZpbGVSZXF1ZXN0Gh0uZGVudGFsLnYxLkdldFByb2ZpbGVSZXNwb25zZSIAElQKDVVwZGF0ZVByb2ZpbGUSHy5kZW50YWwudjEuVXBkYXRlUHJvZmlsZVJlcXVlc3QaIC5kZW50YWwudjEuVXBkYXRlUHJvZmlsZVJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_crypto, file_dental_v1_person, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message dental.v1.User
@@ -88,6 +88,14 @@ export type SignUpRequest = Message<"dental.v1.SignUpRequest"> & {
    * @generated from field: string phone = 5;
    */
   phone: string;
+
+  /**
+   * Optional email address, at most 254 characters; empty for none. Contact
+   * information only: several accounts may share one, and it is not used to log in.
+   *
+   * @generated from field: string email = 6;
+   */
+  email: string;
 };
 
 /**
@@ -352,6 +360,126 @@ export const LogoutResponseSchema: GenMessage<LogoutResponse> = /*@__PURE__*/
   messageDesc(file_dental_v1_auth, 10);
 
 /**
+ * A user's own account details (AuthService.GetProfile).
+ *
+ * @generated from message dental.v1.Profile
+ */
+export type Profile = Message<"dental.v1.Profile"> & {
+  /**
+   * @generated from field: dental.v1.User user = 1;
+   */
+  user?: User | undefined;
+
+  /**
+   * Identification code, unique across all accounts. Cannot be changed.
+   *
+   * @generated from field: dental.v1.PersonIdentity identity = 2;
+   */
+  identity?: PersonIdentity | undefined;
+
+  /**
+   * Mobile number; empty for accounts made before it was asked for.
+   *
+   * @generated from field: string phone = 3;
+   */
+  phone: string;
+
+  /**
+   * Email address; empty when none was given.
+   *
+   * @generated from field: string email = 4;
+   */
+  email: string;
+};
+
+/**
+ * Describes the message dental.v1.Profile.
+ * Use `create(ProfileSchema)` to create a new message.
+ */
+export const ProfileSchema: GenMessage<Profile> = /*@__PURE__*/
+  messageDesc(file_dental_v1_auth, 11);
+
+/**
+ * @generated from message dental.v1.GetProfileRequest
+ */
+export type GetProfileRequest = Message<"dental.v1.GetProfileRequest"> & {
+};
+
+/**
+ * Describes the message dental.v1.GetProfileRequest.
+ * Use `create(GetProfileRequestSchema)` to create a new message.
+ */
+export const GetProfileRequestSchema: GenMessage<GetProfileRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_auth, 12);
+
+/**
+ * @generated from message dental.v1.GetProfileResponse
+ */
+export type GetProfileResponse = Message<"dental.v1.GetProfileResponse"> & {
+  /**
+   * @generated from field: dental.v1.Profile profile = 1;
+   */
+  profile?: Profile | undefined;
+};
+
+/**
+ * Describes the message dental.v1.GetProfileResponse.
+ * Use `create(GetProfileResponseSchema)` to create a new message.
+ */
+export const GetProfileResponseSchema: GenMessage<GetProfileResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_auth, 13);
+
+/**
+ * @generated from message dental.v1.UpdateProfileRequest
+ */
+export type UpdateProfileRequest = Message<"dental.v1.UpdateProfileRequest"> & {
+  /**
+   * Same rules as SignUpRequest.full_name.
+   *
+   * @generated from field: string full_name = 1;
+   */
+  fullName: string;
+
+  /**
+   * Same rules as SignUpRequest.phone.
+   *
+   * @generated from field: string phone = 2;
+   */
+  phone: string;
+
+  /**
+   * Same rules as SignUpRequest.email. Empty removes the email on file.
+   *
+   * @generated from field: string email = 3;
+   */
+  email: string;
+};
+
+/**
+ * Describes the message dental.v1.UpdateProfileRequest.
+ * Use `create(UpdateProfileRequestSchema)` to create a new message.
+ */
+export const UpdateProfileRequestSchema: GenMessage<UpdateProfileRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_auth, 14);
+
+/**
+ * @generated from message dental.v1.UpdateProfileResponse
+ */
+export type UpdateProfileResponse = Message<"dental.v1.UpdateProfileResponse"> & {
+  /**
+   * @generated from field: dental.v1.Profile profile = 1;
+   */
+  profile?: Profile | undefined;
+};
+
+/**
+ * Describes the message dental.v1.UpdateProfileResponse.
+ * Use `create(UpdateProfileResponseSchema)` to create a new message.
+ */
+export const UpdateProfileResponseSchema: GenMessage<UpdateProfileResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_auth, 15);
+
+/**
  * Accounts, logins and local-database keys.
  *
  * Calls marked "needs session" must send the session token from Login as
@@ -439,6 +567,30 @@ export const AuthService: GenService<{
     methodKind: "unary";
     input: typeof LogoutRequestSchema;
     output: typeof LogoutResponseSchema;
+  },
+  /**
+   * The logged-in user's own account details. Needs session; a billing-only
+   * session may call it too.
+   *
+   * @generated from rpc dental.v1.AuthService.GetProfile
+   */
+  getProfile: {
+    methodKind: "unary";
+    input: typeof GetProfileRequestSchema;
+    output: typeof GetProfileResponseSchema;
+  },
+  /**
+   * Changes the logged-in user's full name, mobile number and email. Needs session; a
+   * billing-only session may call it too. The username and the identification
+   * code cannot be changed. Offline grants already given keep the old name until
+   * the next login.
+   *
+   * @generated from rpc dental.v1.AuthService.UpdateProfile
+   */
+  updateProfile: {
+    methodKind: "unary";
+    input: typeof UpdateProfileRequestSchema;
+    output: typeof UpdateProfileResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_dental_v1_auth, 0);

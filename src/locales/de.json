@@ -13,6 +13,7 @@
   "nav": {
     "label": "Hauptmenü",
     "home": "Startseite",
+    "users": "Benutzer",
     "plans": "Tarife",
     "subscriptions": "Abonnements",
     "payments": "Zahlungen",
@@ -127,7 +128,7 @@
     "description": "Alle gekauften Abonnements, die neuesten zuerst. Suchen Sie nach Name, Benutzername, Identifikationsnummer oder Telefon des Praxisinhabers und öffnen Sie einen Inhaber, um sein Konto zu sehen, ein Abonnement zu verkaufen oder zu kündigen.",
     "search": {
       "label": "Abonnements durchsuchen",
-      "placeholder": "Name, Benutzername, Identifikationsnummer oder Telefon"
+      "placeholder": "Name, Benutzername, Identifikationsnummer, Telefon oder E-Mail"
     },
     "filter": {
       "label": "Nach Status filtern",
@@ -139,6 +140,7 @@
       "username": "Benutzername",
       "identityCode": "Identifikationsnummer",
       "phone": "Mobilnummer",
+      "email": "E-Mail",
       "createdAt": "Mitglied seit",
       "disabled": "Konto deaktiviert",
       "paidUntil": "Abonniert bis {{date}}.",
@@ -236,7 +238,7 @@
     "description": "Praxisinhaber überweisen den Betrag auf eines der Zahlungskonten und melden ihn in der App. Prüfen Sie jede Zahlung anhand des Kontoauszugs und bestätigen Sie sie, wodurch das Abonnement hinzugefügt wird, oder lehnen Sie sie mit einer Begründung ab, die der Inhaber sieht.",
     "search": {
       "label": "Zahlungen durchsuchen",
-      "placeholder": "Name, Benutzername, Identifikationsnummer, Telefon oder Referenz"
+      "placeholder": "Name, Benutzername, Identifikationsnummer, Telefon, E-Mail oder Referenz"
     },
     "filter": {
       "label": "Nach Status filtern",
@@ -360,12 +362,38 @@
       "destinationRequired": "Geben Sie eine Kartennummer, eine IBAN oder beides ein."
     }
   },
+  "users": {
+    "title": "Benutzer",
+    "description": "Konten der Desktop-App, die neuesten zuerst. Administratoren des Panels werden hier nicht angezeigt.",
+    "search": {
+      "label": "Benutzer durchsuchen",
+      "placeholder": "Name, Benutzername, Identifikationsnummer, Telefon oder E-Mail"
+    },
+    "empty": "Noch hat sich niemand registriert.",
+    "noResults": "Keine Benutzer gefunden.",
+    "columns": {
+      "name": "Name",
+      "username": "Benutzername",
+      "identityCode": "Identifikationsnummer",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "subscription": "Abonnement",
+      "ownedClinics": "Eigene Praxen",
+      "memberClinics": "Mitglied in Praxen",
+      "lastLogin": "Letzte Anmeldung",
+      "createdAt": "Registriert"
+    },
+    "disabled": "Deaktiviert",
+    "noSubscription": "Kein Abonnement",
+    "paidUntil": "Bis {{date}}",
+    "neverLoggedIn": "Nie"
+  },
   "patients": {
     "title": "Patienten",
     "description": "Patienten, die die Praxen erfasst und synchronisiert haben, die neuesten zuerst. Adressen, medizinische Notizen und Behandlungen werden hier nicht angezeigt.",
     "search": {
       "label": "Patienten durchsuchen",
-      "placeholder": "Name, Identifikationsnummer oder Telefon"
+      "placeholder": "Name, Identifikationsnummer, Telefon oder E-Mail"
     },
     "empty": "Noch keine Patienten.",
     "noResults": "Keine Patienten gefunden.",
@@ -373,6 +401,7 @@
       "patient": "Patient",
       "identityCode": "Identifikationsnummer",
       "phone": "Telefon",
+      "email": "E-Mail",
       "birthDate": "Geburtsdatum",
       "gender": "Geschlecht",
       "clinics": "Praxen",

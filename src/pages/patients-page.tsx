@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const patientsRoute = getRouteApi("/app/patients");
 
-/** ?q=… (name, identification code or phone) and ?page=… (none for the first). */
+/** ?q=… (name, identification code, phone or email) and ?page=… (none for the first). */
 export interface PatientsSearch {
   q?: string;
   page?: number;
@@ -77,6 +77,7 @@ export function PatientsPage() {
                 <TableHead>{t("patients.columns.patient")}</TableHead>
                 <TableHead>{t("patients.columns.identityCode")}</TableHead>
                 <TableHead>{t("patients.columns.phone")}</TableHead>
+                <TableHead>{t("patients.columns.email")}</TableHead>
                 <TableHead>{t("patients.columns.birthDate")}</TableHead>
                 <TableHead>{t("patients.columns.gender")}</TableHead>
                 <TableHead>{t("patients.columns.clinics")}</TableHead>
@@ -95,6 +96,9 @@ export function PatientsPage() {
                   </TableCell>
                   <TableCell>
                     <span dir="ltr">{patient.phone || t("common.empty")}</span>
+                  </TableCell>
+                  <TableCell>
+                    <span dir="ltr">{patient.email || t("common.empty")}</span>
                   </TableCell>
                   <TableCell>{format.date(birthDate(patient.birthDate))}</TableCell>
                   <TableCell>

@@ -15,6 +15,7 @@ import {
 import { loadPayments, parsePaymentsSearch, PaymentsPage, type PaymentsSearch } from "@/pages/payments-page";
 import { loadPaymentAccounts, PaymentAccountsPage } from "@/pages/payment-accounts-page";
 import { loadPatients, parsePatientsSearch, PatientsPage, type PatientsSearch } from "@/pages/patients-page";
+import { loadUsers, parseUsersSearch, UsersPage, type UsersSearch } from "@/pages/users-page";
 
 /**
  * Pages.
@@ -22,8 +23,11 @@ import { loadPatients, parsePatientsSearch, PatientsPage, type PatientsSearch } 
  * /                  → /home or /login
  * /login             only when logged out
  * /home              ┐ "app" layout (sidebar): only when logged in; pages read the
- * /plans             │ session with useSession() and their data with
- * /subscriptions     │ getRouteApi("<route id>").useLoaderData()
+ *                    │ session with useSession() and their data with
+ *                    │ getRouteApi("<route id>").useLoaderData()
+ * /users             │   ?q=… &page=…
+ * /plans             │
+ * /subscriptions     │
  *                    │   ?status=active|upcoming|ended|canceled (none: all) &q=… &page=… (the list), or
  *                    │   ?code=… (one owner's account, by identification code)
  * /payments          │   ?status=approved|rejected|canceled|all (none: pending, the queue to review) &q=… &page=…
@@ -76,6 +80,15 @@ const homeRoute = createRoute({
   component: HomePage,
 });
 
+const usersRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "users",
+  validateSearch: (search: Record<string, unknown>): UsersSearch => parseUsersSearch(search),
+  loaderDeps: ({ search }) => ({ q: search.q, page: search.page }),
+  loader: ({ deps }) => loadUsers(deps),
+  component: UsersPage,
+});
+
 const plansRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "plans",
@@ -122,6 +135,7 @@ const routeTree = rootRoute.addChildren([
   loginRoute,
   appRoute.addChildren([
     homeRoute,
+    usersRoute,
     plansRoute,
     subscriptionsRoute,
     paymentsRoute,
