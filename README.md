@@ -3,13 +3,14 @@
 Web panel for the system administrators of the dental server (`../dental-server`):
 
 - **Plans** (`/plans`): list, create and edit subscription plans (limits, duration, price in rials, on sale or not).
-- **Subscriptions** (`/subscriptions`): find a clinic owner by identification code (a national ID or
-  any other official code); see their account, clinics, subscriptions (with how each was bought), completed
-  purchases and payments not yet approved; sell a subscription
-  from an active plan (it starts when the paid time already bought ends) or cancel one.
+- **Subscriptions** (`/subscriptions`): every subscription bought, newest first and paged, filtered by status
+  and searched by the owner's name, username, identification code or phone. Open an owner to see their account,
+  clinics, subscriptions (with how each was bought), completed purchases and payments not yet approved; sell a
+  subscription from an active plan (it starts when the paid time already bought ends) or cancel one.
 - **Payments** (`/payments`): payments clinic owners reported in the desktop app, pending ones first as
   a review queue; check each against the bank statement, then approve it (adds the subscription) or
-  reject it with a reason the owner sees. Filter by status with `?status=approved|rejected|canceled|all`.
+  reject it with a reason the owner sees. Paged; filter by status (`?status=approved|rejected|canceled|all`)
+  and search by owner or transfer reference.
 - **Payment accounts** (`/payment-accounts`): the bank accounts (card number and/or IBAN) owners transfer to;
   create, edit, order and deactivate them.
 

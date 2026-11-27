@@ -1,6 +1,5 @@
 import { z } from "zod";
 import type { ParseKeys } from "i18next";
-import { IDENTITY_CODE_PATTERN, normalizeIdentityCode } from "@/lib/identity";
 import { CARD_NUMBER_PATTERN, IBAN_PATTERN, normalizeCardNumber, normalizeIban } from "@/lib/payment";
 
 /**
@@ -50,16 +49,6 @@ export const planSchema = z.object({
 export type PlanValues = z.infer<typeof planSchema>;
 
 // --- Subscriptions (src/pages/subscriptions-page.tsx) -------------------------
-
-/** An account by identification code (src/lib/identity.ts): typed in any case, with spaces or dashes. */
-export const findUserSchema = z.object({
-  code: z
-    .string()
-    .transform(normalizeIdentityCode)
-    .pipe(z.string().regex(IDENTITY_CODE_PATTERN, message("subscriptions.validation.identityCode"))),
-});
-export type FindUserInput = z.input<typeof findUserSchema>;
-export type FindUserValues = z.output<typeof findUserSchema>;
 
 export const sellSubscriptionSchema = z.object({
   planId: z.string().min(1, message("subscriptions.validation.plan")),

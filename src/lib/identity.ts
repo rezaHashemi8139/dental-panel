@@ -14,17 +14,11 @@ export function normalizeIdentityCode(code: string): string {
   return code.replace(/[\s-]/g, "").toUpperCase();
 }
 
-/** An identity in the address bar, e.g. ?code=0012345679. */
-export interface IdentitySearch {
-  code?: string;
-}
-
-/** Reads an identity from search parameters; anything malformed reads as none. */
-export function parseIdentitySearch(search: Record<string, unknown>): IdentitySearch {
+/** An identification code from the address bar (?code=…); anything malformed reads as none. */
+export function parseIdentityCode(value: unknown): string | undefined {
   // The router parses search values as JSON, so an all-digit value may arrive as a number.
-  const value = search.code;
   const code = typeof value === "number" ? String(value) : typeof value === "string" ? value : "";
-  return IDENTITY_CODE_PATTERN.test(code) ? { code } : {};
+  return IDENTITY_CODE_PATTERN.test(code) ? code : undefined;
 }
 
 export function toPersonIdentity(code: string): PersonIdentity {

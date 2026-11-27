@@ -30,10 +30,12 @@ const sessionInterceptor: Interceptor = (next) => async (req) => {
 /**
  * The RPCs are served on the panel's own origin: forwarded to the dental server by
  * the Vite dev server (vite.config.ts) or, in production, by the web server in front
- * of both (see README.md). Uses the Connect protocol with JSON.
+ * of both (see README.md). Uses the Connect protocol with binary Protobuf
+ * (application/proto), which the server accepts alongside JSON.
  */
 const transport = createConnectTransport({
   baseUrl: window.location.origin,
+  useBinaryFormat: true,
   interceptors: [sessionInterceptor],
   defaultTimeoutMs: TIMEOUT_MS,
 });

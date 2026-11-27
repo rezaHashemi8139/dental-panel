@@ -1,24 +1,43 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { create } from "@bufbuild/protobuf";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { getRouteApi, useNavigate, useRouter } from "@tanstack/react-router";
-import { BanIcon, LoaderCircleIcon, PlusIcon, SearchIcon, UserXIcon } from "lucide-react";
+import { getRouteApi, Link } from "@tanstack/react-router";
+import { ArrowLeftIcon, BanIcon, PlusIcon, UserIcon, UserXIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { hasReason } from "@/api/errors";
-import { findUserSchema, type FindUserInput, type FindUserValues } from "@/auth/schemas";
-import { PaymentReviewSchema, type GetUserResponse, type PaymentReview } from "@/gen/dental/v1/admin_pb";
+import {
+  PaymentReviewSchema,
+  type GetUserResponse,
+  type PaymentReview,
+  type SubscriptionListItem,
+} from "@/gen/dental/v1/admin_pb";
 import { PaymentStatus, type PaymentAccount, type Plan, type Subscription } from "@/gen/dental/v1/subscription_pb";
-import { fieldError } from "@/lib/form";
 import { useFormat } from "@/lib/format";
-import { fromPersonIdentity, toPersonIdentity } from "@/lib/identity";
-import { accountsById, manualTransfer, purchaseModeKey } from "@/lib/payment";
-import { paidUntil, subscriptionRows, type SubscriptionStatus } from "@/lib/subscription";
+import {
+  fromPersonIdentity,
+  IDENTITY_CODE_PATTERN,
+  normalizeIdentityCode,
+  parseIdentityCode,
+  toPersonIdentity,
+} from "@/lib/identity";
+import { PAGE_SIZE, parsePage, parseQuery } from "@/lib/pagination";
+import { accountsById, manualTransfer, paymentMethodKey, purchaseModeKey } from "@/lib/payment";
+import {
+  daysLeft,
+  fromListedStatus,
+  isSubscriptionFilter,
+  paidUntil,
+  SUBSCRIPTION_FILTERS,
+  subscriptionRows,
+  toListedStatus,
+  type SubscriptionFilter,
+  type SubscriptionStatus,
+} from "@/lib/subscription";
 import { uuidToString } from "@/lib/uuid";
 import { CancelSubscriptionDialog } from "@/components/cancel-subscription-dialog";
 import { Detail } from "@/components/detail";
-import { FormField } from "@/components/form-field";
+import { ListPagination } from "@/components/list-pagination";
+import { ListSearch } from "@/components/list-search";
 import { PaymentsTable } from "@/components/payments-table";
 import { PurchasesTable } from "@/components/purchases-table";
 import { SellSubscriptionDialog } from "@/components/sell-subscription-dialog";
@@ -32,20 +51,65 @@ import { loadPlans } from "./plans-page";
 
 const subscriptionsRoute = getRouteApi("/app/subscriptions");
 
+/**
+ * ?status=active|upcoming|ended|canceled (none: all), ?q=… (owner's name, username,
+ * identification code or phone) and ?page=… (none for the first) for the list of every
+ * subscription; ?code=… for one owner's account instead. The list's parameters stay
+ * while an account is open, so going back returns to the same page of the list.
+ */
+export interface SubscriptionsSearch {
+  status?: SubscriptionFilter;
+  q?: string;
+  page?: number;
+  code?: string;
+}
+
+export function parseSubscriptionsSearch(search: Record<string, unknown>): SubscriptionsSearch {
+  return {
+    status: isSubscriptionFilter(search.status) ? search.status : undefined,
+    q: parseQuery(search.q),
+    page: parsePage(search.page),
+    code: parseIdentityCode(search.code),
+  };
+}
+
+export interface SubscriptionsList {
+  filter: SubscriptionFilter | undefined;
+  query: string;
+  page: number;
+  items: SubscriptionListItem[];
+  /** Matching subscriptions on every page. */
+  total: number;
+}
+
 export interface SubscriptionsData {
-  /** The identification code searched for, if any. */
+  /** The identification code of the account open, if any. */
   code: string | null;
-  /** The account found; null if none was searched for or none has this code. */
+  /** The account open; null if none is or none has this code. */
   user: GetUserResponse | null;
+  /** One page of every subscription; null while an account is open. */
+  list: SubscriptionsList | null;
   /** Plans on sale, for selling a subscription. */
   plans: Plan[];
   /** Every payment account, to show where the user's payments were sent. */
   accounts: PaymentAccount[];
 }
 
-/** Data of /subscriptions?code=… (src/router.tsx). */
-export async function loadSubscriptions(code: string | null): Promise<SubscriptionsData> {
-  if (!code) return { code: null, user: null, plans: [], accounts: [] };
+/** Data of /subscriptions (src/router.tsx): the list, or one account. */
+export async function loadSubscriptions(search: SubscriptionsSearch): Promise<SubscriptionsData> {
+  const { code } = search;
+  if (!code) {
+    const query = search.q ?? "";
+    const page = search.page ?? 1;
+    const response = await adminClient.listSubscriptions({
+      status: toListedStatus(search.status),
+      query,
+      page,
+      pageSize: PAGE_SIZE,
+    });
+    const list = { filter: search.status, query, page, items: response.items, total: response.totalCount };
+    return { code: null, user: null, list, plans: [], accounts: [] };
+  }
   const [user, plans, accounts] = await Promise.all([
     adminClient.getUser({ identity: toPersonIdentity(code) }).catch((error: unknown) => {
       if (hasReason(error, "user_not_found")) return null;
@@ -54,23 +118,41 @@ export async function loadSubscriptions(code: string | null): Promise<Subscripti
     loadPlans(),
     loadPaymentAccounts(),
   ]);
-  return { code, user, plans: plans.filter((plan) => plan.active), accounts };
+  return { code, user, list: null, plans: plans.filter((plan) => plan.active), accounts };
 }
 
 export function SubscriptionsPage() {
-  const { code, user, plans, accounts } = subscriptionsRoute.useLoaderData();
+  const { code, user, list, plans, accounts } = subscriptionsRoute.useLoaderData();
+  const search = subscriptionsRoute.useSearch();
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full max-w-5xl flex-col gap-6">
+    <div className="flex w-full max-w-6xl flex-col gap-6">
       <Card>
         <CardHeader>
           <CardTitle>{t("subscriptions.title")}</CardTitle>
           <CardDescription>{t("subscriptions.description")}</CardDescription>
         </CardHeader>
-        <CardContent>
-          {/* A new form when the search changes from outside (back/forward). */}
-          <FindUserForm key={code ?? ""} code={code} />
+        <CardContent className="flex flex-col gap-4">
+          {/* A new box when the search changes from outside (back/forward). */}
+          <ListSearch
+            key={search.q ?? ""}
+            query={search.q ?? ""}
+            label={t("subscriptions.search.label")}
+            placeholder={t("subscriptions.search.placeholder")}
+          />
+          {list ? (
+            <SubscriptionsListView list={list} />
+          ) : (
+            <div>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/subscriptions" search={{ ...search, code: undefined }}>
+                  <ArrowLeftIcon className="rtl:rotate-180" data-icon="inline-start" />
+                  {t("subscriptions.backToList")}
+                </Link>
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -85,47 +167,131 @@ export function SubscriptionsPage() {
   );
 }
 
-function FindUserForm({ code }: { code: string | null }) {
+/** One page of every subscription, newest first, each linked to its owner's account. */
+function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FindUserInput, unknown, FindUserValues>({
-    resolver: zodResolver(findUserSchema),
-    defaultValues: { code: code ?? "" },
-  });
-
-  async function submit(values: FindUserValues) {
-    // The same search again reloads it, e.g. to see changes made elsewhere.
-    if (values.code === code) await router.invalidate({ sync: true });
-    else await navigate({ to: "/subscriptions", search: { code: values.code } });
-  }
+  const format = useFormat();
+  const now = Date.now();
+  // A search that is a whole identification code may be an owner with no subscription yet.
+  const lookup = list.query ? normalizeIdentityCode(list.query) : "";
+  const canOpen = list.items.length === 0 && IDENTITY_CODE_PATTERN.test(lookup);
 
   return (
-    <form className="flex flex-col gap-4 sm:flex-row sm:items-start" onSubmit={handleSubmit(submit)} noValidate>
-      <div className="sm:w-64">
-        <FormField
-          id="find-code"
-          label={t("subscriptions.search.code")}
-          error={fieldError(errors.code)}
-          maxLength={30}
-          autoFocus={!code}
-          latin
-          {...register("code")}
-        />
-      </div>
+    <>
+      <nav aria-label={t("subscriptions.filter.label")} className="flex flex-wrap gap-1">
+        {[undefined, ...SUBSCRIPTION_FILTERS].map((item) => (
+          <Button key={item ?? "all"} asChild size="sm" variant={item === list.filter ? "secondary" : "ghost"}>
+            <Link
+              to="/subscriptions"
+              search={{ status: item, q: list.query || undefined }}
+              aria-current={item === list.filter ? "page" : undefined}
+            >
+              {item ? t(`subscriptions.status.${item}`) : t("subscriptions.filter.all")}
+            </Link>
+          </Button>
+        ))}
+      </nav>
 
-      {/* Lined up with the input, below its label. */}
-      <Button type="submit" className="sm:mt-7" disabled={isSubmitting}>
-        {isSubmitting ? <LoaderCircleIcon className="animate-spin" /> : <SearchIcon data-icon="inline-start" />}
-        {t("subscriptions.search.submit")}
-      </Button>
-    </form>
+      {list.items.length === 0 ? (
+        <div className="flex flex-col items-center gap-3 py-8">
+          <p className="text-center text-sm text-muted-foreground">{t("subscriptions.list.emptyAll")}</p>
+          {canOpen && (
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/subscriptions" search={{ code: lookup }}>
+                <UserIcon data-icon="inline-start" />
+                {t("subscriptions.list.openByCode", { code: lookup })}
+              </Link>
+            </Button>
+          )}
+        </div>
+      ) : (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t("subscriptions.list.columns.owner")}</TableHead>
+              <TableHead>{t("subscriptions.list.columns.plan")}</TableHead>
+              <TableHead>{t("subscriptions.list.columns.period")}</TableHead>
+              <TableHead>{t("subscriptions.list.columns.status")}</TableHead>
+              <TableHead>{t("subscriptions.list.columns.source")}</TableHead>
+              <TableHead>{t("subscriptions.list.columns.amount")}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {list.items.map((item) => {
+              const { subscription, purchase } = item;
+              if (!subscription) return null;
+              const code = fromPersonIdentity(item.identity);
+              const status = fromListedStatus(item.status);
+              return (
+                <TableRow key={uuidToString(subscription.id)} className="align-top">
+                  <TableCell>
+                    {code ? (
+                      <Link
+                        to="/subscriptions"
+                        search={{ status: list.filter, q: list.query || undefined, page: pageParam(list.page), code }}
+                        className="font-medium underline-offset-4 hover:underline"
+                      >
+                        {item.user?.fullName || code}
+                      </Link>
+                    ) : (
+                      <span className="font-medium">{item.user?.fullName}</span>
+                    )}
+                    <span dir="ltr" className="block text-xs text-muted-foreground">
+                      {code ?? item.user?.username}
+                    </span>
+                    {item.userDisabled && (
+                      <Badge variant="destructive" className="mt-1">
+                        {t("subscriptions.user.disabled")}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <span className="font-medium">{subscription.planName}</span>
+                    <span className="block text-xs text-muted-foreground">
+                      {format.limits(subscription.maxClinics, subscription.maxDevicesPerClinic)}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    {t("subscriptions.list.period", {
+                      start: format.date(subscription.startsAt),
+                      end: format.date(subscription.endsAt),
+                    })}
+                    {status === "active" && (
+                      <span className="block text-xs text-muted-foreground">
+                        {t("subscriptions.list.daysLeft", { days: format.days(daysLeft(subscription, now)) })}
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={status ? STATUS_BADGE[status] : "outline"}
+                      title={subscription.canceledAt ? format.dateTime(subscription.canceledAt) : undefined}
+                    >
+                      {status ? t(`subscriptions.status.${status}`) : t("common.empty")}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {purchase ? t("subscriptions.list.source.app") : t("subscriptions.list.source.panel")}
+                    <span className="block text-xs text-muted-foreground">
+                      {purchase ? t(paymentMethodKey(purchase.method)) : t("subscriptions.purchases.soldByAdmin")}
+                    </span>
+                  </TableCell>
+                  <TableCell className="font-medium">
+                    {format.rials(purchase ? purchase.amountRials : subscription.priceRials)}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      )}
+      {list.total > 0 && <ListPagination page={list.page} total={list.total} shown={list.items.length} />}
+    </>
   );
 }
+
+/** Page 1 is left out of the address bar. */
+const pageParam = (page: number) => (page > 1 ? page : undefined);
 
 const STATUS_BADGE: Record<SubscriptionStatus, "default" | "secondary" | "outline" | "destructive"> = {
   active: "default",

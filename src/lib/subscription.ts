@@ -1,5 +1,6 @@
 import { timestampMs } from "@bufbuild/protobuf/wkt";
 import { PaymentStatus, PurchaseMode, type Payment, type Subscription } from "@/gen/dental/v1/subscription_pb";
+import { SubscriptionStatus as ListedStatus } from "@/gen/dental/v1/admin_pb";
 import { uuidToString } from "./uuid";
 
 /** "replaced": ended early because an upgrade took its place (see subscriptionRows). */
@@ -77,7 +78,39 @@ export function subscriptionRows(
       subscription,
       status,
       purchase: purchases.get(uuidToString(subscription.id)),
-      daysLeft: status === "active" ? Math.ceil((ms(subscription.endsAt) - now) / DAY_MS) : undefined,
+      daysLeft: status === "active" ? daysLeft(subscription, now) : undefined,
     };
   });
+}
+
+/** The statuses the subscriptions list filters by, as in the address bar (?status=active). */
+export type SubscriptionFilter = Exclude<SubscriptionStatus, "replaced">;
+
+const FILTER_STATUSES: Record<SubscriptionFilter, ListedStatus> = {
+  active: ListedStatus.ACTIVE,
+  upcoming: ListedStatus.UPCOMING,
+  ended: ListedStatus.ENDED,
+  canceled: ListedStatus.CANCELED,
+};
+
+export const SUBSCRIPTION_FILTERS = Object.keys(FILTER_STATUSES) as SubscriptionFilter[];
+
+export function isSubscriptionFilter(value: unknown): value is SubscriptionFilter {
+  return typeof value === "string" && Object.prototype.hasOwnProperty.call(FILTER_STATUSES, value);
+}
+
+/** The server's status for a filter; none means every status. */
+export function toListedStatus(filter: SubscriptionFilter | undefined): ListedStatus {
+  return filter ? FILTER_STATUSES[filter] : ListedStatus.UNSPECIFIED;
+}
+
+/** A status the server computed (ListSubscriptions), or null for one this panel does not know. */
+export function fromListedStatus(status: ListedStatus): SubscriptionFilter | null {
+  const entry = Object.entries(FILTER_STATUSES).find(([, value]) => value === status);
+  return entry ? (entry[0] as SubscriptionFilter) : null;
+}
+
+/** Whole days left until `endsAt`, for an active subscription. */
+export function daysLeft(subscription: Subscription, now: number): number {
+  return Math.ceil((ms(subscription.endsAt) - now) / DAY_MS);
 }

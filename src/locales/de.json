@@ -62,7 +62,16 @@
     "clinics_other": "{{clinics}} Praxen",
     "devicesPerClinic_one": "{{devices}} Gerät pro Praxis",
     "devicesPerClinic_other": "{{devices}} Geräte pro Praxis",
-    "empty": "—"
+    "empty": "—",
+    "search": "Suchen",
+    "pagination": {
+      "label": "Seitennavigation",
+      "summary": "{{from}}–{{to}} von {{total}}",
+      "total": "{{total}} insgesamt",
+      "page": "Seite {{page}} von {{pages}}",
+      "previous": "Zurück",
+      "next": "Weiter"
+    }
   },
   "plans": {
     "title": "Abonnement-Tarife",
@@ -114,11 +123,16 @@
   },
   "subscriptions": {
     "title": "Abonnements",
-    "description": "Suchen Sie einen Praxisinhaber über seine Identifikationsnummer (nationale ID oder eine andere amtliche Nummer), um seine Abonnements und Käufe zu sehen, ein Abonnement zu verkaufen oder zu kündigen.",
+    "description": "Alle gekauften Abonnements, die neuesten zuerst. Suchen Sie nach Name, Benutzername, Identifikationsnummer oder Telefon des Praxisinhabers und öffnen Sie einen Inhaber, um sein Konto zu sehen, ein Abonnement zu verkaufen oder zu kündigen.",
     "search": {
-      "code": "Identifikationsnummer",
-      "submit": "Suchen"
+      "label": "Abonnements durchsuchen",
+      "placeholder": "Name, Benutzername, Identifikationsnummer oder Telefon"
     },
+    "filter": {
+      "label": "Nach Status filtern",
+      "all": "Alle"
+    },
+    "backToList": "Zurück zu allen Abonnements",
     "notFound": "Kein Benutzer mit der Identifikationsnummer {{code}} gefunden.",
     "user": {
       "username": "Benutzername",
@@ -132,11 +146,15 @@
     "list": {
       "title": "Abonnements",
       "empty": "Dieser Benutzer hat noch kein Abonnement gekauft.",
+      "emptyAll": "Keine Abonnements gefunden.",
+      "openByCode": "Konto mit der Identifikationsnummer {{code}} öffnen",
       "columns": {
+        "owner": "Praxisinhaber",
         "plan": "Tarif",
         "period": "Zeitraum",
         "status": "Status",
         "source": "Gekauft über",
+        "amount": "Betrag",
         "note": "Notiz"
       },
       "period": "{{start}} bis {{end}}",
@@ -208,7 +226,6 @@
       "working": "Wird gekündigt..."
     },
     "validation": {
-      "identityCode": "Die Identifikationsnummer muss aus 5 bis 20 englischen Buchstaben oder Ziffern bestehen.",
       "plan": "Wählen Sie einen Tarif.",
       "noteLength": "Die Notiz darf höchstens 500 Zeichen lang sein."
     }
@@ -216,6 +233,10 @@
   "payments": {
     "title": "Zahlungen",
     "description": "Praxisinhaber überweisen den Betrag auf eines der Zahlungskonten und melden ihn in der App. Prüfen Sie jede Zahlung anhand des Kontoauszugs und bestätigen Sie sie, wodurch das Abonnement hinzugefügt wird, oder lehnen Sie sie mit einer Begründung ab, die der Inhaber sieht.",
+    "search": {
+      "label": "Zahlungen durchsuchen",
+      "placeholder": "Name, Benutzername, Identifikationsnummer, Telefon oder Referenz"
+    },
     "filter": {
       "label": "Nach Status filtern",
       "pending": "Zu prüfen",
@@ -226,7 +247,6 @@
     },
     "empty": "Keine Zahlungen.",
     "emptyPending": "Keine Zahlungen warten auf Prüfung.",
-    "limited": "Es werden nur die ersten {{limit}} angezeigt.",
     "columns": {
       "reportedAt": "Gemeldet",
       "owner": "Praxisinhaber",

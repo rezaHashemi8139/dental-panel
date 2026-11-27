@@ -62,7 +62,16 @@
     "clinics_other": "{{clinics}} clinics",
     "devicesPerClinic_one": "{{devices}} device per clinic",
     "devicesPerClinic_other": "{{devices}} devices per clinic",
-    "empty": "—"
+    "empty": "—",
+    "search": "Search",
+    "pagination": {
+      "label": "Pagination",
+      "summary": "{{from}}–{{to}} of {{total}}",
+      "total": "{{total}} in all",
+      "page": "Page {{page}} of {{pages}}",
+      "previous": "Previous",
+      "next": "Next"
+    }
   },
   "plans": {
     "title": "Subscription plans",
@@ -114,11 +123,16 @@
   },
   "subscriptions": {
     "title": "Subscriptions",
-    "description": "Find a clinic owner by identification code (a national ID or any other official code) to see their subscriptions and purchases, sell a subscription or cancel one.",
+    "description": "Every subscription bought, newest first. Search by the clinic owner's name, username, identification code or phone, and open an owner to see their account, sell a subscription or cancel one.",
     "search": {
-      "code": "Identification code",
-      "submit": "Search"
+      "label": "Search subscriptions",
+      "placeholder": "Name, username, identification code or phone"
     },
+    "filter": {
+      "label": "Filter by status",
+      "all": "All"
+    },
+    "backToList": "Back to all subscriptions",
     "notFound": "No user with identification code {{code}} was found.",
     "user": {
       "username": "Username",
@@ -132,11 +146,15 @@
     "list": {
       "title": "Subscriptions",
       "empty": "This user has not bought a subscription yet.",
+      "emptyAll": "No subscriptions found.",
+      "openByCode": "Open the account with identification code {{code}}",
       "columns": {
+        "owner": "Clinic owner",
         "plan": "Plan",
         "period": "Period",
         "status": "Status",
         "source": "Bought via",
+        "amount": "Amount",
         "note": "Note"
       },
       "period": "{{start}} to {{end}}",
@@ -208,7 +226,6 @@
       "working": "Canceling..."
     },
     "validation": {
-      "identityCode": "The identification code must be 5 to 20 English letters or digits.",
       "plan": "Choose a plan.",
       "noteLength": "The note can be at most 500 characters."
     }
@@ -216,6 +233,10 @@
   "payments": {
     "title": "Payments",
     "description": "Clinic owners transfer the amount to one of the payment accounts and report it in the app. Check each one against the bank statement, then approve it, which adds the subscription, or reject it with a reason the owner sees.",
+    "search": {
+      "label": "Search payments",
+      "placeholder": "Name, username, identification code, phone or reference"
+    },
     "filter": {
       "label": "Filter by status",
       "pending": "To review",
@@ -226,7 +247,6 @@
     },
     "empty": "No payments.",
     "emptyPending": "No payments are waiting for review.",
-    "limited": "Only the first {{limit}} are shown.",
     "columns": {
       "reportedAt": "Reported",
       "owner": "Clinic owner",
