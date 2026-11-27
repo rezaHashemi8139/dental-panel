@@ -8,9 +8,9 @@ import { useFormat } from "@/lib/format";
 import { formatCardNumber, formatIban } from "@/lib/payment";
 import { uuidToString } from "@/lib/uuid";
 import { PaymentAccountDialog } from "@/components/payment-account-dialog";
+import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const paymentAccountsRoute = getRouteApi("/app/payment-accounts");
@@ -32,20 +32,21 @@ export function PaymentAccountsPage() {
   const nextPosition = accounts.reduce((max, account) => Math.max(max, account.position + 1), 0);
 
   return (
-    <Card className="w-full max-w-5xl">
-      <CardHeader>
-        <CardTitle>{t("paymentAccounts.title")}</CardTitle>
-        <CardDescription>{t("paymentAccounts.description")}</CardDescription>
-        <CardAction>
+    <ListPage>
+      <ListFilters
+        title={t("paymentAccounts.title")}
+        description={t("paymentAccounts.description")}
+        action={
           <Button onClick={() => setEditing({ kind: "new" })}>
             <PlusIcon data-icon="inline-start" />
             {t("paymentAccounts.new")}
           </Button>
-        </CardAction>
-      </CardHeader>
-      <CardContent>
+        }
+      />
+
+      <ListResults>
         {accounts.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">{t("paymentAccounts.empty")}</p>
+          <ListEmpty>{t("paymentAccounts.empty")}</ListEmpty>
         ) : (
           <Table>
             <TableHeader>
@@ -102,7 +103,7 @@ export function PaymentAccountsPage() {
             </TableBody>
           </Table>
         )}
-      </CardContent>
+      </ListResults>
 
       {/* Mounted only while open, so every opening starts with a fresh form. */}
       {editing && (
@@ -112,6 +113,6 @@ export function PaymentAccountsPage() {
           onOpenChange={(open) => !open && setEditing(null)}
         />
       )}
-    </Card>
+    </ListPage>
   );
 }

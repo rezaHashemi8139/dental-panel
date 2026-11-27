@@ -5,7 +5,7 @@ import { PageArea } from "@/pages/root-layout";
 
 /**
  * Around every logged-in page: the sidebar on the start side (right in RTL) and
- * the page beside it. When the session ends (logout, expiry, refused by the
+ * the page beside it, from its top. When the session ends (logout, expiry, refused by the
  * server), goes to the login screen, which says why if it ended by itself.
  */
 export function AppLayout() {
@@ -14,7 +14,7 @@ export function AppLayout() {
   return (
     <>
       <AppSidebar />
-      <PageArea>
+      <PageArea top>
         <Outlet />
       </PageArea>
     </>

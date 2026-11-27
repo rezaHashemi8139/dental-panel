@@ -5,11 +5,11 @@ import type { PaymentReview } from "@/gen/dental/v1/admin_pb";
 import { PaymentStatus } from "@/gen/dental/v1/subscription_pb";
 import { PAGE_SIZE, parsePage, parseQuery } from "@/lib/pagination";
 import { isPaymentStatusName, toPaymentStatus, type PaymentStatusName } from "@/lib/payment";
+import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { ListPagination } from "@/components/list-pagination";
 import { ListSearch } from "@/components/list-search";
 import { PaymentsTable } from "@/components/payments-table";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const paymentsRoute = getRouteApi("/app/payments");
 
@@ -62,12 +62,8 @@ export function PaymentsPage() {
   const { filter, query, page, payments, total } = paymentsRoute.useLoaderData();
 
   return (
-    <Card className="w-full max-w-6xl">
-      <CardHeader>
-        <CardTitle>{t("payments.title")}</CardTitle>
-        <CardDescription>{t("payments.description")}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
+    <ListPage>
+      <ListFilters title={t("payments.title")} description={t("payments.description")}>
         <ListSearch
           key={query}
           query={query}
@@ -87,16 +83,15 @@ export function PaymentsPage() {
             </Button>
           ))}
         </nav>
+      </ListFilters>
 
+      <ListResults footer={total > 0 && <ListPagination page={page} total={total} shown={payments.length} />}>
         {payments.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">
-            {t(filter === "pending" && !query ? "payments.emptyPending" : "payments.empty")}
-          </p>
+          <ListEmpty>{t(filter === "pending" && !query ? "payments.emptyPending" : "payments.empty")}</ListEmpty>
         ) : (
           <PaymentsTable reviews={payments} showOwner />
         )}
-        {total > 0 && <ListPagination page={page} total={total} shown={payments.length} />}
-      </CardContent>
-    </Card>
+      </ListResults>
+    </ListPage>
   );
 }

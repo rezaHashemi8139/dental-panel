@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState } from "react";
 import { create } from "@bufbuild/protobuf";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { ArrowLeftIcon, BanIcon, PlusIcon, UserIcon, UserXIcon } from "lucide-react";
@@ -36,6 +36,7 @@ import {
 import { uuidToString } from "@/lib/uuid";
 import { CancelSubscriptionDialog } from "@/components/cancel-subscription-dialog";
 import { Detail } from "@/components/detail";
+import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { ListPagination } from "@/components/list-pagination";
 import { ListSearch } from "@/components/list-search";
 import { PaymentsTable } from "@/components/payments-table";
@@ -127,35 +128,30 @@ export function SubscriptionsPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full max-w-6xl flex-col gap-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("subscriptions.title")}</CardTitle>
-          <CardDescription>{t("subscriptions.description")}</CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          {/* A new box when the search changes from outside (back/forward). */}
-          <ListSearch
-            key={search.q ?? ""}
-            query={search.q ?? ""}
-            label={t("subscriptions.search.label")}
-            placeholder={t("subscriptions.search.placeholder")}
-          />
-          {list ? (
-            <SubscriptionsListView list={list} />
-          ) : (
-            <div>
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/subscriptions" search={{ ...search, code: undefined }}>
-                  <ArrowLeftIcon className="rtl:rotate-180" data-icon="inline-start" />
-                  {t("subscriptions.backToList")}
-                </Link>
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+    <ListPage>
+      <ListFilters title={t("subscriptions.title")} description={t("subscriptions.description")}>
+        {/* A new box when the search changes from outside (back/forward). */}
+        <ListSearch
+          key={search.q ?? ""}
+          query={search.q ?? ""}
+          label={t("subscriptions.search.label")}
+          placeholder={t("subscriptions.search.placeholder")}
+        />
+        {list ? (
+          <StatusFilter list={list} />
+        ) : (
+          <div>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/subscriptions" search={{ ...search, code: undefined }}>
+                <ArrowLeftIcon className="rtl:rotate-180" data-icon="inline-start" />
+                {t("subscriptions.backToList")}
+              </Link>
+            </Button>
+          </div>
+        )}
+      </ListFilters>
 
+      {list && <SubscriptionsListView list={list} />}
       {code && !user && (
         <Alert>
           <UserXIcon />
@@ -163,7 +159,27 @@ export function SubscriptionsPage() {
         </Alert>
       )}
       {user && <UserDetails user={user} plans={plans} accounts={accounts} />}
-    </div>
+    </ListPage>
+  );
+}
+
+/** Links to the list of one status, or of every subscription; the search stays. */
+function StatusFilter({ list }: { list: SubscriptionsList }) {
+  const { t } = useTranslation();
+  return (
+    <nav aria-label={t("subscriptions.filter.label")} className="flex flex-wrap gap-1">
+      {[undefined, ...SUBSCRIPTION_FILTERS].map((item) => (
+        <Button key={item ?? "all"} asChild size="sm" variant={item === list.filter ? "secondary" : "ghost"}>
+          <Link
+            to="/subscriptions"
+            search={{ status: item, q: list.query || undefined }}
+            aria-current={item === list.filter ? "page" : undefined}
+          >
+            {item ? t(`subscriptions.status.${item}`) : t("subscriptions.filter.all")}
+          </Link>
+        </Button>
+      ))}
+    </nav>
   );
 }
 
@@ -177,21 +193,9 @@ function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
   const canOpen = list.items.length === 0 && IDENTITY_CODE_PATTERN.test(lookup);
 
   return (
-    <>
-      <nav aria-label={t("subscriptions.filter.label")} className="flex flex-wrap gap-1">
-        {[undefined, ...SUBSCRIPTION_FILTERS].map((item) => (
-          <Button key={item ?? "all"} asChild size="sm" variant={item === list.filter ? "secondary" : "ghost"}>
-            <Link
-              to="/subscriptions"
-              search={{ status: item, q: list.query || undefined }}
-              aria-current={item === list.filter ? "page" : undefined}
-            >
-              {item ? t(`subscriptions.status.${item}`) : t("subscriptions.filter.all")}
-            </Link>
-          </Button>
-        ))}
-      </nav>
-
+    <ListResults
+      footer={list.total > 0 && <ListPagination page={list.page} total={list.total} shown={list.items.length} />}
+    >
       {list.items.length === 0 ? (
         <div className="flex flex-col items-center gap-3 py-8">
           <p className="text-center text-sm text-muted-foreground">{t("subscriptions.list.emptyAll")}</p>
@@ -285,8 +289,7 @@ function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
           </TableBody>
         </Table>
       )}
-      {list.total > 0 && <ListPagination page={list.page} total={list.total} shown={list.items.length} />}
-    </>
+    </ListResults>
   );
 }
 
@@ -378,7 +381,7 @@ function UserDetails({
         </CardHeader>
         <CardContent>
           {user.subscriptions.length === 0 ? (
-            <Empty>{t("subscriptions.list.empty")}</Empty>
+            <ListEmpty>{t("subscriptions.list.empty")}</ListEmpty>
           ) : (
             <Table>
               <TableHeader>
@@ -451,7 +454,7 @@ function UserDetails({
         </CardHeader>
         <CardContent>
           {rows.length === 0 ? (
-            <Empty>{t("subscriptions.purchases.empty")}</Empty>
+            <ListEmpty>{t("subscriptions.purchases.empty")}</ListEmpty>
           ) : (
             <PurchasesTable rows={rows} accounts={accounts} />
           )}
@@ -465,7 +468,7 @@ function UserDetails({
         </CardHeader>
         <CardContent>
           {reviews.length === 0 ? (
-            <Empty>{t("subscriptions.payments.empty")}</Empty>
+            <ListEmpty>{t("subscriptions.payments.empty")}</ListEmpty>
           ) : (
             <PaymentsTable reviews={reviews} />
           )}
@@ -478,7 +481,7 @@ function UserDetails({
         </CardHeader>
         <CardContent>
           {user.ownedClinics.length === 0 ? (
-            <Empty>{t("subscriptions.clinics.empty")}</Empty>
+            <ListEmpty>{t("subscriptions.clinics.empty")}</ListEmpty>
           ) : (
             <Table>
               <TableHeader>
@@ -514,8 +517,4 @@ function UserDetails({
       )}
     </>
   );
-}
-
-function Empty({ children }: { children: ReactNode }) {
-  return <p className="py-6 text-center text-sm text-muted-foreground">{children}</p>;
 }

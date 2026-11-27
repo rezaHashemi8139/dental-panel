@@ -7,9 +7,9 @@ import { useFormat } from "@/lib/format";
 import { fromPersonIdentity } from "@/lib/identity";
 import { PAGE_SIZE, parsePage, parseQuery } from "@/lib/pagination";
 import { uuidToString } from "@/lib/uuid";
+import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { ListPagination } from "@/components/list-pagination";
 import { ListSearch } from "@/components/list-search";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const patientsRoute = getRouteApi("/app/patients");
@@ -57,28 +57,25 @@ export function PatientsPage() {
   const { query, page, patients, total } = patientsRoute.useLoaderData();
 
   return (
-    <Card className="w-full max-w-6xl">
-      <CardHeader>
-        <CardTitle>{t("patients.title")}</CardTitle>
-        <CardDescription>{t("patients.description")}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
+    <ListPage>
+      <ListFilters title={t("patients.title")} description={t("patients.description")}>
         <ListSearch
           key={query}
           query={query}
           label={t("patients.search.label")}
           placeholder={t("patients.search.placeholder")}
         />
+      </ListFilters>
 
+      <ListResults footer={total > 0 && <ListPagination page={page} total={total} shown={patients.length} />}>
         {patients.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">
-            {t(query ? "patients.noResults" : "patients.empty")}
-          </p>
+          <ListEmpty>{t(query ? "patients.noResults" : "patients.empty")}</ListEmpty>
         ) : (
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>{t("patients.columns.patient")}</TableHead>
+                <TableHead>{t("patients.columns.identityCode")}</TableHead>
                 <TableHead>{t("patients.columns.phone")}</TableHead>
                 <TableHead>{t("patients.columns.birthDate")}</TableHead>
                 <TableHead>{t("patients.columns.gender")}</TableHead>
@@ -89,14 +86,12 @@ export function PatientsPage() {
             </TableHeader>
             <TableBody>
               {patients.map((patient) => (
-                <TableRow key={uuidToString(patient.id)} className="align-top">
+                <TableRow key={uuidToString(patient.id)}>
+                  <TableCell className="font-medium">
+                    {patient.firstName} {patient.lastName}
+                  </TableCell>
                   <TableCell>
-                    <span className="font-medium">
-                      {patient.firstName} {patient.lastName}
-                    </span>
-                    <span dir="ltr" className="block text-xs text-muted-foreground">
-                      {fromPersonIdentity(patient.identity) ?? t("common.empty")}
-                    </span>
+                    <span dir="ltr">{fromPersonIdentity(patient.identity) ?? t("common.empty")}</span>
                   </TableCell>
                   <TableCell>
                     <span dir="ltr">{patient.phone || t("common.empty")}</span>
@@ -117,8 +112,7 @@ export function PatientsPage() {
             </TableBody>
           </Table>
         )}
-        {total > 0 && <ListPagination page={page} total={total} shown={patients.length} />}
-      </CardContent>
-    </Card>
+      </ListResults>
+    </ListPage>
   );
 }

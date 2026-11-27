@@ -371,6 +371,7 @@
     "noResults": "بیماری با این مشخصات پیدا نشد.",
     "columns": {
       "patient": "بیمار",
+      "identityCode": "کد شناسایی",
       "phone": "تلفن",
       "birthDate": "تاریخ تولد",
       "gender": "جنسیت",

@@ -7,9 +7,9 @@ import type { Plan } from "@/gen/dental/v1/subscription_pb";
 import { useFormat } from "@/lib/format";
 import { uuidToString } from "@/lib/uuid";
 import { PlanDialog } from "@/components/plan-dialog";
+import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const plansRoute = getRouteApi("/app/plans");
@@ -29,20 +29,21 @@ export function PlansPage() {
   const [editing, setEditing] = useState<Editing>(null);
 
   return (
-    <Card className="w-full max-w-5xl">
-      <CardHeader>
-        <CardTitle>{t("plans.title")}</CardTitle>
-        <CardDescription>{t("plans.description")}</CardDescription>
-        <CardAction>
+    <ListPage>
+      <ListFilters
+        title={t("plans.title")}
+        description={t("plans.description")}
+        action={
           <Button onClick={() => setEditing({ kind: "new" })}>
             <PlusIcon data-icon="inline-start" />
             {t("plans.new")}
           </Button>
-        </CardAction>
-      </CardHeader>
-      <CardContent>
+        }
+      />
+
+      <ListResults>
         {plans.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">{t("plans.empty")}</p>
+          <ListEmpty>{t("plans.empty")}</ListEmpty>
         ) : (
           <Table>
             <TableHeader>
@@ -86,7 +87,7 @@ export function PlansPage() {
             </TableBody>
           </Table>
         )}
-      </CardContent>
+      </ListResults>
 
       {/* Mounted only while open, so every opening starts with a fresh form. */}
       {editing && (
@@ -96,6 +97,6 @@ export function PlansPage() {
           onOpenChange={(open) => !open && setEditing(null)}
         />
       )}
-    </Card>
+    </ListPage>
   );
 }

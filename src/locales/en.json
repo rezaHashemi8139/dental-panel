@@ -371,6 +371,7 @@
     "noResults": "No patients match this search.",
     "columns": {
       "patient": "Patient",
+      "identityCode": "Identification code",
       "phone": "Phone",
       "birthDate": "Date of birth",
       "gender": "Gender",

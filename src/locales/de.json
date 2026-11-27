@@ -371,6 +371,7 @@
     "noResults": "Keine Patienten gefunden.",
     "columns": {
       "patient": "Patient",
+      "identityCode": "Identifikationsnummer",
       "phone": "Telefon",
       "birthDate": "Geburtsdatum",
       "gender": "Geschlecht",

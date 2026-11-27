@@ -21,7 +21,7 @@ export function ListPagination({ page, total, shown }: { page: number; total: nu
   });
 
   return (
-    <nav aria-label={t("common.pagination.label")} className="flex flex-wrap items-center justify-between gap-2">
+    <nav aria-label={t("common.pagination.label")} className="flex w-full flex-wrap items-center justify-between gap-2">
       <p className="text-xs text-muted-foreground">
         {shown > 0
           ? t("common.pagination.summary", {

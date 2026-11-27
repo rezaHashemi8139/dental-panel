@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Outlet, useRouterState } from "@tanstack/react-router";
+import { cn } from "cn";
 import { LoaderCircleIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSession } from "@/auth/store";
@@ -40,13 +41,14 @@ export function RootLayout() {
 }
 
 /**
- * Scrolls by itself and centers its content while it fits; taller content starts
- * at the top instead of being cut off.
+ * Scrolls by itself and centers its content across. Down, the content starts at the
+ * top (`top`, the logged-in pages) or is centered while it fits; taller content
+ * starts at the top instead of being cut off.
  */
-export function PageArea({ children }: { children: ReactNode }) {
+export function PageArea({ top, children }: { top?: boolean; children: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-1 overflow-y-auto p-6">
-      <div className="m-auto flex w-full justify-center">{children}</div>
+      <div className={cn("flex w-full justify-center", top ? "mx-auto" : "m-auto")}>{children}</div>
     </div>
   );
 }
