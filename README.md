@@ -13,6 +13,9 @@ Web panel for the system administrators of the dental server (`../dental-server`
   and search by owner or transfer reference.
 - **Payment accounts** (`/payment-accounts`): the bank accounts (card number and/or IBAN) owners transfer to;
   create, edit, order and deactivate them.
+- **Patients** (`/patients`): patients synced from every clinic, newest first and paged, searched by name,
+  identification code or phone; with how many clinics and treatments each has. Addresses, medical notes and
+  treatments are never shown.
 
 - **React** 19, **TypeScript**, **Vite**
 - **Tailwind CSS** 4 + **shadcn/ui** (radix-nova, RTL), same look and components as `../dental-desktop`

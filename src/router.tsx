@@ -14,6 +14,7 @@ import {
 } from "@/pages/subscriptions-page";
 import { loadPayments, parsePaymentsSearch, PaymentsPage, type PaymentsSearch } from "@/pages/payments-page";
 import { loadPaymentAccounts, PaymentAccountsPage } from "@/pages/payment-accounts-page";
+import { loadPatients, parsePatientsSearch, PatientsPage, type PatientsSearch } from "@/pages/patients-page";
 
 /**
  * Pages.
@@ -26,7 +27,8 @@ import { loadPaymentAccounts, PaymentAccountsPage } from "@/pages/payment-accoun
  *                    │   ?status=active|upcoming|ended|canceled (none: all) &q=… &page=… (the list), or
  *                    │   ?code=… (one owner's account, by identification code)
  * /payments          │   ?status=approved|rejected|canceled|all (none: pending, the queue to review) &q=… &page=…
- * /payment-accounts  ┘
+ * /payment-accounts  │
+ * /patients          ┘   ?q=… &page=…
  * anything else      → /
  *
  * Data is loaded by each route's loader, again on every visit; after a change, pages
@@ -106,10 +108,26 @@ const paymentAccountsRoute = createRoute({
   component: PaymentAccountsPage,
 });
 
+const patientsRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "patients",
+  validateSearch: (search: Record<string, unknown>): PatientsSearch => parsePatientsSearch(search),
+  loaderDeps: ({ search }) => ({ q: search.q, page: search.page }),
+  loader: ({ deps }) => loadPatients(deps),
+  component: PatientsPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
-  appRoute.addChildren([homeRoute, plansRoute, subscriptionsRoute, paymentsRoute, paymentAccountsRoute]),
+  appRoute.addChildren([
+    homeRoute,
+    plansRoute,
+    subscriptionsRoute,
+    paymentsRoute,
+    paymentAccountsRoute,
+    patientsRoute,
+  ]),
 ]);
 
 export const router = createRouter({

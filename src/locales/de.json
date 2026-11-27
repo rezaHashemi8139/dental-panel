@@ -16,7 +16,8 @@
     "plans": "Tarife",
     "subscriptions": "Abonnements",
     "payments": "Zahlungen",
-    "paymentAccounts": "Zahlungskonten"
+    "paymentAccounts": "Zahlungskonten",
+    "patients": "Patienten"
   },
   "theme": {
     "label": "Design",
@@ -358,6 +359,30 @@
       "position": "Geben Sie eine ganze Zahl ein.",
       "destinationRequired": "Geben Sie eine Kartennummer, eine IBAN oder beides ein."
     }
+  },
+  "patients": {
+    "title": "Patienten",
+    "description": "Patienten, die die Praxen erfasst und synchronisiert haben, die neuesten zuerst. Adressen, medizinische Notizen und Behandlungen werden hier nicht angezeigt.",
+    "search": {
+      "label": "Patienten durchsuchen",
+      "placeholder": "Name, Identifikationsnummer oder Telefon"
+    },
+    "empty": "Noch keine Patienten.",
+    "noResults": "Keine Patienten gefunden.",
+    "columns": {
+      "patient": "Patient",
+      "phone": "Telefon",
+      "birthDate": "Geburtsdatum",
+      "gender": "Geschlecht",
+      "clinics": "Praxen",
+      "treatments": "Behandlungen",
+      "createdAt": "Hinzugefügt"
+    },
+    "gender": {
+      "male": "Männlich",
+      "female": "Weiblich"
+    },
+    "updatedAt": "Zuletzt geändert: {{time}}"
   },
   "errors": {
     "invalidCredentials": "Falscher Benutzername oder falsches Passwort.",
