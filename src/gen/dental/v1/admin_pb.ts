@@ -428,7 +428,7 @@ export type GetUserResponse = Message<"dental.v1.GetUserResponse"> & {
   user?: User | undefined;
 
   /**
-   * National ID or FIDA code, and nationality.
+   * Identification code.
    *
    * @generated from field: dental.v1.PersonIdentity identity = 2;
    */
@@ -986,7 +986,7 @@ export const AdminService: GenService<{
     output: typeof UpdatePlanResponseSchema;
   },
   /**
-   * An account by identity (type and number), with the clinics it owns and its subscriptions.
+   * An account by identification code, with the clinics it owns and its subscriptions.
    * Fails with NOT_FOUND "user_not_found".
    *
    * @generated from rpc dental.v1.AdminService.GetUser

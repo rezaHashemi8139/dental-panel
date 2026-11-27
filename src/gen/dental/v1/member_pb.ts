@@ -314,8 +314,8 @@ export const SetMemberAdminResponseSchema: GenMessage<SetMemberAdminResponse> = 
  * a clinic can also keep people who have an account but no access to its app,
  * e.g. a doctor who only treats patients there (FindUser / CreateUser give their id).
  *
- * Accounts are unique by identity (national ID, or FIDA code for foreign nationals):
- * the same person has one account in every clinic.
+ * Accounts are unique by identification code (PersonIdentity): the same person has
+ * one account in every clinic.
  *
  * @generated from service dental.v1.MemberService
  */
@@ -329,8 +329,7 @@ export const MemberService: GenService<{
     output: typeof ListMembersResponseSchema;
   },
   /**
-   * Finds the account with an identity (type and number; the nationality is not
-   * compared). Fails with NOT_FOUND "user_not_found".
+   * Finds the account with an identification code. Fails with NOT_FOUND "user_not_found".
    *
    * @generated from rpc dental.v1.MemberService.FindUser
    */
@@ -345,8 +344,7 @@ export const MemberService: GenService<{
    * account with this identity already exists, returns it instead (created =
    * false) and changes nothing.
    *
-   * Fails with "invalid_argument" / "weak_password", INVALID_ARGUMENT
-   * "invalid_national_id" or ALREADY_EXISTS "username_taken".
+   * Fails with "invalid_argument" / "weak_password" or ALREADY_EXISTS "username_taken".
    *
    * @generated from rpc dental.v1.MemberService.CreateUser
    */

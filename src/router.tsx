@@ -1,6 +1,6 @@
 import { createRootRoute, createRoute, createRouter, Navigate, redirect } from "@tanstack/react-router";
 import { getSession } from "@/auth/store";
-import { identityFromSearch, parseIdentitySearch, type IdentitySearch } from "@/lib/identity";
+import { parseIdentitySearch, type IdentitySearch } from "@/lib/identity";
 import { RouteError } from "@/components/route-error";
 import { RootLayout } from "@/pages/root-layout";
 import { AppLayout } from "@/pages/app-layout";
@@ -19,7 +19,7 @@ import { loadPaymentAccounts, PaymentAccountsPage } from "@/pages/payment-accoun
  * /home              ┐ "app" layout (sidebar): only when logged in; pages read the
  * /plans             │ session with useSession() and their data with
  * /subscriptions     │ getRouteApi("<route id>").useLoaderData()
- *                    │   ?kind=national|foreign&number=…&nationality=… (the account searched for)
+ *                    │   ?code=… (the identification code of the account searched for)
  * /payments          │   ?status=approved|rejected|canceled|all (none: pending, the queue to review)
  * /payment-accounts  ┘
  * anything else      → /
@@ -80,8 +80,8 @@ const subscriptionsRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "subscriptions",
   validateSearch: (search: Record<string, unknown>): IdentitySearch => parseIdentitySearch(search),
-  loaderDeps: ({ search }) => ({ kind: search.kind, number: search.number, nationality: search.nationality }),
-  loader: ({ deps }) => loadSubscriptions(identityFromSearch(deps)),
+  loaderDeps: ({ search }) => ({ code: search.code }),
+  loader: ({ deps }) => loadSubscriptions(deps.code ?? null),
   component: SubscriptionsPage,
 });
 

@@ -25,11 +25,10 @@ export const file_dental_v1_patient: GenFile = /*@__PURE__*/
 export type Patient = Message<"dental.v1.Patient"> & {
   /**
    * 16 bytes: the first 16 bytes of
-   *   SHA-256("dental/patient/v1" 0x00 <identity.type as a decimal number> 0x00 <identity.number>)
-   * with the UUID version set to 8 and the variant to RFC 4122, e.g. for national ID
-   * 0012345679 the hash of "dental/patient/v1\x001\x000012345679". The nationality is
-   * not part of it. The server checks it, so every installation gives the same
-   * person the same id, even offline.
+   *   SHA-256("dental/patient/v2" 0x00 <identity.number>)
+   * with the UUID version set to 8 and the variant to RFC 4122, e.g. for code
+   * 0012345679 the hash of "dental/patient/v2\x000012345679". The server checks it,
+   * so every installation gives the same person the same id, even offline.
    *
    * @generated from field: bytes id = 1;
    */
@@ -284,8 +283,8 @@ export const GenderSchema: GenEnum<Gender> = /*@__PURE__*/
   enumDesc(file_dental_v1_patient, 0);
 
 /**
- * Patients are people, unique across the whole system by their identity (an
- * Iranian national ID, or a foreign national's FIDA code; see PersonIdentity). Every clinic that
+ * Patients are people, unique across the whole system by their identification
+ * code (see PersonIdentity). Every clinic that
  * treats a patient shares the same patient record; each treatment belongs to the
  * clinic that recorded it.
  *

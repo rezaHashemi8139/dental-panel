@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import type { PaymentReview } from "@/gen/dental/v1/admin_pb";
 import { PaymentMethod, PaymentStatus } from "@/gen/dental/v1/subscription_pb";
 import { useFormat } from "@/lib/format";
-import { fromPersonIdentity, toIdentitySearch } from "@/lib/identity";
+import { fromPersonIdentity } from "@/lib/identity";
 import { manualTransfer, paymentStatusName, purchaseModeKey, type PaymentStatusName } from "@/lib/payment";
 import { uuidToString } from "@/lib/uuid";
 import { ApprovePaymentDialog } from "@/components/approve-payment-dialog";
@@ -56,26 +56,26 @@ export function PaymentsTable({ reviews, showOwner }: PaymentsTableProps) {
             if (!payment) return null;
             const transfer = manualTransfer(payment);
             const status = paymentStatusName(payment.status);
-            const identity = fromPersonIdentity(review.identity);
+            const code = fromPersonIdentity(review.identity);
             return (
               <TableRow key={uuidToString(payment.id)} className="align-top">
                 <TableCell>{format.dateTime(payment.createdAt)}</TableCell>
                 {showOwner && (
                   <TableCell>
-                    {identity ? (
+                    {code ? (
                       <Link
                         to="/subscriptions"
-                        search={toIdentitySearch(identity)}
+                        search={{ code }}
                         className="font-medium underline-offset-4 hover:underline"
                       >
-                        {review.user?.fullName || identity.number}
+                        {review.user?.fullName || code}
                       </Link>
                     ) : (
                       <span className="font-medium">{review.user?.fullName}</span>
                     )}
-                    {identity && (
+                    {code && (
                       <span dir="ltr" className="block text-xs text-muted-foreground">
-                        {identity.number}
+                        {code}
                       </span>
                     )}
                   </TableCell>

@@ -1,7 +1,6 @@
 import { z } from "zod";
 import type { ParseKeys } from "i18next";
-import { IRAN } from "@/lib/countries";
-import { FIDA_CODE_PATTERN, isValidNationalId, NATIONALITY_PATTERN, type Identity } from "@/lib/identity";
+import { IDENTITY_CODE_PATTERN, normalizeIdentityCode } from "@/lib/identity";
 import { CARD_NUMBER_PATTERN, IBAN_PATTERN, normalizeCardNumber, normalizeIban } from "@/lib/payment";
 
 /**
@@ -52,36 +51,15 @@ export type PlanValues = z.infer<typeof planSchema>;
 
 // --- Subscriptions (src/pages/subscriptions-page.tsx) -------------------------
 
-/** An account by identity (src/lib/identity.ts). The nationality is only used for foreign nationals. */
-export const findUserSchema = z
-  .object({
-    kind: z.enum(["national", "foreign"]),
-    number: z.string().trim(),
-    nationality: z.string(),
-  })
-  .superRefine((v, ctx) => {
-    if (v.kind === "national") {
-      if (!isValidNationalId(v.number)) {
-        ctx.addIssue({ code: "custom", path: ["number"], message: message("subscriptions.validation.nationalId") });
-      }
-      return;
-    }
-    // FIDA codes are typed in any case; the server keeps them in capitals (see toIdentity).
-    if (!FIDA_CODE_PATTERN.test(v.number.toUpperCase())) {
-      ctx.addIssue({ code: "custom", path: ["number"], message: message("subscriptions.validation.fidaCode") });
-    }
-    if (!NATIONALITY_PATTERN.test(v.nationality) || v.nationality === IRAN) {
-      ctx.addIssue({ code: "custom", path: ["nationality"], message: message("subscriptions.validation.nationality") });
-    }
-  });
-export type FindUserValues = z.infer<typeof findUserSchema>;
-
-/** The identity a valid find-user form describes. */
-export function toIdentity(values: FindUserValues): Identity {
-  return values.kind === "national"
-    ? { kind: "national", number: values.number.trim(), nationality: IRAN }
-    : { kind: "foreign", number: values.number.trim().toUpperCase(), nationality: values.nationality };
-}
+/** An account by identification code (src/lib/identity.ts): typed in any case, with spaces or dashes. */
+export const findUserSchema = z.object({
+  code: z
+    .string()
+    .transform(normalizeIdentityCode)
+    .pipe(z.string().regex(IDENTITY_CODE_PATTERN, message("subscriptions.validation.identityCode"))),
+});
+export type FindUserInput = z.input<typeof findUserSchema>;
+export type FindUserValues = z.output<typeof findUserSchema>;
 
 export const sellSubscriptionSchema = z.object({
   planId: z.string().min(1, message("subscriptions.validation.plan")),

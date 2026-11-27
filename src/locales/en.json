@@ -114,22 +114,15 @@
   },
   "subscriptions": {
     "title": "Subscriptions",
-    "description": "Find a clinic owner by national ID, or by FIDA code for foreign nationals, to see their subscriptions, sell one or cancel one.",
+    "description": "Find a clinic owner by identification code (a national ID or any other official code) to see their subscriptions and purchases, sell a subscription or cancel one.",
     "search": {
-      "type": "ID type",
-      "national": "National ID (Iranian)",
-      "foreign": "FIDA code (foreign national)",
-      "nationalId": "National ID",
-      "fidaCode": "FIDA code",
-      "nationality": "Nationality",
+      "code": "Identification code",
       "submit": "Search"
     },
-    "notFound": "No user with ID {{number}} was found.",
+    "notFound": "No user with identification code {{code}} was found.",
     "user": {
       "username": "Username",
-      "nationalId": "National ID",
-      "fidaCode": "FIDA code",
-      "nationality": "Nationality",
+      "identityCode": "Identification code",
       "phone": "Mobile",
       "createdAt": "Member since",
       "disabled": "Account disabled",
@@ -142,23 +135,45 @@
       "columns": {
         "plan": "Plan",
         "period": "Period",
-        "limits": "Limits",
-        "price": "Price",
         "status": "Status",
+        "source": "Bought via",
         "note": "Note"
       },
       "period": "{{start}} to {{end}}",
+      "daysLeft": "{{days}} left",
+      "source": {
+        "app": "Bought in the app",
+        "panel": "Sold in the panel"
+      },
       "limits": "{{clinics}}, {{devices}}"
     },
+    "purchases": {
+      "title": "Completed purchases",
+      "description": "Every purchase that added a subscription: payments approved in the app and sales recorded in the panel.",
+      "empty": "This user has not completed any purchase yet.",
+      "columns": {
+        "completedAt": "Approved",
+        "plan": "Plan",
+        "method": "Payment method",
+        "amount": "Amount paid",
+        "reference": "Reference",
+        "period": "Period bought"
+      },
+      "panelSale": "Sold in the panel",
+      "soldByAdmin": "Recorded by an administrator",
+      "credit": "Price {{price}}, minus {{credit}} credit",
+      "subscriptionCanceled": "This subscription was canceled later."
+    },
     "payments": {
-      "title": "Payments",
-      "description": "Payments this user reported in the app. Approving one adds its subscription.",
-      "empty": "This user has not reported any payments."
+      "title": "Payments not approved",
+      "description": "Payments this user reported in the app that are not approved: waiting for review, rejected or withdrawn. Approving one adds its subscription.",
+      "empty": "There are no payments that are not approved."
     },
     "status": {
       "active": "In force",
       "upcoming": "Upcoming",
       "ended": "Ended",
+      "replaced": "Replaced by upgrade",
       "canceled": "Canceled"
     },
     "clinics": {
@@ -193,9 +208,7 @@
       "working": "Canceling..."
     },
     "validation": {
-      "nationalId": "The national ID is not valid. Enter its 10 digits correctly.",
-      "fidaCode": "The FIDA code must be 5 to 20 capital letters or digits.",
-      "nationality": "Choose a nationality.",
+      "identityCode": "The identification code must be 5 to 20 English letters or digits.",
       "plan": "Choose a plan.",
       "noteLength": "The note can be at most 500 characters."
     }

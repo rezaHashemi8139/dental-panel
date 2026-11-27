@@ -76,7 +76,7 @@ export type SignUpRequest = Message<"dental.v1.SignUpRequest"> & {
   fullName: string;
 
   /**
-   * National ID or FIDA code, and nationality. Unique across all accounts.
+   * Identification code, unique across all accounts.
    *
    * @generated from field: dental.v1.PersonIdentity identity = 4;
    */
@@ -365,8 +365,7 @@ export const AuthService: GenService<{
    *
    * Besides the usual "invalid_argument" / "weak_password", fails with:
    * - ALREADY_EXISTS "username_taken";
-   * - ALREADY_EXISTS "identity_taken": another account has this national ID or FIDA code;
-   * - INVALID_ARGUMENT "invalid_national_id": the national ID's check digit is wrong.
+   * - ALREADY_EXISTS "identity_taken": another account has this identification code.
    *
    * @generated from rpc dental.v1.AuthService.SignUp
    */

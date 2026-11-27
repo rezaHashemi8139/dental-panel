@@ -114,22 +114,15 @@
   },
   "subscriptions": {
     "title": "Abonnements",
-    "description": "Suchen Sie einen Praxisinhaber über die nationale ID oder, bei ausländischen Staatsangehörigen, über den FIDA-Code, um seine Abonnements zu sehen, eines zu verkaufen oder zu kündigen.",
+    "description": "Suchen Sie einen Praxisinhaber über seine Identifikationsnummer (nationale ID oder eine andere amtliche Nummer), um seine Abonnements und Käufe zu sehen, ein Abonnement zu verkaufen oder zu kündigen.",
     "search": {
-      "type": "Art der Kennung",
-      "national": "Nationale ID (iranisch)",
-      "foreign": "FIDA-Code (ausländische Staatsangehörige)",
-      "nationalId": "Nationale ID",
-      "fidaCode": "FIDA-Code",
-      "nationality": "Staatsangehörigkeit",
+      "code": "Identifikationsnummer",
       "submit": "Suchen"
     },
-    "notFound": "Kein Benutzer mit der Kennung {{number}} gefunden.",
+    "notFound": "Kein Benutzer mit der Identifikationsnummer {{code}} gefunden.",
     "user": {
       "username": "Benutzername",
-      "nationalId": "Nationale ID",
-      "fidaCode": "FIDA-Code",
-      "nationality": "Staatsangehörigkeit",
+      "identityCode": "Identifikationsnummer",
       "phone": "Mobilnummer",
       "createdAt": "Mitglied seit",
       "disabled": "Konto deaktiviert",
@@ -142,23 +135,45 @@
       "columns": {
         "plan": "Tarif",
         "period": "Zeitraum",
-        "limits": "Grenzen",
-        "price": "Preis",
         "status": "Status",
+        "source": "Gekauft über",
         "note": "Notiz"
       },
       "period": "{{start}} bis {{end}}",
+      "daysLeft": "noch {{days}}",
+      "source": {
+        "app": "Kauf in der App",
+        "panel": "Verkauf im Panel"
+      },
       "limits": "{{clinics}}, {{devices}}"
     },
+    "purchases": {
+      "title": "Abgeschlossene Käufe",
+      "description": "Jeder Kauf, der ein Abonnement hinzugefügt hat: in der App bestätigte Zahlungen und im Panel erfasste Verkäufe.",
+      "empty": "Dieser Benutzer hat noch keinen Kauf abgeschlossen.",
+      "columns": {
+        "completedAt": "Bestätigt",
+        "plan": "Tarif",
+        "method": "Zahlungsart",
+        "amount": "Bezahlter Betrag",
+        "reference": "Referenz",
+        "period": "Gekaufter Zeitraum"
+      },
+      "panelSale": "Verkauf im Panel",
+      "soldByAdmin": "Von einem Administrator erfasst",
+      "credit": "Preis {{price}}, abzüglich {{credit}} Guthaben",
+      "subscriptionCanceled": "Dieses Abonnement wurde später gekündigt."
+    },
     "payments": {
-      "title": "Zahlungen",
-      "description": "Zahlungen, die dieser Benutzer in der App gemeldet hat. Mit der Bestätigung wird das Abonnement hinzugefügt.",
-      "empty": "Dieser Benutzer hat noch keine Zahlung gemeldet."
+      "title": "Nicht bestätigte Zahlungen",
+      "description": "Zahlungen, die dieser Benutzer in der App gemeldet hat und die nicht bestätigt sind: in Prüfung, abgelehnt oder zurückgezogen. Mit der Bestätigung wird das Abonnement hinzugefügt.",
+      "empty": "Es gibt keine nicht bestätigten Zahlungen."
     },
     "status": {
       "active": "Laufend",
       "upcoming": "Bevorstehend",
       "ended": "Beendet",
+      "replaced": "Durch Upgrade ersetzt",
       "canceled": "Gekündigt"
     },
     "clinics": {
@@ -193,9 +208,7 @@
       "working": "Wird gekündigt..."
     },
     "validation": {
-      "nationalId": "Die nationale ID ist ungültig. Geben Sie ihre 10 Ziffern korrekt ein.",
-      "fidaCode": "Der FIDA-Code muss aus 5 bis 20 Großbuchstaben oder Ziffern bestehen.",
-      "nationality": "Wählen Sie eine Staatsangehörigkeit.",
+      "identityCode": "Die Identifikationsnummer muss aus 5 bis 20 englischen Buchstaben oder Ziffern bestehen.",
       "plan": "Wählen Sie einen Tarif.",
       "noteLength": "Die Notiz darf höchstens 500 Zeichen lang sein."
     }

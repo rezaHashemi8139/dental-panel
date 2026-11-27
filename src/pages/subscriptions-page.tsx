@@ -1,33 +1,31 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { create } from "@bufbuild/protobuf";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getRouteApi, useNavigate, useRouter } from "@tanstack/react-router";
 import { BanIcon, LoaderCircleIcon, PlusIcon, SearchIcon, UserXIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { hasReason } from "@/api/errors";
-import { findUserSchema, toIdentity, type FindUserValues } from "@/auth/schemas";
+import { findUserSchema, type FindUserInput, type FindUserValues } from "@/auth/schemas";
 import { PaymentReviewSchema, type GetUserResponse, type PaymentReview } from "@/gen/dental/v1/admin_pb";
-import type { PaymentAccount, Plan, Subscription } from "@/gen/dental/v1/subscription_pb";
-import { countryName, foreignCountries } from "@/lib/countries";
+import { PaymentStatus, type PaymentAccount, type Plan, type Subscription } from "@/gen/dental/v1/subscription_pb";
 import { fieldError } from "@/lib/form";
 import { useFormat } from "@/lib/format";
-import { fromPersonIdentity, toIdentitySearch, toPersonIdentity, type Identity } from "@/lib/identity";
-import { accountsById, manualTransfer } from "@/lib/payment";
-import { paidUntil, subscriptionStatus, type SubscriptionStatus } from "@/lib/subscription";
+import { fromPersonIdentity, toPersonIdentity } from "@/lib/identity";
+import { accountsById, manualTransfer, purchaseModeKey } from "@/lib/payment";
+import { paidUntil, subscriptionRows, type SubscriptionStatus } from "@/lib/subscription";
 import { uuidToString } from "@/lib/uuid";
 import { CancelSubscriptionDialog } from "@/components/cancel-subscription-dialog";
 import { Detail } from "@/components/detail";
 import { FormField } from "@/components/form-field";
 import { PaymentsTable } from "@/components/payments-table";
+import { PurchasesTable } from "@/components/purchases-table";
 import { SellSubscriptionDialog } from "@/components/sell-subscription-dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { loadPaymentAccounts } from "./payment-accounts-page";
 import { loadPlans } from "./plans-page";
@@ -35,9 +33,9 @@ import { loadPlans } from "./plans-page";
 const subscriptionsRoute = getRouteApi("/app/subscriptions");
 
 export interface SubscriptionsData {
-  /** The identity searched for, if any. */
-  identity: Identity | null;
-  /** The account found; null if none was searched for or none has this identity. */
+  /** The identification code searched for, if any. */
+  code: string | null;
+  /** The account found; null if none was searched for or none has this code. */
   user: GetUserResponse | null;
   /** Plans on sale, for selling a subscription. */
   plans: Plan[];
@@ -45,24 +43,23 @@ export interface SubscriptionsData {
   accounts: PaymentAccount[];
 }
 
-/** Data of /subscriptions?kind=…&number=…&nationality=… (src/router.tsx). */
-export async function loadSubscriptions(identity: Identity | null): Promise<SubscriptionsData> {
-  if (!identity) return { identity: null, user: null, plans: [], accounts: [] };
+/** Data of /subscriptions?code=… (src/router.tsx). */
+export async function loadSubscriptions(code: string | null): Promise<SubscriptionsData> {
+  if (!code) return { code: null, user: null, plans: [], accounts: [] };
   const [user, plans, accounts] = await Promise.all([
-    adminClient.getUser({ identity: toPersonIdentity(identity) }).catch((error: unknown) => {
+    adminClient.getUser({ identity: toPersonIdentity(code) }).catch((error: unknown) => {
       if (hasReason(error, "user_not_found")) return null;
       throw error;
     }),
     loadPlans(),
     loadPaymentAccounts(),
   ]);
-  return { identity, user, plans: plans.filter((plan) => plan.active), accounts };
+  return { code, user, plans: plans.filter((plan) => plan.active), accounts };
 }
 
 export function SubscriptionsPage() {
-  const { identity, user, plans, accounts } = subscriptionsRoute.useLoaderData();
+  const { code, user, plans, accounts } = subscriptionsRoute.useLoaderData();
   const { t } = useTranslation();
-  const searchKey = identity ? `${identity.kind}:${identity.number}:${identity.nationality}` : "";
 
   return (
     <div className="flex w-full max-w-5xl flex-col gap-6">
@@ -73,14 +70,14 @@ export function SubscriptionsPage() {
         </CardHeader>
         <CardContent>
           {/* A new form when the search changes from outside (back/forward). */}
-          <FindUserForm key={searchKey} identity={identity} />
+          <FindUserForm key={code ?? ""} code={code} />
         </CardContent>
       </Card>
 
-      {identity && !user && (
+      {code && !user && (
         <Alert>
           <UserXIcon />
-          <AlertDescription>{t("subscriptions.notFound", { number: identity.number })}</AlertDescription>
+          <AlertDescription>{t("subscriptions.notFound", { code })}</AlertDescription>
         </Alert>
       )}
       {user && <UserDetails user={user} plans={plans} accounts={accounts} />}
@@ -88,110 +85,40 @@ export function SubscriptionsPage() {
   );
 }
 
-/** Foreign nationals in Iran are most often Afghan: the nationality first offered. */
-const DEFAULT_FOREIGN_NATIONALITY = "AF";
-
-function FindUserForm({ identity }: { identity: Identity | null }) {
-  const { t, i18n } = useTranslation();
+function FindUserForm({ code }: { code: string | null }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const router = useRouter();
-  const countries = useMemo(() => foreignCountries(i18n.resolvedLanguage), [i18n.resolvedLanguage]);
   const {
     register,
-    control,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
-  } = useForm<FindUserValues>({
+  } = useForm<FindUserInput, unknown, FindUserValues>({
     resolver: zodResolver(findUserSchema),
-    defaultValues: {
-      kind: identity?.kind ?? "national",
-      number: identity?.number ?? "",
-      nationality: identity?.kind === "foreign" ? identity.nationality : DEFAULT_FOREIGN_NATIONALITY,
-    },
+    defaultValues: { code: code ?? "" },
   });
-  const kind = watch("kind");
 
   async function submit(values: FindUserValues) {
-    const next = toIdentity(values);
-    const same =
-      identity?.kind === next.kind && identity.number === next.number && identity.nationality === next.nationality;
     // The same search again reloads it, e.g. to see changes made elsewhere.
-    if (same) await router.invalidate({ sync: true });
-    else await navigate({ to: "/subscriptions", search: toIdentitySearch(next) });
+    if (values.code === code) await router.invalidate({ sync: true });
+    else await navigate({ to: "/subscriptions", search: { code: values.code } });
   }
 
   return (
-    <form className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start" onSubmit={handleSubmit(submit)} noValidate>
-      <Controller
-        control={control}
-        name="kind"
-        render={({ field }) => (
-          <div className="flex flex-col gap-1.5 sm:w-56">
-            <Label htmlFor="find-kind" className="mb-1">
-              {t("subscriptions.search.type")}
-            </Label>
-            <Select value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger id="find-kind" ref={field.ref} className="h-9 w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="national">{t("subscriptions.search.national")}</SelectItem>
-                <SelectItem value="foreign">{t("subscriptions.search.foreign")}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        )}
-      />
-
-      <div className="sm:w-56">
+    <form className="flex flex-col gap-4 sm:flex-row sm:items-start" onSubmit={handleSubmit(submit)} noValidate>
+      <div className="sm:w-64">
         <FormField
-          id="find-number"
-          label={t(kind === "national" ? "subscriptions.search.nationalId" : "subscriptions.search.fidaCode")}
-          error={fieldError(errors.number)}
-          inputMode={kind === "national" ? "numeric" : "text"}
-          maxLength={kind === "national" ? 10 : 20}
-          autoFocus={!identity}
+          id="find-code"
+          label={t("subscriptions.search.code")}
+          error={fieldError(errors.code)}
+          maxLength={30}
+          autoFocus={!code}
           latin
-          {...register("number")}
+          {...register("code")}
         />
       </div>
-      {kind === "foreign" && (
-        <Controller
-          control={control}
-          name="nationality"
-          render={({ field }) => {
-            const nationalityError = fieldError(errors.nationality);
-            return (
-              <div className="flex flex-col gap-1.5 sm:w-56">
-                <Label htmlFor="find-nationality" className="mb-1">
-                  {t("subscriptions.search.nationality")}
-                </Label>
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger
-                    id="find-nationality"
-                    ref={field.ref}
-                    className="h-9 w-full"
-                    aria-invalid={!!nationalityError}
-                  >
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {countries.map((country) => (
-                      <SelectItem key={country.code} value={country.code}>
-                        {country.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {nationalityError && <p className="text-xs text-destructive">{nationalityError}</p>}
-              </div>
-            );
-          }}
-        />
-      )}
 
-      {/* Lined up with the inputs, below their labels. */}
+      {/* Lined up with the input, below its label. */}
       <Button type="submit" className="sm:mt-7" disabled={isSubmitting}>
         {isSubmitting ? <LoaderCircleIcon className="animate-spin" /> : <SearchIcon data-icon="inline-start" />}
         {t("subscriptions.search.submit")}
@@ -204,13 +131,17 @@ const STATUS_BADGE: Record<SubscriptionStatus, "default" | "secondary" | "outlin
   active: "default",
   upcoming: "secondary",
   ended: "outline",
+  replaced: "outline",
   canceled: "destructive",
 };
 
-/** The user's payments as the payments page shows them, with who paid and where the money went. */
+/**
+ * The user's payments not approved (pending, rejected or canceled) as the payments page
+ * shows them, with who paid and where the money went. Approved ones are completed purchases.
+ */
 function toReviews(user: GetUserResponse, accounts: readonly PaymentAccount[]): PaymentReview[] {
   const byId = accountsById(accounts);
-  return user.payments.map((payment) => {
+  return user.payments.filter((payment) => payment.status !== PaymentStatus.APPROVED).map((payment) => {
     const transfer = manualTransfer(payment);
     return create(PaymentReviewSchema, {
       payment,
@@ -231,14 +162,15 @@ function UserDetails({
   plans: Plan[];
   accounts: PaymentAccount[];
 }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const format = useFormat();
-  const identity = fromPersonIdentity(user.identity);
+  const code = fromPersonIdentity(user.identity);
   const [selling, setSelling] = useState(false);
   const [canceling, setCanceling] = useState<Subscription | null>(null);
   const reviews = useMemo(() => toReviews(user, accounts), [user, accounts]);
   const now = Date.now();
   const until = paidUntil(user.subscriptions, now);
+  const rows = subscriptionRows(user.subscriptions, user.payments, now);
 
   return (
     <>
@@ -263,20 +195,9 @@ function UserDetails({
             <Detail label={t("subscriptions.user.username")} ltr>
               {user.user?.username}
             </Detail>
-            {identity?.kind === "foreign" ? (
-              <>
-                <Detail label={t("subscriptions.user.fidaCode")} ltr>
-                  {identity.number}
-                </Detail>
-                <Detail label={t("subscriptions.user.nationality")}>
-                  {countryName(identity.nationality, i18n.resolvedLanguage)}
-                </Detail>
-              </>
-            ) : (
-              <Detail label={t("subscriptions.user.nationalId")} ltr>
-                {identity?.number ?? t("common.empty")}
-              </Detail>
-            )}
+            <Detail label={t("subscriptions.user.identityCode")} ltr>
+              {code ?? t("common.empty")}
+            </Detail>
             <Detail label={t("subscriptions.user.phone")} ltr>
               {user.phone || t("common.empty")}
             </Detail>
@@ -298,51 +219,75 @@ function UserDetails({
                 <TableRow>
                   <TableHead>{t("subscriptions.list.columns.plan")}</TableHead>
                   <TableHead>{t("subscriptions.list.columns.period")}</TableHead>
-                  <TableHead>{t("subscriptions.list.columns.limits")}</TableHead>
-                  <TableHead>{t("subscriptions.list.columns.price")}</TableHead>
                   <TableHead>{t("subscriptions.list.columns.status")}</TableHead>
+                  <TableHead>{t("subscriptions.list.columns.source")}</TableHead>
                   <TableHead>{t("subscriptions.list.columns.note")}</TableHead>
                   <TableHead />
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {user.subscriptions.map((subscription) => {
-                  const status = subscriptionStatus(subscription, now);
-                  return (
-                    <TableRow key={uuidToString(subscription.id)}>
-                      <TableCell className="font-medium">{subscription.planName}</TableCell>
-                      <TableCell>
-                        {t("subscriptions.list.period", {
-                          start: format.date(subscription.startsAt),
-                          end: format.date(subscription.endsAt),
-                        })}
-                      </TableCell>
-                      <TableCell>{format.limits(subscription.maxClinics, subscription.maxDevicesPerClinic)}</TableCell>
-                      <TableCell>{format.rials(subscription.priceRials)}</TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={STATUS_BADGE[status]}
-                          title={subscription.canceledAt ? format.dateTime(subscription.canceledAt) : undefined}
-                        >
-                          {t(`subscriptions.status.${status}`)}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="max-w-48 truncate whitespace-nowrap" title={subscription.note}>
-                        {subscription.note || t("common.empty")}
-                      </TableCell>
-                      <TableCell className="text-end">
-                        {(status === "active" || status === "upcoming") && (
-                          <Button variant="destructive" size="sm" onClick={() => setCanceling(subscription)}>
-                            <BanIcon data-icon="inline-start" />
-                            {t("subscriptions.cancel.button")}
-                          </Button>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {rows.map(({ subscription, status, purchase, daysLeft }) => (
+                  <TableRow key={uuidToString(subscription.id)} className="align-top">
+                    <TableCell>
+                      <span className="font-medium">{subscription.planName}</span>
+                      <span className="block text-xs text-muted-foreground">
+                        {format.limits(subscription.maxClinics, subscription.maxDevicesPerClinic)}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      {t("subscriptions.list.period", {
+                        start: format.date(subscription.startsAt),
+                        end: format.date(subscription.endsAt),
+                      })}
+                      {daysLeft !== undefined && (
+                        <span className="block text-xs text-muted-foreground">
+                          {t("subscriptions.list.daysLeft", { days: format.days(daysLeft) })}
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={STATUS_BADGE[status]}
+                        title={subscription.canceledAt ? format.dateTime(subscription.canceledAt) : undefined}
+                      >
+                        {t(`subscriptions.status.${status}`)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      {purchase ? t("subscriptions.list.source.app") : t("subscriptions.list.source.panel")}
+                      <span className="block text-xs text-muted-foreground">
+                        {purchase ? t(purchaseModeKey(purchase.mode)) : format.rials(subscription.priceRials)}
+                      </span>
+                    </TableCell>
+                    <TableCell className="max-w-48 truncate whitespace-nowrap" title={subscription.note}>
+                      {subscription.note || t("common.empty")}
+                    </TableCell>
+                    <TableCell className="text-end">
+                      {(status === "active" || status === "upcoming") && (
+                        <Button variant="destructive" size="sm" onClick={() => setCanceling(subscription)}>
+                          <BanIcon data-icon="inline-start" />
+                          {t("subscriptions.cancel.button")}
+                        </Button>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
+          )}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("subscriptions.purchases.title")}</CardTitle>
+          <CardDescription>{t("subscriptions.purchases.description")}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {rows.length === 0 ? (
+            <Empty>{t("subscriptions.purchases.empty")}</Empty>
+          ) : (
+            <PurchasesTable rows={rows} accounts={accounts} />
           )}
         </CardContent>
       </Card>
