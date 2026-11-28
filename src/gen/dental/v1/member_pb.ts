@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file dental/v1/member.proto.
  */
 export const file_dental_v1_member: GenFile = /*@__PURE__*/
-  fileDesc("ChZkZW50YWwvdjEvbWVtYmVyLnByb3RvEglkZW50YWwudjEieQoGTWVtYmVyEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIQCghpc19vd25lchgCIAEoCBIQCghpc19hZG1pbhgDIAEoCBIsCghhZGRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFAoSTGlzdE1lbWJlcnNSZXF1ZXN0IjkKE0xpc3RNZW1iZXJzUmVzcG9uc2USIgoHbWVtYmVycxgBIAMoCzIRLmRlbnRhbC52MS5NZW1iZXIiRgoPRmluZFVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQEiMQoQRmluZFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXIiywMKEUNyZWF0ZVVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQESLwoIdXNlcm5hbWUYAiABKAlCHbpIGnIYMhZeW0EtWmEtejAtOS5fLV17MywzMn0kEusBChJ0ZW1wb3JhcnlfcGFzc3dvcmQYAyABKAlCzgG6SMoBugHBAQoNd2Vha19wYXNzd29yZBJUbXVzdCBoYXZlIGF0IGxlYXN0IDggY2hhcmFjdGVycywgYSBsb3dlcmNhc2UgbGV0dGVyLCBhbiB1cHBlcmNhc2UgbGV0dGVyIGFuZCBhIGRpZ2l0GlpzaXplKHRoaXMpID49IDggJiYgdGhpcy5tYXRjaGVzKCdbYS16XScpICYmIHRoaXMubWF0Y2hlcygnW0EtWl0nKSAmJiB0aGlzLm1hdGNoZXMoJ1swLTldJylyAxiAAhIcCglmdWxsX25hbWUYBCABKAlCCbpIBnIEEAEYZBImCgVwaG9uZRgFIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQSHAoFZW1haWwYBiABKAlCDbpICtgBAXIFGP4BYAEiRAoSQ3JlYXRlVXNlclJlc3BvbnNlEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIPCgdjcmVhdGVkGAIgASgIIk4KEEFkZE1lbWJlclJlcXVlc3QSEAoIaXNfYWRtaW4YAiABKAgSGAoHdXNlcl9pZBgDIAEoDEIHukgEegJoEEoECAEQAlIIdXNlcm5hbWUiNgoRQWRkTWVtYmVyUmVzcG9uc2USIQoGbWVtYmVyGAEgASgLMhEuZGVudGFsLnYxLk1lbWJlciIvChNSZW1vdmVNZW1iZXJSZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBAiFgoUUmVtb3ZlTWVtYmVyUmVzcG9uc2UiQwoVU2V0TWVtYmVyQWRtaW5SZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBASEAoIaXNfYWRtaW4YAiABKAgiOwoWU2V0TWVtYmVyQWRtaW5SZXNwb25zZRIhCgZtZW1iZXIYASABKAsyES5kZW50YWwudjEuTWVtYmVyMukDCg1NZW1iZXJTZXJ2aWNlEk4KC0xpc3RNZW1iZXJzEh0uZGVudGFsLnYxLkxpc3RNZW1iZXJzUmVxdWVzdBoeLmRlbnRhbC52MS5MaXN0TWVtYmVyc1Jlc3BvbnNlIgASRQoIRmluZFVzZXISGi5kZW50YWwudjEuRmluZFVzZXJSZXF1ZXN0GhsuZGVudGFsLnYxLkZpbmRVc2VyUmVzcG9uc2UiABJLCgpDcmVhdGVVc2VyEhwuZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXF1ZXN0Gh0uZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXNwb25zZSIAEkgKCUFkZE1lbWJlchIbLmRlbnRhbC52MS5BZGRNZW1iZXJSZXF1ZXN0GhwuZGVudGFsLnYxLkFkZE1lbWJlclJlc3BvbnNlIgASUQoMUmVtb3ZlTWVtYmVyEh4uZGVudGFsLnYxLlJlbW92ZU1lbWJlclJlcXVlc3QaHy5kZW50YWwudjEuUmVtb3ZlTWVtYmVyUmVzcG9uc2UiABJXCg5TZXRNZW1iZXJBZG1pbhIgLmRlbnRhbC52MS5TZXRNZW1iZXJBZG1pblJlcXVlc3QaIS5kZW50YWwudjEuU2V0TWVtYmVyQWRtaW5SZXNwb25zZSIAYgZwcm90bzM", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
+  fileDesc("ChZkZW50YWwvdjEvbWVtYmVyLnByb3RvEglkZW50YWwudjEijQEKBk1lbWJlchIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXISEAoIaXNfb3duZXIYAiABKAgSEAoIaXNfYWRtaW4YAyABKAgSLAoIYWRkZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmJpcnRoX2RhdGUYBSABKAkiFAoSTGlzdE1lbWJlcnNSZXF1ZXN0IjkKE0xpc3RNZW1iZXJzUmVzcG9uc2USIgoHbWVtYmVycxgBIAMoCzIRLmRlbnRhbC52MS5NZW1iZXIiRgoPRmluZFVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQEiMQoQRmluZFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXIiywMKEUNyZWF0ZVVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQESLwoIdXNlcm5hbWUYAiABKAlCHbpIGnIYMhZeW0EtWmEtejAtOS5fLV17MywzMn0kEusBChJ0ZW1wb3JhcnlfcGFzc3dvcmQYAyABKAlCzgG6SMoBugHBAQoNd2Vha19wYXNzd29yZBJUbXVzdCBoYXZlIGF0IGxlYXN0IDggY2hhcmFjdGVycywgYSBsb3dlcmNhc2UgbGV0dGVyLCBhbiB1cHBlcmNhc2UgbGV0dGVyIGFuZCBhIGRpZ2l0GlpzaXplKHRoaXMpID49IDggJiYgdGhpcy5tYXRjaGVzKCdbYS16XScpICYmIHRoaXMubWF0Y2hlcygnW0EtWl0nKSAmJiB0aGlzLm1hdGNoZXMoJ1swLTldJylyAxiAAhIcCglmdWxsX25hbWUYBCABKAlCCbpIBnIEEAEYZBImCgVwaG9uZRgFIAEoCUIXukgUchIyEF5cKz9bMC05XXs3LDE1fSQSHAoFZW1haWwYBiABKAlCDbpICtgBAXIFGP4BYAEiRAoSQ3JlYXRlVXNlclJlc3BvbnNlEh0KBHVzZXIYASABKAsyDy5kZW50YWwudjEuVXNlchIPCgdjcmVhdGVkGAIgASgIIk4KEEFkZE1lbWJlclJlcXVlc3QSEAoIaXNfYWRtaW4YAiABKAgSGAoHdXNlcl9pZBgDIAEoDEIHukgEegJoEEoECAEQAlIIdXNlcm5hbWUiNgoRQWRkTWVtYmVyUmVzcG9uc2USIQoGbWVtYmVyGAEgASgLMhEuZGVudGFsLnYxLk1lbWJlciIvChNSZW1vdmVNZW1iZXJSZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBAiFgoUUmVtb3ZlTWVtYmVyUmVzcG9uc2UiQwoVU2V0TWVtYmVyQWRtaW5SZXF1ZXN0EhgKB3VzZXJfaWQYASABKAxCB7pIBHoCaBASEAoIaXNfYWRtaW4YAiABKAgiOwoWU2V0TWVtYmVyQWRtaW5SZXNwb25zZRIhCgZtZW1iZXIYASABKAsyES5kZW50YWwudjEuTWVtYmVyInEKGVNldE1lbWJlckJpcnRoRGF0ZVJlcXVlc3QSGAoHdXNlcl9pZBgBIAEoDEIHukgEegJoEBI6CgpiaXJ0aF9kYXRlGAIgASgJQia6SCNyITIfXihbMC05XXs0fS1bMC05XXsyfS1bMC05XXsyfSk/JCI/ChpTZXRNZW1iZXJCaXJ0aERhdGVSZXNwb25zZRIhCgZtZW1iZXIYASABKAsyES5kZW50YWwudjEuTWVtYmVyMs4ECg1NZW1iZXJTZXJ2aWNlEk4KC0xpc3RNZW1iZXJzEh0uZGVudGFsLnYxLkxpc3RNZW1iZXJzUmVxdWVzdBoeLmRlbnRhbC52MS5MaXN0TWVtYmVyc1Jlc3BvbnNlIgASRQoIRmluZFVzZXISGi5kZW50YWwudjEuRmluZFVzZXJSZXF1ZXN0GhsuZGVudGFsLnYxLkZpbmRVc2VyUmVzcG9uc2UiABJLCgpDcmVhdGVVc2VyEhwuZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXF1ZXN0Gh0uZGVudGFsLnYxLkNyZWF0ZVVzZXJSZXNwb25zZSIAEkgKCUFkZE1lbWJlchIbLmRlbnRhbC52MS5BZGRNZW1iZXJSZXF1ZXN0GhwuZGVudGFsLnYxLkFkZE1lbWJlclJlc3BvbnNlIgASUQoMUmVtb3ZlTWVtYmVyEh4uZGVudGFsLnYxLlJlbW92ZU1lbWJlclJlcXVlc3QaHy5kZW50YWwudjEuUmVtb3ZlTWVtYmVyUmVzcG9uc2UiABJXCg5TZXRNZW1iZXJBZG1pbhIgLmRlbnRhbC52MS5TZXRNZW1iZXJBZG1pblJlcXVlc3QaIS5kZW50YWwudjEuU2V0TWVtYmVyQWRtaW5SZXNwb25zZSIAEmMKElNldE1lbWJlckJpcnRoRGF0ZRIkLmRlbnRhbC52MS5TZXRNZW1iZXJCaXJ0aERhdGVSZXF1ZXN0GiUuZGVudGFsLnYxLlNldE1lbWJlckJpcnRoRGF0ZVJlc3BvbnNlIgBiBnByb3RvMw", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_person, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message dental.v1.Member
@@ -46,6 +46,13 @@ export type Member = Message<"dental.v1.Member"> & {
    * @generated from field: google.protobuf.Timestamp added_at = 4;
    */
   addedAt?: Timestamp | undefined;
+
+  /**
+   * The account's birth date (Profile.birth_date): Gregorian "YYYY-MM-DD", or empty.
+   *
+   * @generated from field: string birth_date = 5;
+   */
+  birthDate: string;
 };
 
 /**
@@ -311,6 +318,49 @@ export const SetMemberAdminResponseSchema: GenMessage<SetMemberAdminResponse> = 
   messageDesc(file_dental_v1_member, 12);
 
 /**
+ * @generated from message dental.v1.SetMemberBirthDateRequest
+ */
+export type SetMemberBirthDateRequest = Message<"dental.v1.SetMemberBirthDateRequest"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes user_id = 1;
+   */
+  userId: Uint8Array;
+
+  /**
+   * Gregorian "YYYY-MM-DD"; empty removes the birth date on file.
+   *
+   * @generated from field: string birth_date = 2;
+   */
+  birthDate: string;
+};
+
+/**
+ * Describes the message dental.v1.SetMemberBirthDateRequest.
+ * Use `create(SetMemberBirthDateRequestSchema)` to create a new message.
+ */
+export const SetMemberBirthDateRequestSchema: GenMessage<SetMemberBirthDateRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_member, 13);
+
+/**
+ * @generated from message dental.v1.SetMemberBirthDateResponse
+ */
+export type SetMemberBirthDateResponse = Message<"dental.v1.SetMemberBirthDateResponse"> & {
+  /**
+   * @generated from field: dental.v1.Member member = 1;
+   */
+  member?: Member | undefined;
+};
+
+/**
+ * Describes the message dental.v1.SetMemberBirthDateResponse.
+ * Use `create(SetMemberBirthDateResponseSchema)` to create a new message.
+ */
+export const SetMemberBirthDateResponseSchema: GenMessage<SetMemberBirthDateResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_member, 14);
+
+/**
  * Accounts and who may use a clinic's app. Membership is per clinic: a member may
  * log in on every installation of the clinic. Every call works on the clinic of
  * the session's installation and needs a session of an admin of that clinic,
@@ -388,6 +438,18 @@ export const MemberService: GenService<{
     methodKind: "unary";
     input: typeof SetMemberAdminRequestSchema;
     output: typeof SetMemberAdminResponseSchema;
+  },
+  /**
+   * Sets a member's birth date (also their own, as in AuthService.UpdateProfile),
+   * for birthdays on the clinic app's calendar. It belongs to the account, so the
+   * member's other clinics see it too. Fails with NOT_FOUND "user_not_found".
+   *
+   * @generated from rpc dental.v1.MemberService.SetMemberBirthDate
+   */
+  setMemberBirthDate: {
+    methodKind: "unary";
+    input: typeof SetMemberBirthDateRequestSchema;
+    output: typeof SetMemberBirthDateResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_dental_v1_member, 0);

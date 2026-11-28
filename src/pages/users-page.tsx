@@ -4,6 +4,7 @@ import { Trash2Icon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import type { UserListItem } from "@/gen/dental/v1/admin_pb";
+import { ageInYears, parseBirthDate } from "@/lib/birth-date";
 import { useFormat } from "@/lib/format";
 import { fromPersonIdentity } from "@/lib/identity";
 import { PAGE_SIZE, parsePage, parseQuery } from "@/lib/pagination";
@@ -50,6 +51,7 @@ export function UsersPage() {
   const router = useRouter();
   const { query, page, users, total } = usersRoute.useLoaderData();
   const [deleting, setDeleting] = useState<UserListItem | null>(null);
+  const today = new Date();
 
   return (
     <ListPage>
@@ -74,6 +76,7 @@ export function UsersPage() {
                 <TableHead>{t("users.columns.identityCode")}</TableHead>
                 <TableHead>{t("users.columns.phone")}</TableHead>
                 <TableHead>{t("users.columns.email")}</TableHead>
+                <TableHead>{t("users.columns.age")}</TableHead>
                 <TableHead>{t("users.columns.subscription")}</TableHead>
                 <TableHead>{t("users.columns.ownedClinics")}</TableHead>
                 <TableHead>{t("users.columns.memberClinics")}</TableHead>
@@ -88,6 +91,7 @@ export function UsersPage() {
                 const { user } = item;
                 if (!user) return null;
                 const code = fromPersonIdentity(item.identity);
+                const age = ageInYears(item.birthDate, today);
                 return (
                   <TableRow key={uuidToString(user.id)} className={item.disabled ? "text-muted-foreground" : undefined}>
                     <TableCell>
@@ -118,6 +122,10 @@ export function UsersPage() {
                     </TableCell>
                     <TableCell>
                       <span dir="ltr">{item.email || t("common.empty")}</span>
+                    </TableCell>
+                    {/* The birth date itself on hover. */}
+                    <TableCell title={age === undefined ? undefined : format.date(parseBirthDate(item.birthDate))}>
+                      {age === undefined ? t("common.empty") : format.number(age)}
                     </TableCell>
                     <TableCell>
                       {item.planName ? (

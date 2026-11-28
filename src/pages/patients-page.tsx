@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import type { PatientListItem } from "@/gen/dental/v1/admin_pb";
 import { Gender } from "@/gen/dental/v1/patient_pb";
+import { ageInYears, parseBirthDate } from "@/lib/birth-date";
 import { useFormat } from "@/lib/format";
 import { fromPersonIdentity } from "@/lib/identity";
 import { PAGE_SIZE, parsePage, parseQuery } from "@/lib/pagination";
@@ -45,16 +46,11 @@ const GENDER_KEYS = {
   [Gender.FEMALE]: "patients.gender.female",
 } as const;
 
-/** A Gregorian "YYYY-MM-DD" as a local date, to show in the current calendar; undefined if none. */
-function birthDate(value: string): Date | undefined {
-  const [year, month, day] = value.split("-").map(Number);
-  return value ? new Date(year, month - 1, day) : undefined;
-}
-
 export function PatientsPage() {
   const { t } = useTranslation();
   const format = useFormat();
   const { query, page, patients, total } = patientsRoute.useLoaderData();
+  const today = new Date();
 
   return (
     <ListPage>
@@ -79,6 +75,7 @@ export function PatientsPage() {
                 <TableHead>{t("patients.columns.phone")}</TableHead>
                 <TableHead>{t("patients.columns.email")}</TableHead>
                 <TableHead>{t("patients.columns.birthDate")}</TableHead>
+                <TableHead>{t("patients.columns.age")}</TableHead>
                 <TableHead>{t("patients.columns.gender")}</TableHead>
                 <TableHead>{t("patients.columns.clinics")}</TableHead>
                 <TableHead>{t("patients.columns.treatments")}</TableHead>
@@ -86,33 +83,37 @@ export function PatientsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {patients.map((patient) => (
-                <TableRow key={uuidToString(patient.id)}>
-                  <TableCell className="font-medium">
-                    {patient.firstName} {patient.lastName}
-                  </TableCell>
-                  <TableCell>
-                    <span dir="ltr">{fromPersonIdentity(patient.identity) ?? t("common.empty")}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span dir="ltr">{patient.phone || t("common.empty")}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span dir="ltr">{patient.email || t("common.empty")}</span>
-                  </TableCell>
-                  <TableCell>{format.date(birthDate(patient.birthDate))}</TableCell>
-                  <TableCell>
-                    {patient.gender === Gender.MALE || patient.gender === Gender.FEMALE
-                      ? t(GENDER_KEYS[patient.gender])
-                      : t("common.empty")}
-                  </TableCell>
-                  <TableCell>{format.number(patient.clinicCount)}</TableCell>
-                  <TableCell>{format.number(patient.treatmentCount)}</TableCell>
-                  <TableCell title={t("patients.updatedAt", { time: format.dateTime(patient.updatedAt) })}>
-                    {format.date(patient.createdAt)}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {patients.map((patient) => {
+                const age = ageInYears(patient.birthDate, today);
+                return (
+                  <TableRow key={uuidToString(patient.id)}>
+                    <TableCell className="font-medium">
+                      {patient.firstName} {patient.lastName}
+                    </TableCell>
+                    <TableCell>
+                      <span dir="ltr">{fromPersonIdentity(patient.identity) ?? t("common.empty")}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span dir="ltr">{patient.phone || t("common.empty")}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span dir="ltr">{patient.email || t("common.empty")}</span>
+                    </TableCell>
+                    <TableCell>{format.date(parseBirthDate(patient.birthDate))}</TableCell>
+                    <TableCell>{age === undefined ? t("common.empty") : format.number(age)}</TableCell>
+                    <TableCell>
+                      {patient.gender === Gender.MALE || patient.gender === Gender.FEMALE
+                        ? t(GENDER_KEYS[patient.gender])
+                        : t("common.empty")}
+                    </TableCell>
+                    <TableCell>{format.number(patient.clinicCount)}</TableCell>
+                    <TableCell>{format.number(patient.treatmentCount)}</TableCell>
+                    <TableCell title={t("patients.updatedAt", { time: format.dateTime(patient.updatedAt) })}>
+                      {format.date(patient.createdAt)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         )}
