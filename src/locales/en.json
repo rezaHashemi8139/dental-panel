@@ -64,6 +64,8 @@
     "clinics_other": "{{clinics}} clinics",
     "devicesPerClinic_one": "{{devices}} device per clinic",
     "devicesPerClinic_other": "{{devices}} devices per clinic",
+    "devices_one": "{{devices}} device",
+    "devices_other": "{{devices}} devices",
     "empty": "—",
     "search": "Search",
     "pagination": {
@@ -158,6 +160,7 @@
         "status": "Status",
         "source": "Bought via",
         "amount": "Amount",
+        "clinics": "Clinics",
         "note": "Note"
       },
       "period": "{{start}} to {{end}}",
@@ -231,6 +234,80 @@
     "validation": {
       "plan": "Choose a plan.",
       "noteLength": "The note can be at most 500 characters."
+    }
+  },
+  "subscription": {
+    "open": "Subscription details",
+    "backToAccount": "Back to the user's account",
+    "notFound": "No subscription with this ID was found.",
+    "details": {
+      "owner": "Clinic owner",
+      "limits": "Plan limits",
+      "amount": "Amount",
+      "source": "Bought via",
+      "completedAt": "Purchase approved",
+      "canceledAt": "Canceled",
+      "note": "Note"
+    },
+    "clinics": {
+      "title": "Clinics covered",
+      "description": "The owner's clinics, oldest first. Clinic and device limits are measured against this subscription.",
+      "empty": "The owner has no clinics."
+    }
+  },
+  "clinic": {
+    "open": "Clinic details",
+    "back": "Back",
+    "notFound": "No clinic with this ID was found.",
+    "overLimit": "Beyond the clinic limit",
+    "licenseNumber": "License number {{number}}",
+    "details": {
+      "phone": "Phone",
+      "province": "Province",
+      "city": "City",
+      "address": "Address",
+      "postalCode": "Postal code",
+      "location": "Location",
+      "createdAt": "Registered",
+      "updatedAt": "Last updated",
+      "members": "Members",
+      "patients": "Patients",
+      "devices": "Active devices",
+      "devicesOfLimit": "{{count}} of {{max}}"
+    },
+    "owner": {
+      "title": "Owner and subscription",
+      "name": "Clinic owner",
+      "subscription": "Subscription",
+      "paidUntil": "Until {{date}}",
+      "limits": "Limits in force",
+      "noSubscription": "The owner has no subscription in force: nobody can log in on this clinic's devices."
+    },
+    "devices": {
+      "title": "Devices",
+      "description": "Every device of this clinic, active ones first. The device limit is the one of the subscription in force, as checked at login.",
+      "empty": "This clinic has no devices.",
+      "columns": {
+        "computer": "Computer",
+        "system": "Operating system",
+        "hardware": "Hardware",
+        "mac": "MAC addresses",
+        "appVersion": "App version",
+        "offlineAccess": "Offline access",
+        "createdAt": "Registered",
+        "lastSeen": "Last seen",
+        "lastLogin": "Last login",
+        "status": "Status"
+      },
+      "machine": "Machine {{id}}",
+      "cores_one": "{{cores}} core",
+      "cores_other": "{{cores}} cores",
+      "memory": "{{size}} GB RAM",
+      "neverLoggedIn": "Never",
+      "active": "Active",
+      "revoked": "Revoked",
+      "revokedAt": "Since {{date}}",
+      "overLimit": "Beyond the device limit"
     }
   },
   "payments": {
@@ -380,6 +457,7 @@
       "subscription": "Subscription",
       "ownedClinics": "Owned clinics",
       "memberClinics": "Member clinics",
+      "installations": "Devices",
       "lastLogin": "Last login",
       "createdAt": "Signed up"
     },
@@ -429,6 +507,7 @@
     "planNotFound": "This plan no longer exists.",
     "planInactive": "This plan is inactive and cannot be sold.",
     "subscriptionNotFound": "This subscription no longer exists.",
+    "clinicNotFound": "This clinic no longer exists.",
     "paymentNotFound": "This payment no longer exists.",
     "paymentNotPending": "This payment has already been reviewed, or the owner withdrew it.",
     "renewalQueued": "Another subscription was sold after this upgrade was reported, so it cannot be applied now. Reject the payment instead.",

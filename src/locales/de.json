@@ -64,6 +64,8 @@
     "clinics_other": "{{clinics}} Praxen",
     "devicesPerClinic_one": "{{devices}} Gerät pro Praxis",
     "devicesPerClinic_other": "{{devices}} Geräte pro Praxis",
+    "devices_one": "{{devices}} Gerät",
+    "devices_other": "{{devices}} Geräte",
     "empty": "—",
     "search": "Suchen",
     "pagination": {
@@ -158,6 +160,7 @@
         "status": "Status",
         "source": "Gekauft über",
         "amount": "Betrag",
+        "clinics": "Praxen",
         "note": "Notiz"
       },
       "period": "{{start}} bis {{end}}",
@@ -231,6 +234,80 @@
     "validation": {
       "plan": "Wählen Sie einen Tarif.",
       "noteLength": "Die Notiz darf höchstens 500 Zeichen lang sein."
+    }
+  },
+  "subscription": {
+    "open": "Abonnementdetails",
+    "backToAccount": "Zurück zum Benutzerkonto",
+    "notFound": "Kein Abonnement mit dieser ID gefunden.",
+    "details": {
+      "owner": "Praxisinhaber",
+      "limits": "Tariflimits",
+      "amount": "Betrag",
+      "source": "Gekauft über",
+      "completedAt": "Kauf bestätigt",
+      "canceledAt": "Storniert am",
+      "note": "Notiz"
+    },
+    "clinics": {
+      "title": "Abgedeckte Praxen",
+      "description": "Die Praxen des Inhabers, die ältesten zuerst. Praxis- und Gerätelimits werden an diesem Abonnement gemessen.",
+      "empty": "Der Inhaber hat keine Praxen."
+    }
+  },
+  "clinic": {
+    "open": "Praxisdetails",
+    "back": "Zurück",
+    "notFound": "Keine Praxis mit dieser ID gefunden.",
+    "overLimit": "Über dem Praxislimit",
+    "licenseNumber": "Zulassungsnummer {{number}}",
+    "details": {
+      "phone": "Telefon",
+      "province": "Provinz",
+      "city": "Stadt",
+      "address": "Adresse",
+      "postalCode": "Postleitzahl",
+      "location": "Standort",
+      "createdAt": "Registriert",
+      "updatedAt": "Zuletzt geändert",
+      "members": "Mitglieder",
+      "patients": "Patienten",
+      "devices": "Aktive Geräte",
+      "devicesOfLimit": "{{count}} von {{max}}"
+    },
+    "owner": {
+      "title": "Inhaber und Abonnement",
+      "name": "Praxisinhaber",
+      "subscription": "Abonnement",
+      "paidUntil": "Bis {{date}}",
+      "limits": "Geltende Limits",
+      "noSubscription": "Der Inhaber hat kein laufendes Abonnement: Auf den Geräten dieser Praxis kann sich niemand anmelden."
+    },
+    "devices": {
+      "title": "Geräte",
+      "description": "Alle Geräte dieser Praxis, aktive zuerst. Das Gerätelimit ist das des laufenden Abonnements, wie bei der Anmeldung geprüft.",
+      "empty": "Diese Praxis hat keine Geräte.",
+      "columns": {
+        "computer": "Computer",
+        "system": "Betriebssystem",
+        "hardware": "Hardware",
+        "mac": "MAC-Adressen",
+        "appVersion": "App-Version",
+        "offlineAccess": "Offline-Zugang",
+        "createdAt": "Registriert",
+        "lastSeen": "Zuletzt gesehen",
+        "lastLogin": "Letzte Anmeldung",
+        "status": "Status"
+      },
+      "machine": "Rechner {{id}}",
+      "cores_one": "{{cores}} Kern",
+      "cores_other": "{{cores}} Kerne",
+      "memory": "{{size}} GB RAM",
+      "neverLoggedIn": "Nie",
+      "active": "Aktiv",
+      "revoked": "Gesperrt",
+      "revokedAt": "Seit {{date}}",
+      "overLimit": "Über dem Gerätelimit"
     }
   },
   "payments": {
@@ -380,6 +457,7 @@
       "subscription": "Abonnement",
       "ownedClinics": "Eigene Praxen",
       "memberClinics": "Mitglied in Praxen",
+      "installations": "Geräte",
       "lastLogin": "Letzte Anmeldung",
       "createdAt": "Registriert"
     },
@@ -429,6 +507,7 @@
     "planNotFound": "Dieser Tarif existiert nicht mehr.",
     "planInactive": "Dieser Tarif ist inaktiv und kann nicht verkauft werden.",
     "subscriptionNotFound": "Dieses Abonnement existiert nicht mehr.",
+    "clinicNotFound": "Diese Praxis existiert nicht mehr.",
     "paymentNotFound": "Diese Zahlung existiert nicht mehr.",
     "paymentNotPending": "Diese Zahlung wurde bereits geprüft oder vom Inhaber zurückgezogen.",
     "renewalQueued": "Nach der Meldung dieses Upgrades wurde ein weiteres Abonnement verkauft, daher kann es nicht mehr angewendet werden. Lehnen Sie die Zahlung stattdessen ab.",

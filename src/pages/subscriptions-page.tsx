@@ -218,6 +218,7 @@ function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
               <TableHead>{t("subscriptions.list.columns.status")}</TableHead>
               <TableHead>{t("subscriptions.list.columns.source")}</TableHead>
               <TableHead>{t("subscriptions.list.columns.amount")}</TableHead>
+              <TableHead>{t("subscriptions.list.columns.clinics")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -250,7 +251,15 @@ function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
                     )}
                   </TableCell>
                   <TableCell>
-                    <span className="font-medium">{subscription.planName}</span>
+                    <Link
+                      to="/subscriptions/$subscriptionId"
+                      params={{ subscriptionId: uuidToString(subscription.id) }}
+                      search={{ status: list.filter, q: list.query || undefined, page: pageParam(list.page) }}
+                      title={t("subscription.open")}
+                      className="font-medium underline-offset-4 hover:underline"
+                    >
+                      {subscription.planName}
+                    </Link>
                     <span className="block text-xs text-muted-foreground">
                       {format.limits(subscription.maxClinics, subscription.maxDevicesPerClinic)}
                     </span>
@@ -283,6 +292,27 @@ function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
                   <TableCell className="font-medium">
                     {format.rials(purchase ? purchase.amountRials : subscription.priceRials)}
                   </TableCell>
+                  <TableCell>
+                    {/* The owner's clinics now, with their devices that are not revoked. */}
+                    {item.ownedClinics.length === 0
+                      ? t("common.empty")
+                      : item.ownedClinics.map((clinic) => (
+                          <span key={uuidToString(clinic.id)} className="block whitespace-nowrap">
+                            <Link
+                              to="/clinics/$clinicId"
+                              params={{ clinicId: uuidToString(clinic.id) }}
+                              title={t("clinic.open")}
+                              className="font-medium underline-offset-4 hover:underline"
+                            >
+                              {clinic.name}
+                            </Link>
+                            <span className="text-xs text-muted-foreground">
+                              {" · "}
+                              {format.devices(clinic.installationCount)}
+                            </span>
+                          </span>
+                        ))}
+                  </TableCell>
                 </TableRow>
               );
             })}
@@ -296,7 +326,7 @@ function SubscriptionsListView({ list }: { list: SubscriptionsList }) {
 /** Page 1 is left out of the address bar. */
 const pageParam = (page: number) => (page > 1 ? page : undefined);
 
-const STATUS_BADGE: Record<SubscriptionStatus, "default" | "secondary" | "outline" | "destructive"> = {
+export const STATUS_BADGE: Record<SubscriptionStatus, "default" | "secondary" | "outline" | "destructive"> = {
   active: "default",
   upcoming: "secondary",
   ended: "outline",
@@ -333,6 +363,8 @@ function UserDetails({
 }) {
   const { t } = useTranslation();
   const format = useFormat();
+  // The account's address (with the list's), for coming back from a subscription.
+  const search = subscriptionsRoute.useSearch();
   const code = fromPersonIdentity(user.identity);
   const [selling, setSelling] = useState(false);
   const [canceling, setCanceling] = useState<Subscription | null>(null);
@@ -401,7 +433,15 @@ function UserDetails({
                 {rows.map(({ subscription, status, purchase, daysLeft }) => (
                   <TableRow key={uuidToString(subscription.id)} className="align-top">
                     <TableCell>
-                      <span className="font-medium">{subscription.planName}</span>
+                      <Link
+                        to="/subscriptions/$subscriptionId"
+                        params={{ subscriptionId: uuidToString(subscription.id) }}
+                        search={search}
+                        title={t("subscription.open")}
+                        className="font-medium underline-offset-4 hover:underline"
+                      >
+                        {subscription.planName}
+                      </Link>
                       <span className="block text-xs text-muted-foreground">
                         {format.limits(subscription.maxClinics, subscription.maxDevicesPerClinic)}
                       </span>
@@ -499,7 +539,16 @@ function UserDetails({
               <TableBody>
                 {user.ownedClinics.map((clinic) => (
                   <TableRow key={uuidToString(clinic.id)}>
-                    <TableCell className="font-medium">{clinic.name}</TableCell>
+                    <TableCell>
+                      <Link
+                        to="/clinics/$clinicId"
+                        params={{ clinicId: uuidToString(clinic.id) }}
+                        title={t("clinic.open")}
+                        className="font-medium underline-offset-4 hover:underline"
+                      >
+                        {clinic.name}
+                      </Link>
+                    </TableCell>
                     <TableCell>
                       <span dir="ltr">{clinic.licenseNumber}</span>
                     </TableCell>

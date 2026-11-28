@@ -7,21 +7,23 @@ import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf
 import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
 import type { User } from "./auth_pb";
 import { file_dental_v1_auth } from "./auth_pb";
+import type { GeoLocation } from "./installation_pb";
+import { file_dental_v1_installation } from "./installation_pb";
 import type { Gender } from "./patient_pb";
 import { file_dental_v1_patient } from "./patient_pb";
 import type { PersonIdentity } from "./person_pb";
 import { file_dental_v1_person } from "./person_pb";
 import type { Payment, PaymentAccount, PaymentStatus, Plan, Subscription } from "./subscription_pb";
 import { file_dental_v1_subscription } from "./subscription_pb";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_duration, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file dental/v1/admin.proto.
  */
 export const file_dental_v1_admin: GenFile = /*@__PURE__*/
-  fileDesc("ChVkZW50YWwvdjEvYWRtaW4ucHJvdG8SCWRlbnRhbC52MSI4CgVBZG1pbhIKCgJpZBgBIAEoDBIQCgh1c2VybmFtZRgCIAEoCRIRCglmdWxsX25hbWUYAyABKAkimwEKDUNsaW5pY1N1bW1hcnkSCgoCaWQYASABKAwSDAoEbmFtZRgCIAEoCRIWCg5saWNlbnNlX251bWJlchgDIAEoCRIMCgRjaXR5GAQgASgJEhoKEmluc3RhbGxhdGlvbl9jb3VudBgFIAEoDRIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJTChhBZG1pblNlcnZpY2VMb2dpblJlcXVlc3QSGwoIdXNlcm5hbWUYASABKAlCCbpIBnIEEAEYQBIaCghwYXNzd29yZBgCIAEoCUIIukgFcgMogAginQEKGUFkbWluU2VydmljZUxvZ2luUmVzcG9uc2USNgoSc2Vzc2lvbl9leHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIfCgVhZG1pbhgDIAEoCzIQLmRlbnRhbC52MS5BZG1pbhISCgpjc3JmX3Rva2VuGAQgASgJSgQIARACUg1zZXNzaW9uX3Rva2VuIhsKGUFkbWluU2VydmljZUxvZ291dFJlcXVlc3QiHAoaQWRtaW5TZXJ2aWNlTG9nb3V0UmVzcG9uc2UixwIKEkNyZWF0ZUFkbWluUmVxdWVzdBIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQiNgoTQ3JlYXRlQWRtaW5SZXNwb25zZRIfCgVhZG1pbhgBIAEoCzIQLmRlbnRhbC52MS5BZG1pbiISChBMaXN0UGxhbnNSZXF1ZXN0IjMKEUxpc3RQbGFuc1Jlc3BvbnNlEh4KBXBsYW5zGAEgAygLMg8uZGVudGFsLnYxLlBsYW4i5QEKEUNyZWF0ZVBsYW5SZXF1ZXN0EhcKBG5hbWUYASABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgCIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAMgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBCABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBSABKANCB7pIBCICKAASKQoXbWF4X3B1cmNoYXNlc19wZXJfb3duZXIYBiABKA1CCLpIBSoDGOgHIjMKEkNyZWF0ZVBsYW5SZXNwb25zZRIdCgRwbGFuGAEgASgLMg8uZGVudGFsLnYxLlBsYW4iigIKEVVwZGF0ZVBsYW5SZXF1ZXN0EhMKAmlkGAEgASgMQge6SAR6AmgQEhcKBG5hbWUYAiABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgDIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAQgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBSABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBiABKANCB7pIBCICKAASDgoGYWN0aXZlGAcgASgIEikKF21heF9wdXJjaGFzZXNfcGVyX293bmVyGAggASgNQgi6SAUqAxjoByIzChJVcGRhdGVQbGFuUmVzcG9uc2USHQoEcGxhbhgBIAEoCzIPLmRlbnRhbC52MS5QbGFuIkUKDkdldFVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQEixAIKD0dldFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXISKwoIaWRlbnRpdHkYAiABKAsyGS5kZW50YWwudjEuUGVyc29uSWRlbnRpdHkSDQoFcGhvbmUYAyABKAkSEAoIZGlzYWJsZWQYBCABKAgSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLwoNb3duZWRfY2xpbmljcxgGIAMoCzIYLmRlbnRhbC52MS5DbGluaWNTdW1tYXJ5Ei4KDXN1YnNjcmlwdGlvbnMYByADKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uEiQKCHBheW1lbnRzGAggAygLMhIuZGVudGFsLnYxLlBheW1lbnQSDQoFZW1haWwYCSABKAkiZQoXU2VsbFN1YnNjcmlwdGlvblJlcXVlc3QSGAoHdXNlcl9pZBgBIAEoDEIHukgEegJoEBIYCgdwbGFuX2lkGAIgASgMQge6SAR6AmgQEhYKBG5vdGUYAyABKAlCCLpIBXIDGPQDIkkKGFNlbGxTdWJzY3JpcHRpb25SZXNwb25zZRItCgxzdWJzY3JpcHRpb24YASABKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uIjAKGUNhbmNlbFN1YnNjcmlwdGlvblJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBAiSwoaQ2FuY2VsU3Vic2NyaXB0aW9uUmVzcG9uc2USLQoMc3Vic2NyaXB0aW9uGAEgASgLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbiKgAQoYTGlzdFN1YnNjcmlwdGlvbnNSZXF1ZXN0EjcKBnN0YXR1cxgBIAEoDjIdLmRlbnRhbC52MS5TdWJzY3JpcHRpb25TdGF0dXNCCLpIBYIBAhABEhYKBXF1ZXJ5GAIgASgJQge6SARyAhhkEhcKBHBhZ2UYAyABKA1CCbpIBioEGKCNBhIaCglwYWdlX3NpemUYBCABKA1CB7pIBCoCGGQiYAoZTGlzdFN1YnNjcmlwdGlvbnNSZXNwb25zZRIuCgVpdGVtcxgBIAMoCzIfLmRlbnRhbC52MS5TdWJzY3JpcHRpb25MaXN0SXRlbRITCgt0b3RhbF9jb3VudBgCIAEoDSKMAgoUU3Vic2NyaXB0aW9uTGlzdEl0ZW0SLQoMc3Vic2NyaXB0aW9uGAEgASgLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbhItCgZzdGF0dXMYAiABKA4yHS5kZW50YWwudjEuU3Vic2NyaXB0aW9uU3RhdHVzEh0KBHVzZXIYAyABKAsyDy5kZW50YWwudjEuVXNlchIrCghpZGVudGl0eRgEIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eRINCgVwaG9uZRgFIAEoCRIVCg11c2VyX2Rpc2FibGVkGAYgASgIEiQKCHB1cmNoYXNlGAcgASgLMhIuZGVudGFsLnYxLlBheW1lbnQiowEKE0xpc3RQYXltZW50c1JlcXVlc3QSMgoGc3RhdHVzGAEgASgOMhguZGVudGFsLnYxLlBheW1lbnRTdGF0dXNCCLpIBYIBAhABEhYKBXF1ZXJ5GAMgASgJQge6SARyAhhkEhcKBHBhZ2UYBCABKA1CCbpIBioEGKCNBhIaCglwYWdlX3NpemUYBSABKA1CB7pIBCoCGGRKBAgCEANSBWxpbWl0IlcKFExpc3RQYXltZW50c1Jlc3BvbnNlEioKCHBheW1lbnRzGAEgAygLMhguZGVudGFsLnYxLlBheW1lbnRSZXZpZXcSEwoLdG90YWxfY291bnQYAiABKA0iuwEKDVBheW1lbnRSZXZpZXcSIwoHcGF5bWVudBgBIAEoCzISLmRlbnRhbC52MS5QYXltZW50Eh0KBHVzZXIYAiABKAsyDy5kZW50YWwudjEuVXNlchIrCghpZGVudGl0eRgDIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eRINCgVwaG9uZRgEIAEoCRIqCgdhY2NvdW50GAUgASgLMhkuZGVudGFsLnYxLlBheW1lbnRBY2NvdW50IkQKFUFwcHJvdmVQYXltZW50UmVxdWVzdBITCgJpZBgBIAEoDEIHukgEegJoEBIWCgRub3RlGAIgASgJQgi6SAVyAxj0AyJsChZBcHByb3ZlUGF5bWVudFJlc3BvbnNlEiMKB3BheW1lbnQYASABKAsyEi5kZW50YWwudjEuUGF5bWVudBItCgxzdWJzY3JpcHRpb24YAiABKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uIkcKFFJlamVjdFBheW1lbnRSZXF1ZXN0EhMKAmlkGAEgASgMQge6SAR6AmgQEhoKBnJlYXNvbhgCIAEoCUIKukgHcgUQARj0AyI8ChVSZWplY3RQYXltZW50UmVzcG9uc2USIwoHcGF5bWVudBgBIAEoCzISLmRlbnRhbC52MS5QYXltZW50IhwKGkxpc3RQYXltZW50QWNjb3VudHNSZXF1ZXN0IkoKG0xpc3RQYXltZW50QWNjb3VudHNSZXNwb25zZRIrCghhY2NvdW50cxgBIAMoCzIZLmRlbnRhbC52MS5QYXltZW50QWNjb3VudCKuAgobQ3JlYXRlUGF5bWVudEFjY291bnRSZXF1ZXN0EhwKCWJhbmtfbmFtZRgBIAEoCUIJukgGcgQQARhkEh4KC2hvbGRlcl9uYW1lGAIgASgJQgm6SAZyBBABGGQSKgoLY2FyZF9udW1iZXIYAyABKAlCFbpIEnIQMg5eKFswLTldezE2fSk/JBIlCgRpYmFuGAQgASgJQhe6SBRyEjIQXihJUlswLTldezI0fSk/JBIQCghwb3NpdGlvbhgFIAEoBTpsukhpGmcKFGRlc3RpbmF0aW9uX3JlcXVpcmVkEiRhIGNhcmQgbnVtYmVyIG9yIGFuIElCQU4gaXMgcmVxdWlyZWQaKXRoaXMuY2FyZF9udW1iZXIgIT0gJycgfHwgdGhpcy5pYmFuICE9ICcnIkoKHENyZWF0ZVBheW1lbnRBY2NvdW50UmVzcG9uc2USKgoHYWNjb3VudBgBIAEoCzIZLmRlbnRhbC52MS5QYXltZW50QWNjb3VudCLTAgobVXBkYXRlUGF5bWVudEFjY291bnRSZXF1ZXN0EhMKAmlkGAEgASgMQge6SAR6AmgQEhwKCWJhbmtfbmFtZRgCIAEoCUIJukgGcgQQARhkEh4KC2hvbGRlcl9uYW1lGAMgASgJQgm6SAZyBBABGGQSKgoLY2FyZF9udW1iZXIYBCABKAlCFbpIEnIQMg5eKFswLTldezE2fSk/JBIlCgRpYmFuGAUgASgJQhe6SBRyEjIQXihJUlswLTldezI0fSk/JBIQCghwb3NpdGlvbhgGIAEoBRIOCgZhY3RpdmUYByABKAg6bLpIaRpnChRkZXN0aW5hdGlvbl9yZXF1aXJlZBIkYSBjYXJkIG51bWJlciBvciBhbiBJQkFOIGlzIHJlcXVpcmVkGil0aGlzLmNhcmRfbnVtYmVyICE9ICcnIHx8IHRoaXMuaWJhbiAhPSAnJyJKChxVcGRhdGVQYXltZW50QWNjb3VudFJlc3BvbnNlEioKB2FjY291bnQYASABKAsyGS5kZW50YWwudjEuUGF5bWVudEFjY291bnQiYgoTTGlzdFBhdGllbnRzUmVxdWVzdBIWCgVxdWVyeRgBIAEoCUIHukgEcgIYZBIXCgRwYWdlGAIgASgNQgm6SAYqBBigjQYSGgoJcGFnZV9zaXplGAMgASgNQge6SAQqAhhkIlkKFExpc3RQYXRpZW50c1Jlc3BvbnNlEiwKCHBhdGllbnRzGAEgAygLMhouZGVudGFsLnYxLlBhdGllbnRMaXN0SXRlbRITCgt0b3RhbF9jb3VudBgCIAEoDSLVAgoPUGF0aWVudExpc3RJdGVtEgoKAmlkGAEgASgMEisKCGlkZW50aXR5GAIgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5EhIKCmZpcnN0X25hbWUYAyABKAkSEQoJbGFzdF9uYW1lGAQgASgJEhIKCmJpcnRoX2RhdGUYBSABKAkSIQoGZ2VuZGVyGAYgASgOMhEuZGVudGFsLnYxLkdlbmRlchINCgVwaG9uZRgHIAEoCRIUCgxjbGluaWNfY291bnQYCCABKA0SFwoPdHJlYXRtZW50X2NvdW50GAkgASgNEi4KCmNyZWF0ZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg0KBWVtYWlsGAwgASgJIl8KEExpc3RVc2Vyc1JlcXVlc3QSFgoFcXVlcnkYASABKAlCB7pIBHICGGQSFwoEcGFnZRgCIAEoDUIJukgGKgQYoI0GEhoKCXBhZ2Vfc2l6ZRgDIAEoDUIHukgEKgIYZCJQChFMaXN0VXNlcnNSZXNwb25zZRImCgV1c2VycxgBIAMoCzIXLmRlbnRhbC52MS5Vc2VyTGlzdEl0ZW0SEwoLdG90YWxfY291bnQYAiABKA0i6QIKDFVzZXJMaXN0SXRlbRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXISKwoIaWRlbnRpdHkYAiABKAsyGS5kZW50YWwudjEuUGVyc29uSWRlbnRpdHkSDQoFcGhvbmUYAyABKAkSDQoFZW1haWwYBCABKAkSEAoIZGlzYWJsZWQYBSABKAgSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASGgoSb3duZWRfY2xpbmljX2NvdW50GAcgASgNEhsKE21lbWJlcl9jbGluaWNfY291bnQYCCABKA0SEQoJcGxhbl9uYW1lGAkgASgJEi4KCnBhaWRfdW50aWwYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wKrwBChJTdWJzY3JpcHRpb25TdGF0dXMSIwofU1VCU0NSSVBUSU9OX1NUQVRVU19VTlNQRUNJRklFRBAAEh4KGlNVQlNDUklQVElPTl9TVEFUVVNfQUNUSVZFEAESIAocU1VCU0NSSVBUSU9OX1NUQVRVU19VUENPTUlORxACEh0KGVNVQlNDUklQVElPTl9TVEFUVVNfRU5ERUQQAxIgChxTVUJTQ1JJUFRJT05fU1RBVFVTX0NBTkNFTEVEEAQyuAwKDEFkbWluU2VydmljZRJUCgVMb2dpbhIjLmRlbnRhbC52MS5BZG1pblNlcnZpY2VMb2dpblJlcXVlc3QaJC5kZW50YWwudjEuQWRtaW5TZXJ2aWNlTG9naW5SZXNwb25zZSIAElcKBkxvZ291dBIkLmRlbnRhbC52MS5BZG1pblNlcnZpY2VMb2dvdXRSZXF1ZXN0GiUuZGVudGFsLnYxLkFkbWluU2VydmljZUxvZ291dFJlc3BvbnNlIgASTgoLQ3JlYXRlQWRtaW4SHS5kZW50YWwudjEuQ3JlYXRlQWRtaW5SZXF1ZXN0Gh4uZGVudGFsLnYxLkNyZWF0ZUFkbWluUmVzcG9uc2UiABJICglMaXN0UGxhbnMSGy5kZW50YWwudjEuTGlzdFBsYW5zUmVxdWVzdBocLmRlbnRhbC52MS5MaXN0UGxhbnNSZXNwb25zZSIAEksKCkNyZWF0ZVBsYW4SHC5kZW50YWwudjEuQ3JlYXRlUGxhblJlcXVlc3QaHS5kZW50YWwudjEuQ3JlYXRlUGxhblJlc3BvbnNlIgASSwoKVXBkYXRlUGxhbhIcLmRlbnRhbC52MS5VcGRhdGVQbGFuUmVxdWVzdBodLmRlbnRhbC52MS5VcGRhdGVQbGFuUmVzcG9uc2UiABJCCgdHZXRVc2VyEhkuZGVudGFsLnYxLkdldFVzZXJSZXF1ZXN0GhouZGVudGFsLnYxLkdldFVzZXJSZXNwb25zZSIAEl0KEFNlbGxTdWJzY3JpcHRpb24SIi5kZW50YWwudjEuU2VsbFN1YnNjcmlwdGlvblJlcXVlc3QaIy5kZW50YWwudjEuU2VsbFN1YnNjcmlwdGlvblJlc3BvbnNlIgASYwoSQ2FuY2VsU3Vic2NyaXB0aW9uEiQuZGVudGFsLnYxLkNhbmNlbFN1YnNjcmlwdGlvblJlcXVlc3QaJS5kZW50YWwudjEuQ2FuY2VsU3Vic2NyaXB0aW9uUmVzcG9uc2UiABJgChFMaXN0U3Vic2NyaXB0aW9ucxIjLmRlbnRhbC52MS5MaXN0U3Vic2NyaXB0aW9uc1JlcXVlc3QaJC5kZW50YWwudjEuTGlzdFN1YnNjcmlwdGlvbnNSZXNwb25zZSIAElEKDExpc3RQYXltZW50cxIeLmRlbnRhbC52MS5MaXN0UGF5bWVudHNSZXF1ZXN0Gh8uZGVudGFsLnYxLkxpc3RQYXltZW50c1Jlc3BvbnNlIgASVwoOQXBwcm92ZVBheW1lbnQSIC5kZW50YWwudjEuQXBwcm92ZVBheW1lbnRSZXF1ZXN0GiEuZGVudGFsLnYxLkFwcHJvdmVQYXltZW50UmVzcG9uc2UiABJUCg1SZWplY3RQYXltZW50Eh8uZGVudGFsLnYxLlJlamVjdFBheW1lbnRSZXF1ZXN0GiAuZGVudGFsLnYxLlJlamVjdFBheW1lbnRSZXNwb25zZSIAEmYKE0xpc3RQYXltZW50QWNjb3VudHMSJS5kZW50YWwudjEuTGlzdFBheW1lbnRBY2NvdW50c1JlcXVlc3QaJi5kZW50YWwudjEuTGlzdFBheW1lbnRBY2NvdW50c1Jlc3BvbnNlIgASaQoUQ3JlYXRlUGF5bWVudEFjY291bnQSJi5kZW50YWwudjEuQ3JlYXRlUGF5bWVudEFjY291bnRSZXF1ZXN0GicuZGVudGFsLnYxLkNyZWF0ZVBheW1lbnRBY2NvdW50UmVzcG9uc2UiABJpChRVcGRhdGVQYXltZW50QWNjb3VudBImLmRlbnRhbC52MS5VcGRhdGVQYXltZW50QWNjb3VudFJlcXVlc3QaJy5kZW50YWwudjEuVXBkYXRlUGF5bWVudEFjY291bnRSZXNwb25zZSIAElEKDExpc3RQYXRpZW50cxIeLmRlbnRhbC52MS5MaXN0UGF0aWVudHNSZXF1ZXN0Gh8uZGVudGFsLnYxLkxpc3RQYXRpZW50c1Jlc3BvbnNlIgASSAoJTGlzdFVzZXJzEhsuZGVudGFsLnYxLkxpc3RVc2Vyc1JlcXVlc3QaHC5kZW50YWwudjEuTGlzdFVzZXJzUmVzcG9uc2UiAGIGcHJvdG8z", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_patient, file_dental_v1_person, file_dental_v1_subscription, file_google_protobuf_timestamp]);
+  fileDesc("ChVkZW50YWwvdjEvYWRtaW4ucHJvdG8SCWRlbnRhbC52MSI4CgVBZG1pbhIKCgJpZBgBIAEoDBIQCgh1c2VybmFtZRgCIAEoCRIRCglmdWxsX25hbWUYAyABKAkimwEKDUNsaW5pY1N1bW1hcnkSCgoCaWQYASABKAwSDAoEbmFtZRgCIAEoCRIWCg5saWNlbnNlX251bWJlchgDIAEoCRIMCgRjaXR5GAQgASgJEhoKEmluc3RhbGxhdGlvbl9jb3VudBgFIAEoDRIuCgpjcmVhdGVkX2F0GAYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJTChhBZG1pblNlcnZpY2VMb2dpblJlcXVlc3QSGwoIdXNlcm5hbWUYASABKAlCCbpIBnIEEAEYQBIaCghwYXNzd29yZBgCIAEoCUIIukgFcgMogAginQEKGUFkbWluU2VydmljZUxvZ2luUmVzcG9uc2USNgoSc2Vzc2lvbl9leHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIfCgVhZG1pbhgDIAEoCzIQLmRlbnRhbC52MS5BZG1pbhISCgpjc3JmX3Rva2VuGAQgASgJSgQIARACUg1zZXNzaW9uX3Rva2VuIhsKGUFkbWluU2VydmljZUxvZ291dFJlcXVlc3QiHAoaQWRtaW5TZXJ2aWNlTG9nb3V0UmVzcG9uc2UixwIKEkNyZWF0ZUFkbWluUmVxdWVzdBIvCgh1c2VybmFtZRgBIAEoCUIdukgachgyFl5bQS1aYS16MC05Ll8tXXszLDMyfSQS4QEKCHBhc3N3b3JkGAIgASgJQs4BukjKAboBwQEKDXdlYWtfcGFzc3dvcmQSVG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMsIGEgbG93ZXJjYXNlIGxldHRlciwgYW4gdXBwZXJjYXNlIGxldHRlciBhbmQgYSBkaWdpdBpac2l6ZSh0aGlzKSA+PSA4ICYmIHRoaXMubWF0Y2hlcygnW2Etel0nKSAmJiB0aGlzLm1hdGNoZXMoJ1tBLVpdJykgJiYgdGhpcy5tYXRjaGVzKCdbMC05XScpcgMYgAISHAoJZnVsbF9uYW1lGAMgASgJQgm6SAZyBBABGGQiNgoTQ3JlYXRlQWRtaW5SZXNwb25zZRIfCgVhZG1pbhgBIAEoCzIQLmRlbnRhbC52MS5BZG1pbiISChBMaXN0UGxhbnNSZXF1ZXN0IjMKEUxpc3RQbGFuc1Jlc3BvbnNlEh4KBXBsYW5zGAEgAygLMg8uZGVudGFsLnYxLlBsYW4i5QEKEUNyZWF0ZVBsYW5SZXF1ZXN0EhcKBG5hbWUYASABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgCIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAMgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBCABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBSABKANCB7pIBCICKAASKQoXbWF4X3B1cmNoYXNlc19wZXJfb3duZXIYBiABKA1CCLpIBSoDGOgHIjMKEkNyZWF0ZVBsYW5SZXNwb25zZRIdCgRwbGFuGAEgASgLMg8uZGVudGFsLnYxLlBsYW4iigIKEVVwZGF0ZVBsYW5SZXF1ZXN0EhMKAmlkGAEgASgMQge6SAR6AmgQEhcKBG5hbWUYAiABKAlCCbpIBnIEEAEYZBIfCgttYXhfY2xpbmljcxgDIAEoDUIKukgHKgUY6AcoARIqChZtYXhfZGV2aWNlc19wZXJfY2xpbmljGAQgASgNQgq6SAcqBRjoBygBEiEKDWR1cmF0aW9uX2RheXMYBSABKA1CCrpIByoFGMIcKAESHAoLcHJpY2VfcmlhbHMYBiABKANCB7pIBCICKAASDgoGYWN0aXZlGAcgASgIEikKF21heF9wdXJjaGFzZXNfcGVyX293bmVyGAggASgNQgi6SAUqAxjoByIzChJVcGRhdGVQbGFuUmVzcG9uc2USHQoEcGxhbhgBIAEoCzIPLmRlbnRhbC52MS5QbGFuIkUKDkdldFVzZXJSZXF1ZXN0EjMKCGlkZW50aXR5GAEgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Qga6SAPIAQEixAIKD0dldFVzZXJSZXNwb25zZRIdCgR1c2VyGAEgASgLMg8uZGVudGFsLnYxLlVzZXISKwoIaWRlbnRpdHkYAiABKAsyGS5kZW50YWwudjEuUGVyc29uSWRlbnRpdHkSDQoFcGhvbmUYAyABKAkSEAoIZGlzYWJsZWQYBCABKAgSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLwoNb3duZWRfY2xpbmljcxgGIAMoCzIYLmRlbnRhbC52MS5DbGluaWNTdW1tYXJ5Ei4KDXN1YnNjcmlwdGlvbnMYByADKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uEiQKCHBheW1lbnRzGAggAygLMhIuZGVudGFsLnYxLlBheW1lbnQSDQoFZW1haWwYCSABKAkiZQoXU2VsbFN1YnNjcmlwdGlvblJlcXVlc3QSGAoHdXNlcl9pZBgBIAEoDEIHukgEegJoEBIYCgdwbGFuX2lkGAIgASgMQge6SAR6AmgQEhYKBG5vdGUYAyABKAlCCLpIBXIDGPQDIkkKGFNlbGxTdWJzY3JpcHRpb25SZXNwb25zZRItCgxzdWJzY3JpcHRpb24YASABKAsyFy5kZW50YWwudjEuU3Vic2NyaXB0aW9uIjAKGUNhbmNlbFN1YnNjcmlwdGlvblJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBAiSwoaQ2FuY2VsU3Vic2NyaXB0aW9uUmVzcG9uc2USLQoMc3Vic2NyaXB0aW9uGAEgASgLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbiKgAQoYTGlzdFN1YnNjcmlwdGlvbnNSZXF1ZXN0EjcKBnN0YXR1cxgBIAEoDjIdLmRlbnRhbC52MS5TdWJzY3JpcHRpb25TdGF0dXNCCLpIBYIBAhABEhYKBXF1ZXJ5GAIgASgJQge6SARyAhhkEhcKBHBhZ2UYAyABKA1CCbpIBioEGKCNBhIaCglwYWdlX3NpemUYBCABKA1CB7pIBCoCGGQiYAoZTGlzdFN1YnNjcmlwdGlvbnNSZXNwb25zZRIuCgVpdGVtcxgBIAMoCzIfLmRlbnRhbC52MS5TdWJzY3JpcHRpb25MaXN0SXRlbRITCgt0b3RhbF9jb3VudBgCIAEoDSK9AgoUU3Vic2NyaXB0aW9uTGlzdEl0ZW0SLQoMc3Vic2NyaXB0aW9uGAEgASgLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbhItCgZzdGF0dXMYAiABKA4yHS5kZW50YWwudjEuU3Vic2NyaXB0aW9uU3RhdHVzEh0KBHVzZXIYAyABKAsyDy5kZW50YWwudjEuVXNlchIrCghpZGVudGl0eRgEIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eRINCgVwaG9uZRgFIAEoCRIVCg11c2VyX2Rpc2FibGVkGAYgASgIEiQKCHB1cmNoYXNlGAcgASgLMhIuZGVudGFsLnYxLlBheW1lbnQSLwoNb3duZWRfY2xpbmljcxgIIAMoCzIYLmRlbnRhbC52MS5DbGluaWNTdW1tYXJ5Ii0KFkdldFN1YnNjcmlwdGlvblJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBAigQEKF0dldFN1YnNjcmlwdGlvblJlc3BvbnNlEi0KBGl0ZW0YASABKAsyHy5kZW50YWwudjEuU3Vic2NyaXB0aW9uTGlzdEl0ZW0SDQoFZW1haWwYAiABKAkSKAoHY2xpbmljcxgDIAMoCzIXLmRlbnRhbC52MS5DbGluaWNEZXRhaWwiJwoQR2V0Q2xpbmljUmVxdWVzdBITCgJpZBgBIAEoDEIHukgEegJoECK2AgoRR2V0Q2xpbmljUmVzcG9uc2USJwoGY2xpbmljGAEgASgLMhcuZGVudGFsLnYxLkNsaW5pY0RldGFpbBIeCgVvd25lchgCIAEoCzIPLmRlbnRhbC52MS5Vc2VyEjEKDm93bmVyX2lkZW50aXR5GAMgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5EhMKC293bmVyX3Bob25lGAQgASgJEhMKC293bmVyX2VtYWlsGAUgASgJEhYKDm93bmVyX2Rpc2FibGVkGAYgASgIEi4KCnBhaWRfdW50aWwYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhMKC21heF9jbGluaWNzGAggASgNEh4KFm1heF9kZXZpY2VzX3Blcl9jbGluaWMYCSABKA0inQMKDENsaW5pY0RldGFpbBIKCgJpZBgBIAEoDBIMCgRuYW1lGAIgASgJEhYKDmxpY2Vuc2VfbnVtYmVyGAMgASgJEg0KBXBob25lGAQgASgJEhAKCHByb3ZpbmNlGAUgASgJEgwKBGNpdHkYBiABKAkSDwoHYWRkcmVzcxgHIAEoCRITCgtwb3N0YWxfY29kZRgIIAEoCRIoCghsb2NhdGlvbhgJIAEoCzIWLmRlbnRhbC52MS5HZW9Mb2NhdGlvbhIuCgpjcmVhdGVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIUCgxtZW1iZXJfY291bnQYDCABKA0SFQoNcGF0aWVudF9jb3VudBgNIAEoDRIZChFvdmVyX2NsaW5pY19saW1pdBgOIAEoCBI0Cg1pbnN0YWxsYXRpb25zGA8gAygLMh0uZGVudGFsLnYxLkluc3RhbGxhdGlvbkRldGFpbCKVBAoSSW5zdGFsbGF0aW9uRGV0YWlsEgoKAmlkGAEgASgMEhcKD21hY2hpbmVfaWRfaGFzaBgCIAEoDBIQCghob3N0bmFtZRgDIAEoCRIPCgdvc19uYW1lGAQgASgJEhIKCm9zX3ZlcnNpb24YBSABKAkSEQoJY3B1X21vZGVsGAYgASgJEhEKCWNwdV9jb3JlcxgHIAEoDRIUCgxtZW1vcnlfYnl0ZXMYCCABKAQSFQoNbWFjX2FkZHJlc3NlcxgJIAMoCRITCgthcHBfdmVyc2lvbhgKIAEoCRIxCg5vZmZsaW5lX2FjY2VzcxgLIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbhIuCgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIwCgxsYXN0X3NlZW5fYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnJldm9rZWRfYXQYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDWxhc3RfbG9naW5fYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEigKD2xhc3RfbG9naW5fdXNlchgQIAEoCzIPLmRlbnRhbC52MS5Vc2VyEhkKEW92ZXJfZGV2aWNlX2xpbWl0GBEgASgIIqMBChNMaXN0UGF5bWVudHNSZXF1ZXN0EjIKBnN0YXR1cxgBIAEoDjIYLmRlbnRhbC52MS5QYXltZW50U3RhdHVzQgi6SAWCAQIQARIWCgVxdWVyeRgDIAEoCUIHukgEcgIYZBIXCgRwYWdlGAQgASgNQgm6SAYqBBigjQYSGgoJcGFnZV9zaXplGAUgASgNQge6SAQqAhhkSgQIAhADUgVsaW1pdCJXChRMaXN0UGF5bWVudHNSZXNwb25zZRIqCghwYXltZW50cxgBIAMoCzIYLmRlbnRhbC52MS5QYXltZW50UmV2aWV3EhMKC3RvdGFsX2NvdW50GAIgASgNIrsBCg1QYXltZW50UmV2aWV3EiMKB3BheW1lbnQYASABKAsyEi5kZW50YWwudjEuUGF5bWVudBIdCgR1c2VyGAIgASgLMg8uZGVudGFsLnYxLlVzZXISKwoIaWRlbnRpdHkYAyABKAsyGS5kZW50YWwudjEuUGVyc29uSWRlbnRpdHkSDQoFcGhvbmUYBCABKAkSKgoHYWNjb3VudBgFIAEoCzIZLmRlbnRhbC52MS5QYXltZW50QWNjb3VudCJEChVBcHByb3ZlUGF5bWVudFJlcXVlc3QSEwoCaWQYASABKAxCB7pIBHoCaBASFgoEbm90ZRgCIAEoCUIIukgFcgMY9AMibAoWQXBwcm92ZVBheW1lbnRSZXNwb25zZRIjCgdwYXltZW50GAEgASgLMhIuZGVudGFsLnYxLlBheW1lbnQSLQoMc3Vic2NyaXB0aW9uGAIgASgLMhcuZGVudGFsLnYxLlN1YnNjcmlwdGlvbiJHChRSZWplY3RQYXltZW50UmVxdWVzdBITCgJpZBgBIAEoDEIHukgEegJoEBIaCgZyZWFzb24YAiABKAlCCrpIB3IFEAEY9AMiPAoVUmVqZWN0UGF5bWVudFJlc3BvbnNlEiMKB3BheW1lbnQYASABKAsyEi5kZW50YWwudjEuUGF5bWVudCIcChpMaXN0UGF5bWVudEFjY291bnRzUmVxdWVzdCJKChtMaXN0UGF5bWVudEFjY291bnRzUmVzcG9uc2USKwoIYWNjb3VudHMYASADKAsyGS5kZW50YWwudjEuUGF5bWVudEFjY291bnQirgIKG0NyZWF0ZVBheW1lbnRBY2NvdW50UmVxdWVzdBIcCgliYW5rX25hbWUYASABKAlCCbpIBnIEEAEYZBIeCgtob2xkZXJfbmFtZRgCIAEoCUIJukgGcgQQARhkEioKC2NhcmRfbnVtYmVyGAMgASgJQhW6SBJyEDIOXihbMC05XXsxNn0pPyQSJQoEaWJhbhgEIAEoCUIXukgUchIyEF4oSVJbMC05XXsyNH0pPyQSEAoIcG9zaXRpb24YBSABKAU6bLpIaRpnChRkZXN0aW5hdGlvbl9yZXF1aXJlZBIkYSBjYXJkIG51bWJlciBvciBhbiBJQkFOIGlzIHJlcXVpcmVkGil0aGlzLmNhcmRfbnVtYmVyICE9ICcnIHx8IHRoaXMuaWJhbiAhPSAnJyJKChxDcmVhdGVQYXltZW50QWNjb3VudFJlc3BvbnNlEioKB2FjY291bnQYASABKAsyGS5kZW50YWwudjEuUGF5bWVudEFjY291bnQi0wIKG1VwZGF0ZVBheW1lbnRBY2NvdW50UmVxdWVzdBITCgJpZBgBIAEoDEIHukgEegJoEBIcCgliYW5rX25hbWUYAiABKAlCCbpIBnIEEAEYZBIeCgtob2xkZXJfbmFtZRgDIAEoCUIJukgGcgQQARhkEioKC2NhcmRfbnVtYmVyGAQgASgJQhW6SBJyEDIOXihbMC05XXsxNn0pPyQSJQoEaWJhbhgFIAEoCUIXukgUchIyEF4oSVJbMC05XXsyNH0pPyQSEAoIcG9zaXRpb24YBiABKAUSDgoGYWN0aXZlGAcgASgIOmy6SGkaZwoUZGVzdGluYXRpb25fcmVxdWlyZWQSJGEgY2FyZCBudW1iZXIgb3IgYW4gSUJBTiBpcyByZXF1aXJlZBopdGhpcy5jYXJkX251bWJlciAhPSAnJyB8fCB0aGlzLmliYW4gIT0gJyciSgocVXBkYXRlUGF5bWVudEFjY291bnRSZXNwb25zZRIqCgdhY2NvdW50GAEgASgLMhkuZGVudGFsLnYxLlBheW1lbnRBY2NvdW50ImIKE0xpc3RQYXRpZW50c1JlcXVlc3QSFgoFcXVlcnkYASABKAlCB7pIBHICGGQSFwoEcGFnZRgCIAEoDUIJukgGKgQYoI0GEhoKCXBhZ2Vfc2l6ZRgDIAEoDUIHukgEKgIYZCJZChRMaXN0UGF0aWVudHNSZXNwb25zZRIsCghwYXRpZW50cxgBIAMoCzIaLmRlbnRhbC52MS5QYXRpZW50TGlzdEl0ZW0SEwoLdG90YWxfY291bnQYAiABKA0i1QIKD1BhdGllbnRMaXN0SXRlbRIKCgJpZBgBIAEoDBIrCghpZGVudGl0eRgCIAEoCzIZLmRlbnRhbC52MS5QZXJzb25JZGVudGl0eRISCgpmaXJzdF9uYW1lGAMgASgJEhEKCWxhc3RfbmFtZRgEIAEoCRISCgpiaXJ0aF9kYXRlGAUgASgJEiEKBmdlbmRlchgGIAEoDjIRLmRlbnRhbC52MS5HZW5kZXISDQoFcGhvbmUYByABKAkSFAoMY2xpbmljX2NvdW50GAggASgNEhcKD3RyZWF0bWVudF9jb3VudBgJIAEoDRIuCgpjcmVhdGVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBINCgVlbWFpbBgMIAEoCSJfChBMaXN0VXNlcnNSZXF1ZXN0EhYKBXF1ZXJ5GAEgASgJQge6SARyAhhkEhcKBHBhZ2UYAiABKA1CCbpIBioEGKCNBhIaCglwYWdlX3NpemUYAyABKA1CB7pIBCoCGGQiUAoRTGlzdFVzZXJzUmVzcG9uc2USJgoFdXNlcnMYASADKAsyFy5kZW50YWwudjEuVXNlckxpc3RJdGVtEhMKC3RvdGFsX2NvdW50GAIgASgNIoUDCgxVc2VyTGlzdEl0ZW0SHQoEdXNlchgBIAEoCzIPLmRlbnRhbC52MS5Vc2VyEisKCGlkZW50aXR5GAIgASgLMhkuZGVudGFsLnYxLlBlcnNvbklkZW50aXR5Eg0KBXBob25lGAMgASgJEg0KBWVtYWlsGAQgASgJEhAKCGRpc2FibGVkGAUgASgIEi4KCmNyZWF0ZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhoKEm93bmVkX2NsaW5pY19jb3VudBgHIAEoDRIbChNtZW1iZXJfY2xpbmljX2NvdW50GAggASgNEhEKCXBsYW5fbmFtZRgJIAEoCRIuCgpwYWlkX3VudGlsGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIxCg1sYXN0X2xvZ2luX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIaChJpbnN0YWxsYXRpb25fY291bnQYDCABKA0qvAEKElN1YnNjcmlwdGlvblN0YXR1cxIjCh9TVUJTQ1JJUFRJT05fU1RBVFVTX1VOU1BFQ0lGSUVEEAASHgoaU1VCU0NSSVBUSU9OX1NUQVRVU19BQ1RJVkUQARIgChxTVUJTQ1JJUFRJT05fU1RBVFVTX1VQQ09NSU5HEAISHQoZU1VCU0NSSVBUSU9OX1NUQVRVU19FTkRFRBADEiAKHFNVQlNDUklQVElPTl9TVEFUVVNfQ0FOQ0VMRUQQBDLeDQoMQWRtaW5TZXJ2aWNlElQKBUxvZ2luEiMuZGVudGFsLnYxLkFkbWluU2VydmljZUxvZ2luUmVxdWVzdBokLmRlbnRhbC52MS5BZG1pblNlcnZpY2VMb2dpblJlc3BvbnNlIgASVwoGTG9nb3V0EiQuZGVudGFsLnYxLkFkbWluU2VydmljZUxvZ291dFJlcXVlc3QaJS5kZW50YWwudjEuQWRtaW5TZXJ2aWNlTG9nb3V0UmVzcG9uc2UiABJOCgtDcmVhdGVBZG1pbhIdLmRlbnRhbC52MS5DcmVhdGVBZG1pblJlcXVlc3QaHi5kZW50YWwudjEuQ3JlYXRlQWRtaW5SZXNwb25zZSIAEkgKCUxpc3RQbGFucxIbLmRlbnRhbC52MS5MaXN0UGxhbnNSZXF1ZXN0GhwuZGVudGFsLnYxLkxpc3RQbGFuc1Jlc3BvbnNlIgASSwoKQ3JlYXRlUGxhbhIcLmRlbnRhbC52MS5DcmVhdGVQbGFuUmVxdWVzdBodLmRlbnRhbC52MS5DcmVhdGVQbGFuUmVzcG9uc2UiABJLCgpVcGRhdGVQbGFuEhwuZGVudGFsLnYxLlVwZGF0ZVBsYW5SZXF1ZXN0Gh0uZGVudGFsLnYxLlVwZGF0ZVBsYW5SZXNwb25zZSIAEkIKB0dldFVzZXISGS5kZW50YWwudjEuR2V0VXNlclJlcXVlc3QaGi5kZW50YWwudjEuR2V0VXNlclJlc3BvbnNlIgASXQoQU2VsbFN1YnNjcmlwdGlvbhIiLmRlbnRhbC52MS5TZWxsU3Vic2NyaXB0aW9uUmVxdWVzdBojLmRlbnRhbC52MS5TZWxsU3Vic2NyaXB0aW9uUmVzcG9uc2UiABJjChJDYW5jZWxTdWJzY3JpcHRpb24SJC5kZW50YWwudjEuQ2FuY2VsU3Vic2NyaXB0aW9uUmVxdWVzdBolLmRlbnRhbC52MS5DYW5jZWxTdWJzY3JpcHRpb25SZXNwb25zZSIAEmAKEUxpc3RTdWJzY3JpcHRpb25zEiMuZGVudGFsLnYxLkxpc3RTdWJzY3JpcHRpb25zUmVxdWVzdBokLmRlbnRhbC52MS5MaXN0U3Vic2NyaXB0aW9uc1Jlc3BvbnNlIgASWgoPR2V0U3Vic2NyaXB0aW9uEiEuZGVudGFsLnYxLkdldFN1YnNjcmlwdGlvblJlcXVlc3QaIi5kZW50YWwudjEuR2V0U3Vic2NyaXB0aW9uUmVzcG9uc2UiABJICglHZXRDbGluaWMSGy5kZW50YWwudjEuR2V0Q2xpbmljUmVxdWVzdBocLmRlbnRhbC52MS5HZXRDbGluaWNSZXNwb25zZSIAElEKDExpc3RQYXltZW50cxIeLmRlbnRhbC52MS5MaXN0UGF5bWVudHNSZXF1ZXN0Gh8uZGVudGFsLnYxLkxpc3RQYXltZW50c1Jlc3BvbnNlIgASVwoOQXBwcm92ZVBheW1lbnQSIC5kZW50YWwudjEuQXBwcm92ZVBheW1lbnRSZXF1ZXN0GiEuZGVudGFsLnYxLkFwcHJvdmVQYXltZW50UmVzcG9uc2UiABJUCg1SZWplY3RQYXltZW50Eh8uZGVudGFsLnYxLlJlamVjdFBheW1lbnRSZXF1ZXN0GiAuZGVudGFsLnYxLlJlamVjdFBheW1lbnRSZXNwb25zZSIAEmYKE0xpc3RQYXltZW50QWNjb3VudHMSJS5kZW50YWwudjEuTGlzdFBheW1lbnRBY2NvdW50c1JlcXVlc3QaJi5kZW50YWwudjEuTGlzdFBheW1lbnRBY2NvdW50c1Jlc3BvbnNlIgASaQoUQ3JlYXRlUGF5bWVudEFjY291bnQSJi5kZW50YWwudjEuQ3JlYXRlUGF5bWVudEFjY291bnRSZXF1ZXN0GicuZGVudGFsLnYxLkNyZWF0ZVBheW1lbnRBY2NvdW50UmVzcG9uc2UiABJpChRVcGRhdGVQYXltZW50QWNjb3VudBImLmRlbnRhbC52MS5VcGRhdGVQYXltZW50QWNjb3VudFJlcXVlc3QaJy5kZW50YWwudjEuVXBkYXRlUGF5bWVudEFjY291bnRSZXNwb25zZSIAElEKDExpc3RQYXRpZW50cxIeLmRlbnRhbC52MS5MaXN0UGF0aWVudHNSZXF1ZXN0Gh8uZGVudGFsLnYxLkxpc3RQYXRpZW50c1Jlc3BvbnNlIgASSAoJTGlzdFVzZXJzEhsuZGVudGFsLnYxLkxpc3RVc2Vyc1JlcXVlc3QaHC5kZW50YWwudjEuTGlzdFVzZXJzUmVzcG9uc2UiAGIGcHJvdG8z", [file_buf_validate_validate, file_dental_v1_auth, file_dental_v1_installation, file_dental_v1_patient, file_dental_v1_person, file_dental_v1_subscription, file_google_protobuf_duration, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message dental.v1.Admin
@@ -683,6 +685,14 @@ export type SubscriptionListItem = Message<"dental.v1.SubscriptionListItem"> & {
    * @generated from field: dental.v1.Payment purchase = 7;
    */
   purchase?: Payment | undefined;
+
+  /**
+   * Clinics the owner owns now, oldest first, with their installations that are not
+   * revoked (as GetUser.owned_clinics). Rows of the same owner repeat them.
+   *
+   * @generated from field: repeated dental.v1.ClinicSummary owned_clinics = 8;
+   */
+  ownedClinics: ClinicSummary[];
 };
 
 /**
@@ -691,6 +701,375 @@ export type SubscriptionListItem = Message<"dental.v1.SubscriptionListItem"> & {
  */
 export const SubscriptionListItemSchema: GenMessage<SubscriptionListItem> = /*@__PURE__*/
   messageDesc(file_dental_v1_admin, 22);
+
+/**
+ * @generated from message dental.v1.GetSubscriptionRequest
+ */
+export type GetSubscriptionRequest = Message<"dental.v1.GetSubscriptionRequest"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+};
+
+/**
+ * Describes the message dental.v1.GetSubscriptionRequest.
+ * Use `create(GetSubscriptionRequestSchema)` to create a new message.
+ */
+export const GetSubscriptionRequestSchema: GenMessage<GetSubscriptionRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 23);
+
+/**
+ * @generated from message dental.v1.GetSubscriptionResponse
+ */
+export type GetSubscriptionResponse = Message<"dental.v1.GetSubscriptionResponse"> & {
+  /**
+   * As ListSubscriptions gives it (owned_clinics included).
+   *
+   * @generated from field: dental.v1.SubscriptionListItem item = 1;
+   */
+  item?: SubscriptionListItem | undefined;
+
+  /**
+   * The owner's email; empty when none was given.
+   *
+   * @generated from field: string email = 2;
+   */
+  email: string;
+
+  /**
+   * The owner's clinics now, oldest first. Their limits are this subscription's.
+   *
+   * @generated from field: repeated dental.v1.ClinicDetail clinics = 3;
+   */
+  clinics: ClinicDetail[];
+};
+
+/**
+ * Describes the message dental.v1.GetSubscriptionResponse.
+ * Use `create(GetSubscriptionResponseSchema)` to create a new message.
+ */
+export const GetSubscriptionResponseSchema: GenMessage<GetSubscriptionResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 24);
+
+/**
+ * @generated from message dental.v1.GetClinicRequest
+ */
+export type GetClinicRequest = Message<"dental.v1.GetClinicRequest"> & {
+  /**
+   * 16 raw UUID bytes (ClinicSummary.id or ClinicDetail.id).
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+};
+
+/**
+ * Describes the message dental.v1.GetClinicRequest.
+ * Use `create(GetClinicRequestSchema)` to create a new message.
+ */
+export const GetClinicRequestSchema: GenMessage<GetClinicRequest> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 25);
+
+/**
+ * @generated from message dental.v1.GetClinicResponse
+ */
+export type GetClinicResponse = Message<"dental.v1.GetClinicResponse"> & {
+  /**
+   * Its limits are the ones of the owner's subscription in force now: none are
+   * exceeded when no subscription is in force.
+   *
+   * @generated from field: dental.v1.ClinicDetail clinic = 1;
+   */
+  clinic?: ClinicDetail | undefined;
+
+  /**
+   * The owner.
+   *
+   * @generated from field: dental.v1.User owner = 2;
+   */
+  owner?: User | undefined;
+
+  /**
+   * The owner's identification code, for GetUser; empty if none is on file.
+   *
+   * @generated from field: dental.v1.PersonIdentity owner_identity = 3;
+   */
+  ownerIdentity?: PersonIdentity | undefined;
+
+  /**
+   * @generated from field: string owner_phone = 4;
+   */
+  ownerPhone: string;
+
+  /**
+   * Empty when none was given.
+   *
+   * @generated from field: string owner_email = 5;
+   */
+  ownerEmail: string;
+
+  /**
+   * @generated from field: bool owner_disabled = 6;
+   */
+  ownerDisabled: boolean;
+
+  /**
+   * When the owner's paid time ends: the subscription in force, plus renewals that
+   * follow it without a gap. Unset when none is in force (logins fail with
+   * "subscription_inactive").
+   *
+   * @generated from field: google.protobuf.Timestamp paid_until = 7;
+   */
+  paidUntil?: Timestamp | undefined;
+
+  /**
+   * What the subscription in force allows; 0 when none is in force.
+   *
+   * @generated from field: uint32 max_clinics = 8;
+   */
+  maxClinics: number;
+
+  /**
+   * @generated from field: uint32 max_devices_per_clinic = 9;
+   */
+  maxDevicesPerClinic: number;
+};
+
+/**
+ * Describes the message dental.v1.GetClinicResponse.
+ * Use `create(GetClinicResponseSchema)` to create a new message.
+ */
+export const GetClinicResponseSchema: GenMessage<GetClinicResponse> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 26);
+
+/**
+ * A clinic in full, as the admin panel shows it under a subscription.
+ *
+ * @generated from message dental.v1.ClinicDetail
+ */
+export type ClinicDetail = Message<"dental.v1.ClinicDetail"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string license_number = 3;
+   */
+  licenseNumber: string;
+
+  /**
+   * @generated from field: string phone = 4;
+   */
+  phone: string;
+
+  /**
+   * Province name; empty for clinics registered before cities were picked from a list.
+   *
+   * @generated from field: string province = 5;
+   */
+  province: string;
+
+  /**
+   * @generated from field: string city = 6;
+   */
+  city: string;
+
+  /**
+   * @generated from field: string address = 7;
+   */
+  address: string;
+
+  /**
+   * Empty when none was given.
+   *
+   * @generated from field: string postal_code = 8;
+   */
+  postalCode: string;
+
+  /**
+   * Unset when the clinic has none.
+   *
+   * @generated from field: dental.v1.GeoLocation location = 9;
+   */
+  location?: GeoLocation | undefined;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 10;
+   */
+  createdAt?: Timestamp | undefined;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp updated_at = 11;
+   */
+  updatedAt?: Timestamp | undefined;
+
+  /**
+   * Accounts that are members of the clinic, the owner included.
+   *
+   * @generated from field: uint32 member_count = 12;
+   */
+  memberCount: number;
+
+  /**
+   * Patients synced from the clinic.
+   *
+   * @generated from field: uint32 patient_count = 13;
+   */
+  patientCount: number;
+
+  /**
+   * Beyond max_clinics of the subscription it is shown with (see GetSubscriptionResponse
+   * and GetClinicResponse), counting the owner's clinics oldest first as AuthService.Login
+   * does: while that subscription is in force, logins there fail with "clinic_limit_exceeded".
+   *
+   * @generated from field: bool over_clinic_limit = 14;
+   */
+  overClinicLimit: boolean;
+
+  /**
+   * All installations, revoked ones included: not revoked first, then newest first.
+   *
+   * @generated from field: repeated dental.v1.InstallationDetail installations = 15;
+   */
+  installations: InstallationDetail[];
+};
+
+/**
+ * Describes the message dental.v1.ClinicDetail.
+ * Use `create(ClinicDetailSchema)` to create a new message.
+ */
+export const ClinicDetailSchema: GenMessage<ClinicDetail> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 27);
+
+/**
+ * An installation of the desktop app, as the admin panel shows it. Never its secret.
+ *
+ * @generated from message dental.v1.InstallationDetail
+ */
+export type InstallationDetail = Message<"dental.v1.InstallationDetail"> & {
+  /**
+   * 16 raw UUID bytes.
+   *
+   * @generated from field: bytes id = 1;
+   */
+  id: Uint8Array;
+
+  /**
+   * SHA-256 of the Windows MachineGuid: the same computer has the same hash across
+   * reinstalls of the app.
+   *
+   * @generated from field: bytes machine_id_hash = 2;
+   */
+  machineIdHash: Uint8Array;
+
+  /**
+   * @generated from field: string hostname = 3;
+   */
+  hostname: string;
+
+  /**
+   * @generated from field: string os_name = 4;
+   */
+  osName: string;
+
+  /**
+   * @generated from field: string os_version = 5;
+   */
+  osVersion: string;
+
+  /**
+   * @generated from field: string cpu_model = 6;
+   */
+  cpuModel: string;
+
+  /**
+   * @generated from field: uint32 cpu_cores = 7;
+   */
+  cpuCores: number;
+
+  /**
+   * @generated from field: uint64 memory_bytes = 8;
+   */
+  memoryBytes: bigint;
+
+  /**
+   * @generated from field: repeated string mac_addresses = 9;
+   */
+  macAddresses: string[];
+
+  /**
+   * Desktop app version when it registered.
+   *
+   * @generated from field: string app_version = 10;
+   */
+  appVersion: string;
+
+  /**
+   * How long a login on this installation keeps working offline.
+   *
+   * @generated from field: google.protobuf.Duration offline_access = 11;
+   */
+  offlineAccess?: Duration | undefined;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 12;
+   */
+  createdAt?: Timestamp | undefined;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp last_seen_at = 13;
+   */
+  lastSeenAt?: Timestamp | undefined;
+
+  /**
+   * Unset unless revoked.
+   *
+   * @generated from field: google.protobuf.Timestamp revoked_at = 14;
+   */
+  revokedAt?: Timestamp | undefined;
+
+  /**
+   * The last login on this installation; unset if nobody logged in on it.
+   *
+   * @generated from field: google.protobuf.Timestamp last_login_at = 15;
+   */
+  lastLoginAt?: Timestamp | undefined;
+
+  /**
+   * Who made the last login; unset with last_login_at.
+   *
+   * @generated from field: dental.v1.User last_login_user = 16;
+   */
+  lastLoginUser?: User | undefined;
+
+  /**
+   * Not revoked, but beyond max_devices_per_clinic of the subscription its clinic is shown
+   * with, counting the clinic's installations that are not revoked oldest first as
+   * AuthService.Login does: while that subscription is in force, logins there fail with
+   * "device_limit_exceeded".
+   *
+   * @generated from field: bool over_device_limit = 17;
+   */
+  overDeviceLimit: boolean;
+};
+
+/**
+ * Describes the message dental.v1.InstallationDetail.
+ * Use `create(InstallationDetailSchema)` to create a new message.
+ */
+export const InstallationDetailSchema: GenMessage<InstallationDetail> = /*@__PURE__*/
+  messageDesc(file_dental_v1_admin, 28);
 
 /**
  * @generated from message dental.v1.ListPaymentsRequest
@@ -732,7 +1111,7 @@ export type ListPaymentsRequest = Message<"dental.v1.ListPaymentsRequest"> & {
  * Use `create(ListPaymentsRequestSchema)` to create a new message.
  */
 export const ListPaymentsRequestSchema: GenMessage<ListPaymentsRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 23);
+  messageDesc(file_dental_v1_admin, 29);
 
 /**
  * @generated from message dental.v1.ListPaymentsResponse
@@ -756,7 +1135,7 @@ export type ListPaymentsResponse = Message<"dental.v1.ListPaymentsResponse"> & {
  * Use `create(ListPaymentsResponseSchema)` to create a new message.
  */
 export const ListPaymentsResponseSchema: GenMessage<ListPaymentsResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 24);
+  messageDesc(file_dental_v1_admin, 30);
 
 /**
  * A payment with what an administrator needs to check it.
@@ -799,7 +1178,7 @@ export type PaymentReview = Message<"dental.v1.PaymentReview"> & {
  * Use `create(PaymentReviewSchema)` to create a new message.
  */
 export const PaymentReviewSchema: GenMessage<PaymentReview> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 25);
+  messageDesc(file_dental_v1_admin, 31);
 
 /**
  * @generated from message dental.v1.ApprovePaymentRequest
@@ -825,7 +1204,7 @@ export type ApprovePaymentRequest = Message<"dental.v1.ApprovePaymentRequest"> &
  * Use `create(ApprovePaymentRequestSchema)` to create a new message.
  */
 export const ApprovePaymentRequestSchema: GenMessage<ApprovePaymentRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 26);
+  messageDesc(file_dental_v1_admin, 32);
 
 /**
  * @generated from message dental.v1.ApprovePaymentResponse
@@ -849,7 +1228,7 @@ export type ApprovePaymentResponse = Message<"dental.v1.ApprovePaymentResponse">
  * Use `create(ApprovePaymentResponseSchema)` to create a new message.
  */
 export const ApprovePaymentResponseSchema: GenMessage<ApprovePaymentResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 27);
+  messageDesc(file_dental_v1_admin, 33);
 
 /**
  * @generated from message dental.v1.RejectPaymentRequest
@@ -875,7 +1254,7 @@ export type RejectPaymentRequest = Message<"dental.v1.RejectPaymentRequest"> & {
  * Use `create(RejectPaymentRequestSchema)` to create a new message.
  */
 export const RejectPaymentRequestSchema: GenMessage<RejectPaymentRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 28);
+  messageDesc(file_dental_v1_admin, 34);
 
 /**
  * @generated from message dental.v1.RejectPaymentResponse
@@ -892,7 +1271,7 @@ export type RejectPaymentResponse = Message<"dental.v1.RejectPaymentResponse"> &
  * Use `create(RejectPaymentResponseSchema)` to create a new message.
  */
 export const RejectPaymentResponseSchema: GenMessage<RejectPaymentResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 29);
+  messageDesc(file_dental_v1_admin, 35);
 
 /**
  * @generated from message dental.v1.ListPaymentAccountsRequest
@@ -905,7 +1284,7 @@ export type ListPaymentAccountsRequest = Message<"dental.v1.ListPaymentAccountsR
  * Use `create(ListPaymentAccountsRequestSchema)` to create a new message.
  */
 export const ListPaymentAccountsRequestSchema: GenMessage<ListPaymentAccountsRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 30);
+  messageDesc(file_dental_v1_admin, 36);
 
 /**
  * @generated from message dental.v1.ListPaymentAccountsResponse
@@ -922,7 +1301,7 @@ export type ListPaymentAccountsResponse = Message<"dental.v1.ListPaymentAccounts
  * Use `create(ListPaymentAccountsResponseSchema)` to create a new message.
  */
 export const ListPaymentAccountsResponseSchema: GenMessage<ListPaymentAccountsResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 31);
+  messageDesc(file_dental_v1_admin, 37);
 
 /**
  * @generated from message dental.v1.CreatePaymentAccountRequest
@@ -967,7 +1346,7 @@ export type CreatePaymentAccountRequest = Message<"dental.v1.CreatePaymentAccoun
  * Use `create(CreatePaymentAccountRequestSchema)` to create a new message.
  */
 export const CreatePaymentAccountRequestSchema: GenMessage<CreatePaymentAccountRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 32);
+  messageDesc(file_dental_v1_admin, 38);
 
 /**
  * @generated from message dental.v1.CreatePaymentAccountResponse
@@ -984,7 +1363,7 @@ export type CreatePaymentAccountResponse = Message<"dental.v1.CreatePaymentAccou
  * Use `create(CreatePaymentAccountResponseSchema)` to create a new message.
  */
 export const CreatePaymentAccountResponseSchema: GenMessage<CreatePaymentAccountResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 33);
+  messageDesc(file_dental_v1_admin, 39);
 
 /**
  * @generated from message dental.v1.UpdatePaymentAccountRequest
@@ -1035,7 +1414,7 @@ export type UpdatePaymentAccountRequest = Message<"dental.v1.UpdatePaymentAccoun
  * Use `create(UpdatePaymentAccountRequestSchema)` to create a new message.
  */
 export const UpdatePaymentAccountRequestSchema: GenMessage<UpdatePaymentAccountRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 34);
+  messageDesc(file_dental_v1_admin, 40);
 
 /**
  * @generated from message dental.v1.UpdatePaymentAccountResponse
@@ -1052,7 +1431,7 @@ export type UpdatePaymentAccountResponse = Message<"dental.v1.UpdatePaymentAccou
  * Use `create(UpdatePaymentAccountResponseSchema)` to create a new message.
  */
 export const UpdatePaymentAccountResponseSchema: GenMessage<UpdatePaymentAccountResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 35);
+  messageDesc(file_dental_v1_admin, 41);
 
 /**
  * @generated from message dental.v1.ListPatientsRequest
@@ -1086,7 +1465,7 @@ export type ListPatientsRequest = Message<"dental.v1.ListPatientsRequest"> & {
  * Use `create(ListPatientsRequestSchema)` to create a new message.
  */
 export const ListPatientsRequestSchema: GenMessage<ListPatientsRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 36);
+  messageDesc(file_dental_v1_admin, 42);
 
 /**
  * @generated from message dental.v1.ListPatientsResponse
@@ -1110,7 +1489,7 @@ export type ListPatientsResponse = Message<"dental.v1.ListPatientsResponse"> & {
  * Use `create(ListPatientsResponseSchema)` to create a new message.
  */
 export const ListPatientsResponseSchema: GenMessage<ListPatientsResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 37);
+  messageDesc(file_dental_v1_admin, 43);
 
 /**
  * A patient as the admin panel lists it; fields as in Patient.
@@ -1196,7 +1575,7 @@ export type PatientListItem = Message<"dental.v1.PatientListItem"> & {
  * Use `create(PatientListItemSchema)` to create a new message.
  */
 export const PatientListItemSchema: GenMessage<PatientListItem> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 38);
+  messageDesc(file_dental_v1_admin, 44);
 
 /**
  * @generated from message dental.v1.ListUsersRequest
@@ -1230,7 +1609,7 @@ export type ListUsersRequest = Message<"dental.v1.ListUsersRequest"> & {
  * Use `create(ListUsersRequestSchema)` to create a new message.
  */
 export const ListUsersRequestSchema: GenMessage<ListUsersRequest> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 39);
+  messageDesc(file_dental_v1_admin, 45);
 
 /**
  * @generated from message dental.v1.ListUsersResponse
@@ -1254,7 +1633,7 @@ export type ListUsersResponse = Message<"dental.v1.ListUsersResponse"> & {
  * Use `create(ListUsersResponseSchema)` to create a new message.
  */
 export const ListUsersResponseSchema: GenMessage<ListUsersResponse> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 40);
+  messageDesc(file_dental_v1_admin, 46);
 
 /**
  * @generated from message dental.v1.UserListItem
@@ -1329,6 +1708,13 @@ export type UserListItem = Message<"dental.v1.UserListItem"> & {
    * @generated from field: google.protobuf.Timestamp last_login_at = 11;
    */
   lastLoginAt?: Timestamp | undefined;
+
+  /**
+   * Installations that are not revoked, across the clinics the account owns.
+   *
+   * @generated from field: uint32 installation_count = 12;
+   */
+  installationCount: number;
 };
 
 /**
@@ -1336,7 +1722,7 @@ export type UserListItem = Message<"dental.v1.UserListItem"> & {
  * Use `create(UserListItemSchema)` to create a new message.
  */
 export const UserListItemSchema: GenMessage<UserListItem> = /*@__PURE__*/
-  messageDesc(file_dental_v1_admin, 41);
+  messageDesc(file_dental_v1_admin, 47);
 
 /**
  * Where a subscription stands, on the server's clock.
@@ -1515,6 +1901,28 @@ export const AdminService: GenService<{
     methodKind: "unary";
     input: typeof ListSubscriptionsRequestSchema;
     output: typeof ListSubscriptionsResponseSchema;
+  },
+  /**
+   * One subscription in full: its owner, the payment that bought it, and the owner's
+   * clinics with all their installations. Fails with NOT_FOUND "subscription_not_found".
+   *
+   * @generated from rpc dental.v1.AdminService.GetSubscription
+   */
+  getSubscription: {
+    methodKind: "unary";
+    input: typeof GetSubscriptionRequestSchema;
+    output: typeof GetSubscriptionResponseSchema;
+  },
+  /**
+   * One clinic in full, with all its installations and its owner. Its limits are the
+   * ones of the owner's subscription in force now. Fails with NOT_FOUND "clinic_not_found".
+   *
+   * @generated from rpc dental.v1.AdminService.GetClinic
+   */
+  getClinic: {
+    methodKind: "unary";
+    input: typeof GetClinicRequestSchema;
+    output: typeof GetClinicResponseSchema;
   },
   /**
    * Payments reported by clinic owners (BillingService.CreatePayment), with who paid,

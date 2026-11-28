@@ -71,6 +71,7 @@ export function UsersPage() {
                 <TableHead>{t("users.columns.subscription")}</TableHead>
                 <TableHead>{t("users.columns.ownedClinics")}</TableHead>
                 <TableHead>{t("users.columns.memberClinics")}</TableHead>
+                <TableHead>{t("users.columns.installations")}</TableHead>
                 <TableHead>{t("users.columns.lastLogin")}</TableHead>
                 <TableHead>{t("users.columns.createdAt")}</TableHead>
               </TableRow>
@@ -127,6 +128,8 @@ export function UsersPage() {
                     </TableCell>
                     <TableCell>{format.number(item.ownedClinicCount)}</TableCell>
                     <TableCell>{format.number(item.memberClinicCount)}</TableCell>
+                    {/* Devices not revoked, across the clinics the account owns. */}
+                    <TableCell>{format.number(item.installationCount)}</TableCell>
                     <TableCell>
                       {item.lastLoginAt ? format.dateTime(item.lastLoginAt) : t("users.neverLoggedIn")}
                     </TableCell>

@@ -64,6 +64,8 @@
     "clinics_other": "{{clinics}} مطب",
     "devicesPerClinic_one": "{{devices}} دستگاه برای هر مطب",
     "devicesPerClinic_other": "{{devices}} دستگاه برای هر مطب",
+    "devices_one": "{{devices}} دستگاه",
+    "devices_other": "{{devices}} دستگاه",
     "empty": "—",
     "search": "جستجو",
     "pagination": {
@@ -158,6 +160,7 @@
         "status": "وضعیت",
         "source": "نحوه‌ی خرید",
         "amount": "مبلغ",
+        "clinics": "مطب‌ها",
         "note": "یادداشت"
       },
       "period": "{{start}} تا {{end}}",
@@ -231,6 +234,80 @@
     "validation": {
       "plan": "یک پلن انتخاب کنید.",
       "noteLength": "یادداشت حداکثر می‌تواند ۵۰۰ نویسه باشد."
+    }
+  },
+  "subscription": {
+    "open": "جزئیات اشتراک",
+    "backToAccount": "بازگشت به حساب کاربر",
+    "notFound": "اشتراکی با این شناسه پیدا نشد.",
+    "details": {
+      "owner": "مسئول مطب",
+      "limits": "سقف پلن",
+      "amount": "مبلغ",
+      "source": "نحوه‌ی خرید",
+      "completedAt": "زمان تأیید خرید",
+      "canceledAt": "زمان لغو",
+      "note": "یادداشت"
+    },
+    "clinics": {
+      "title": "مطب‌های تحت پوشش",
+      "description": "مطب‌های مسئول این اشتراک، به ترتیب ثبت. سقف مطب‌ها و دستگاه‌ها با همین اشتراک سنجیده می‌شود.",
+      "empty": "مسئول این اشتراک مطبی ندارد."
+    }
+  },
+  "clinic": {
+    "open": "جزئیات مطب",
+    "back": "بازگشت",
+    "notFound": "مطبی با این شناسه پیدا نشد.",
+    "overLimit": "خارج از سقف مطب‌ها",
+    "licenseNumber": "شماره پروانه {{number}}",
+    "details": {
+      "phone": "تلفن مطب",
+      "province": "استان",
+      "city": "شهر",
+      "address": "نشانی",
+      "postalCode": "کد پستی",
+      "location": "موقعیت روی نقشه",
+      "createdAt": "تاریخ ثبت",
+      "updatedAt": "آخرین ویرایش",
+      "members": "اعضا",
+      "patients": "بیماران",
+      "devices": "دستگاه‌های فعال",
+      "devicesOfLimit": "{{count}} از {{max}}"
+    },
+    "owner": {
+      "title": "مسئول مطب و اشتراک",
+      "name": "مسئول مطب",
+      "subscription": "اشتراک",
+      "paidUntil": "تا {{date}}",
+      "limits": "سقف اشتراک در جریان",
+      "noSubscription": "مسئول این مطب اشتراک فعالی ندارد؛ هیچ‌کس نمی‌تواند روی دستگاه‌های این مطب وارد شود."
+    },
+    "devices": {
+      "title": "دستگاه‌ها",
+      "description": "همه‌ی دستگاه‌های این مطب، اول دستگاه‌های فعال. سقف دستگاه‌ها با اشتراک در جریان سنجیده می‌شود، همان‌طور که هنگام ورود.",
+      "empty": "این مطب دستگاهی ندارد.",
+      "columns": {
+        "computer": "رایانه",
+        "system": "سیستم‌عامل",
+        "hardware": "سخت‌افزار",
+        "mac": "آدرس‌های MAC",
+        "appVersion": "نسخه‌ی برنامه",
+        "offlineAccess": "کار آفلاین",
+        "createdAt": "تاریخ ثبت",
+        "lastSeen": "آخرین ارتباط",
+        "lastLogin": "آخرین ورود",
+        "status": "وضعیت"
+      },
+      "machine": "شناسه‌ی رایانه {{id}}",
+      "cores_one": "{{cores}} هسته",
+      "cores_other": "{{cores}} هسته",
+      "memory": "{{size}} گیگابایت رم",
+      "neverLoggedIn": "وارد نشده",
+      "active": "فعال",
+      "revoked": "مسدودشده",
+      "revokedAt": "از {{date}}",
+      "overLimit": "خارج از سقف دستگاه‌ها"
     }
   },
   "payments": {
@@ -380,6 +457,7 @@
       "subscription": "اشتراک",
       "ownedClinics": "مطب‌های مالک",
       "memberClinics": "مطب‌های عضو",
+      "installations": "دستگاه‌ها",
       "lastLogin": "آخرین ورود",
       "createdAt": "تاریخ ثبت‌نام"
     },
@@ -429,6 +507,7 @@
     "planNotFound": "این پلن دیگر وجود ندارد.",
     "planInactive": "این پلن غیرفعال است و قابل فروش نیست.",
     "subscriptionNotFound": "این اشتراک دیگر وجود ندارد.",
+    "clinicNotFound": "این مطب دیگر وجود ندارد.",
     "paymentNotFound": "این پرداخت دیگر وجود ندارد.",
     "paymentNotPending": "این پرداخت قبلاً بررسی شده یا مسئول مطب از آن انصراف داده است.",
     "renewalQueued": "پس از ثبت این ارتقا، اشتراک دیگری فروخته شده است و دیگر نمی‌توان آن را اعمال کرد. به‌جای آن، پرداخت را رد کنید.",

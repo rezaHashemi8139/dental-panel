@@ -16,6 +16,7 @@ const REASONS: Record<string, ParseKeys> = {
   plan_not_found: "errors.planNotFound",
   plan_inactive: "errors.planInactive",
   subscription_not_found: "errors.subscriptionNotFound",
+  clinic_not_found: "errors.clinicNotFound",
   payment_not_found: "errors.paymentNotFound",
   // Approved, rejected or canceled by the owner meanwhile.
   payment_not_pending: "errors.paymentNotPending",

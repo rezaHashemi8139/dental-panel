@@ -44,11 +44,17 @@ export function RootLayout() {
  * Scrolls by itself and centers its content across. Down, the content starts at the
  * top (`top`, the logged-in pages) or is centered while it fits; taller content
  * starts at the top instead of being cut off.
+ *
+ * With `top` the content is at least as tall as the area, so a page can fill it, and
+ * grows with what it holds (`self-start` instead of being stretched to the area's
+ * height, which squeezed its cards and left nothing to scroll).
  */
 export function PageArea({ top, children }: { top?: boolean; children: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-1 overflow-y-auto p-6">
-      <div className={cn("flex w-full justify-center", top ? "mx-auto" : "m-auto")}>{children}</div>
+      <div className={cn("flex w-full justify-center", top ? "mx-auto min-h-full self-start" : "m-auto")}>
+        {children}
+      </div>
     </div>
   );
 }

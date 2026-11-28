@@ -12,6 +12,8 @@ import {
   SubscriptionsPage,
   type SubscriptionsSearch,
 } from "@/pages/subscriptions-page";
+import { loadSubscription, SubscriptionPage } from "@/pages/subscription-page";
+import { ClinicPage, loadClinic } from "@/pages/clinic-page";
 import { loadPayments, parsePaymentsSearch, PaymentsPage, type PaymentsSearch } from "@/pages/payments-page";
 import { loadPaymentAccounts, PaymentAccountsPage } from "@/pages/payment-accounts-page";
 import { loadPatients, parsePatientsSearch, PatientsPage, type PatientsSearch } from "@/pages/patients-page";
@@ -30,6 +32,9 @@ import { loadUsers, parseUsersSearch, UsersPage, type UsersSearch } from "@/page
  * /subscriptions     │
  *                    │   ?status=active|upcoming|ended|canceled (none: all) &q=… &page=… (the list), or
  *                    │   ?code=… (one owner's account, by identification code)
+ * /subscriptions/$id │ one subscription in full ($id: its UUID), with the search above
+ *                    │   kept to go back where it was opened from
+ * /clinics/$id       │ one clinic in full ($id: its UUID), with every device
  * /payments          │   ?status=approved|rejected|canceled|all (none: pending, the queue to review) &q=… &page=…
  * /payment-accounts  │
  * /patients          ┘   ?q=… &page=…
@@ -105,6 +110,22 @@ const subscriptionsRoute = createRoute({
   component: SubscriptionsPage,
 });
 
+const subscriptionRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "subscriptions/$subscriptionId",
+  // Where it was opened from: the list's filters, or an owner's account (?code=…).
+  validateSearch: (search: Record<string, unknown>): SubscriptionsSearch => parseSubscriptionsSearch(search),
+  loader: ({ params }) => loadSubscription(params.subscriptionId),
+  component: SubscriptionPage,
+});
+
+const clinicRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "clinics/$clinicId",
+  loader: ({ params }) => loadClinic(params.clinicId),
+  component: ClinicPage,
+});
+
 const paymentsRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "payments",
@@ -138,6 +159,8 @@ const routeTree = rootRoute.addChildren([
     usersRoute,
     plansRoute,
     subscriptionsRoute,
+    subscriptionRoute,
+    clinicRoute,
     paymentsRoute,
     paymentAccountsRoute,
     patientsRoute,

@@ -29,6 +29,8 @@ export function useFormat() {
       /** An amount in Iranian rials, as the server keeps them. */
       rials: (value: bigint) => t("common.rials", { amount: number.format(value) }),
       days: (count: number) => t("common.days", { count, days: number.format(count) }),
+      /** A number of devices (installations), e.g. "2 devices". */
+      devices: (count: number) => t("common.devices", { count, devices: number.format(count) }),
       /** A subscription's limits, e.g. "1 clinic, 2 devices per clinic". */
       limits: (clinics: number, devices: number) =>
         t("subscriptions.list.limits", {
