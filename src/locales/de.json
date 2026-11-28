@@ -46,7 +46,36 @@
   },
   "account": {
     "label": "Konto",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "profile": {
+      "menu": "Profil bearbeiten",
+      "title": "Profil bearbeiten",
+      "description": "Ihr Name und Benutzername als Administrator. Sie bleiben angemeldet.",
+      "fullName": "Vollständiger Name",
+      "usernameHint": "3 bis 32 lateinische Buchstaben, Ziffern, Punkte, Bindestriche oder Unterstriche. Melden Sie sich künftig damit an.",
+      "save": "Speichern",
+      "working": "Wird gespeichert..."
+    },
+    "password": {
+      "menu": "Passwort ändern",
+      "title": "Passwort ändern",
+      "description": "Geben Sie Ihr aktuelles und dann das neue Passwort ein. Hier bleiben Sie angemeldet; Ihre anderen Sitzungen werden beendet.",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "newHint": "Mindestens 8 Zeichen, mit einem Klein- und einem Großbuchstaben und einer Ziffer.",
+      "confirm": "Neues Passwort wiederholen",
+      "save": "Passwort ändern",
+      "working": "Wird geändert...",
+      "wrongCurrent": "Das aktuelle Passwort ist falsch.",
+      "done": "Ihr Passwort wurde geändert. Ihre anderen Sitzungen wurden beendet.",
+      "close": "Schließen"
+    },
+    "validation": {
+      "fullNameLength": "Der Name darf höchstens 100 Zeichen lang sein.",
+      "username": "Verwenden Sie 3 bis 32 lateinische Buchstaben, Ziffern, Punkte, Bindestriche oder Unterstriche.",
+      "weakPassword": "Verwenden Sie mindestens 8 Zeichen, mit einem Klein- und einem Großbuchstaben und einer Ziffer.",
+      "passwordMismatch": "Die beiden Passwörter stimmen nicht überein."
+    }
   },
   "home": {
     "welcome": "Willkommen, {{name}}",
@@ -234,6 +263,14 @@
     "validation": {
       "plan": "Wählen Sie einen Tarif.",
       "noteLength": "Die Notiz darf höchstens 500 Zeichen lang sein."
+    },
+    "delete": {
+      "button": "Abonnement löschen",
+      "title": "Abonnement löschen",
+      "description": "Das Abonnement „{{plan}}“ ({{period}}) wird endgültig entfernt. Läuft kein anderes Abonnement, verlieren die Praxen dieses Benutzers sofort den Zugang. Dies kann nicht rückgängig gemacht werden.",
+      "purchased": "Es wurde in der Desktop-App gekauft, daher wird auch der Zahlungsdatensatz gelöscht.",
+      "submit": "Endgültig löschen",
+      "working": "Wird gelöscht..."
     }
   },
   "subscription": {
@@ -472,7 +509,16 @@
     "disabled": "Deaktiviert",
     "noSubscription": "Kein Abonnement",
     "paidUntil": "Bis {{date}}",
-    "neverLoggedIn": "Nie"
+    "neverLoggedIn": "Nie",
+    "delete": {
+      "button": "Benutzer löschen",
+      "title": "Benutzer löschen",
+      "description": "Das Konto von {{name}} wird endgültig gelöscht, mit seinen Abonnements und Zahlungen sowie seinen Praxen samt Geräten, Mitgliedern und Behandlungsdaten. Mitglieder seiner Praxen behalten ihre eigenen Konten. Dies kann nicht rückgängig gemacht werden.",
+      "clinicsWarning": "Dieses Konto besitzt {{clinics}}. Sie werden mit allen Daten darin ebenfalls gelöscht.",
+      "confirmLabel": "Geben Sie zur Bestätigung den Benutzernamen ein: {{username}}",
+      "submit": "Endgültig löschen",
+      "working": "Wird gelöscht..."
+    }
   },
   "patients": {
     "title": "Patienten",
@@ -519,6 +565,9 @@
     "paymentNotFound": "Diese Zahlung existiert nicht mehr.",
     "paymentNotPending": "Diese Zahlung wurde bereits geprüft oder vom Inhaber zurückgezogen.",
     "renewalQueued": "Nach der Meldung dieses Upgrades wurde ein weiteres Abonnement verkauft, daher kann es nicht mehr angewendet werden. Lehnen Sie die Zahlung stattdessen ab.",
-    "paymentAccountNotFound": "Dieses Zahlungskonto existiert nicht mehr."
+    "paymentAccountNotFound": "Dieses Zahlungskonto existiert nicht mehr.",
+    "usernameTaken": "Dieser Benutzername ist bereits vergeben.",
+    "weakPassword": "Das neue Passwort ist zu schwach.",
+    "passwordUnchanged": "Das neue Passwort muss sich vom aktuellen unterscheiden."
   }
 }

@@ -1,4 +1,6 @@
-import { getRouteApi, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { getRouteApi, Link, useRouter } from "@tanstack/react-router";
+import { Trash2Icon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import type { UserListItem } from "@/gen/dental/v1/admin_pb";
@@ -6,10 +8,12 @@ import { useFormat } from "@/lib/format";
 import { fromPersonIdentity } from "@/lib/identity";
 import { PAGE_SIZE, parsePage, parseQuery } from "@/lib/pagination";
 import { uuidToString } from "@/lib/uuid";
+import { DeleteUserDialog } from "@/components/delete-user-dialog";
 import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { ListPagination } from "@/components/list-pagination";
 import { ListSearch } from "@/components/list-search";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const usersRoute = getRouteApi("/app/users");
@@ -43,7 +47,9 @@ export async function loadUsers(search: UsersSearch): Promise<UsersData> {
 export function UsersPage() {
   const { t } = useTranslation();
   const format = useFormat();
+  const router = useRouter();
   const { query, page, users, total } = usersRoute.useLoaderData();
+  const [deleting, setDeleting] = useState<UserListItem | null>(null);
 
   return (
     <ListPage>
@@ -74,6 +80,7 @@ export function UsersPage() {
                 <TableHead>{t("users.columns.installations")}</TableHead>
                 <TableHead>{t("users.columns.lastLogin")}</TableHead>
                 <TableHead>{t("users.columns.createdAt")}</TableHead>
+                <TableHead />
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -134,6 +141,17 @@ export function UsersPage() {
                       {item.lastLoginAt ? format.dateTime(item.lastLoginAt) : t("users.neverLoggedIn")}
                     </TableCell>
                     <TableCell>{format.date(item.createdAt)}</TableCell>
+                    <TableCell className="text-end">
+                      <Button
+                        variant="destructive"
+                        size="icon-sm"
+                        title={t("users.delete.button")}
+                        aria-label={t("users.delete.button")}
+                        onClick={() => setDeleting(item)}
+                      >
+                        <Trash2Icon />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -141,6 +159,15 @@ export function UsersPage() {
           </Table>
         )}
       </ListResults>
+
+      {deleting?.user && (
+        <DeleteUserDialog
+          user={deleting.user}
+          ownedClinicCount={deleting.ownedClinicCount}
+          onDeleted={() => router.invalidate({ sync: true })}
+          onOpenChange={(open) => !open && setDeleting(null)}
+        />
+      )}
     </ListPage>
   );
 }

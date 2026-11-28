@@ -17,6 +17,42 @@ export const loginSchema = z.object({
 });
 export type LoginValues = z.infer<typeof loginSchema>;
 
+// --- The administrator's own account (src/components/profile-dialog.tsx, change-password-dialog.tsx) ---
+
+/** Same rules as the server (CreateAdminRequest in admin.proto). */
+const USERNAME_PATTERN = /^[A-Za-z0-9._-]{3,32}$/;
+
+export const profileSchema = z.object({
+  fullName: z
+    .string()
+    .trim()
+    .min(1, message("auth.validation.required"))
+    .refine((v) => [...v].length <= 100, message("account.validation.fullNameLength")),
+  username: z.string().trim().regex(USERNAME_PATTERN, message("account.validation.username")),
+});
+export type ProfileValues = z.infer<typeof profileSchema>;
+
+/** At least 8 characters, a lowercase letter, an uppercase letter and a digit; at most 256. */
+const strongPassword = z
+  .string()
+  .refine(
+    (v) => v.length >= 8 && v.length <= 256 && /[a-z]/.test(v) && /[A-Z]/.test(v) && /[0-9]/.test(v),
+    message("account.validation.weakPassword"),
+  );
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: required,
+    newPassword: strongPassword,
+    confirmPassword: required,
+  })
+  .superRefine((v, ctx) => {
+    if (v.confirmPassword !== v.newPassword) {
+      ctx.addIssue({ code: "custom", path: ["confirmPassword"], message: message("account.validation.passwordMismatch") });
+    }
+  });
+export type ChangePasswordValues = z.infer<typeof changePasswordSchema>;
+
 // --- Plans (src/components/plan-dialog.tsx) ---------------------------------
 
 /** A whole number typed as text, from `min` to `max`. Same limits as the server (admin.proto). */

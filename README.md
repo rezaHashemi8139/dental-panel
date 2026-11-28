@@ -6,7 +6,12 @@ Web panel for the system administrators of the dental server (`../dental-server`
 - **Subscriptions** (`/subscriptions`): every subscription bought, newest first and paged, filtered by status
   and searched by the owner's name, username, identification code or phone. Open an owner to see their account,
   clinics, subscriptions (with how each was bought), completed purchases and payments not yet approved; sell a
-  subscription from an active plan (it starts when the paid time already bought ends) or cancel one.
+  subscription from an active plan (it starts when the paid time already bought ends), cancel one, or delete
+  one for good (with the payment that bought it).
+- **Users** (`/users`): desktop-app accounts, newest first and paged. Delete an account for good, with its
+  subscriptions, payments and the clinics it owns (the username must be typed to confirm).
+- **Account menu**: the logged-in administrator edits their own name and username, and changes their password
+  (their other sessions end).
 - **Payments** (`/payments`): payments clinic owners reported in the desktop app, pending ones first as
   a review queue; check each against the bank statement, then approve it (adds the subscription) or
   reject it with a reason the owner sees. Paged; filter by status (`?status=approved|rejected|canceled|all`)

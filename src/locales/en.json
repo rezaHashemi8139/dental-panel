@@ -46,7 +46,36 @@
   },
   "account": {
     "label": "Account",
-    "logout": "Log out"
+    "logout": "Log out",
+    "profile": {
+      "menu": "Edit profile",
+      "title": "Edit profile",
+      "description": "Your name and username as an administrator. You stay logged in.",
+      "fullName": "Full name",
+      "usernameHint": "3 to 32 Latin letters, digits, dots, dashes or underscores. Use it to log in from now on.",
+      "save": "Save",
+      "working": "Saving..."
+    },
+    "password": {
+      "menu": "Change password",
+      "title": "Change password",
+      "description": "Enter your current password, then the new one. You stay logged in here; your other sessions end.",
+      "current": "Current password",
+      "new": "New password",
+      "newHint": "At least 8 characters, with a lowercase letter, an uppercase letter and a digit.",
+      "confirm": "Repeat the new password",
+      "save": "Change password",
+      "working": "Changing...",
+      "wrongCurrent": "The current password is wrong.",
+      "done": "Your password has been changed. Your other sessions have ended.",
+      "close": "Close"
+    },
+    "validation": {
+      "fullNameLength": "The name can be at most 100 characters.",
+      "username": "Use 3 to 32 Latin letters, digits, dots, dashes or underscores.",
+      "weakPassword": "Use at least 8 characters, with a lowercase letter, an uppercase letter and a digit.",
+      "passwordMismatch": "The two passwords do not match."
+    }
   },
   "home": {
     "welcome": "Welcome, {{name}}",
@@ -234,6 +263,14 @@
     "validation": {
       "plan": "Choose a plan.",
       "noteLength": "The note can be at most 500 characters."
+    },
+    "delete": {
+      "button": "Delete subscription",
+      "title": "Delete subscription",
+      "description": "The subscription \"{{plan}}\" ({{period}}) is removed for good. If no other subscription is in force, this user's clinics lose access at once. This cannot be undone.",
+      "purchased": "It was bought in the desktop app, so its payment record is deleted too.",
+      "submit": "Delete for good",
+      "working": "Deleting..."
     }
   },
   "subscription": {
@@ -472,7 +509,16 @@
     "disabled": "Disabled",
     "noSubscription": "No subscription",
     "paidUntil": "Until {{date}}",
-    "neverLoggedIn": "Never"
+    "neverLoggedIn": "Never",
+    "delete": {
+      "button": "Delete user",
+      "title": "Delete user",
+      "description": "The account of {{name}} is deleted for good, with its subscriptions and payments, and its clinics with their devices, members and treatment records. Members of its clinics keep their own accounts. This cannot be undone.",
+      "clinicsWarning": "This account owns {{clinics}}. They are deleted too, with every record in them.",
+      "confirmLabel": "To confirm, type the username: {{username}}",
+      "submit": "Delete for good",
+      "working": "Deleting..."
+    }
   },
   "patients": {
     "title": "Patients",
@@ -519,6 +565,9 @@
     "paymentNotFound": "This payment no longer exists.",
     "paymentNotPending": "This payment has already been reviewed, or the owner withdrew it.",
     "renewalQueued": "Another subscription was sold after this upgrade was reported, so it cannot be applied now. Reject the payment instead.",
-    "paymentAccountNotFound": "This payment account no longer exists."
+    "paymentAccountNotFound": "This payment account no longer exists.",
+    "usernameTaken": "This username is already taken.",
+    "weakPassword": "The new password is too weak.",
+    "passwordUnchanged": "The new password must be different from the current one."
   }
 }

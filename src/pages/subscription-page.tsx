@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
-import { getRouteApi, Link } from "@tanstack/react-router";
-import { ArrowLeftIcon, BanIcon, SearchXIcon } from "lucide-react";
+import { getRouteApi, Link, useNavigate } from "@tanstack/react-router";
+import { ArrowLeftIcon, BanIcon, SearchXIcon, Trash2Icon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { hasReason } from "@/api/errors";
@@ -12,6 +12,7 @@ import { daysLeft, fromListedStatus } from "@/lib/subscription";
 import { uuidFromString, uuidToString } from "@/lib/uuid";
 import { CancelSubscriptionDialog } from "@/components/cancel-subscription-dialog";
 import { ClinicFacts, DevicesTable } from "@/components/clinic-details";
+import { DeleteSubscriptionDialog } from "@/components/delete-subscription-dialog";
 import { Detail } from "@/components/detail";
 import { ListEmpty, ListPage } from "@/components/list-page";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -71,7 +72,11 @@ export function SubscriptionPage() {
 function SubscriptionDetails({ data, back }: { data: GetSubscriptionResponse; back: ReactNode }) {
   const { t } = useTranslation();
   const format = useFormat();
+  // Where it was opened from, to go back there once it is deleted.
+  const search = subscriptionRoute.useSearch();
+  const navigate = useNavigate();
   const [canceling, setCanceling] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const item = data.item!;
   const subscription = item.subscription!;
   const { purchase } = item;
@@ -107,6 +112,10 @@ function SubscriptionDetails({ data, back }: { data: GetSubscriptionResponse; ba
                 {t("subscriptions.cancel.button")}
               </Button>
             )}
+            <Button variant="destructive" size="sm" onClick={() => setDeleting(true)}>
+              <Trash2Icon data-icon="inline-start" />
+              {t("subscriptions.delete.button")}
+            </Button>
           </CardAction>
         </CardHeader>
         <CardContent>
@@ -176,6 +185,14 @@ function SubscriptionDetails({ data, back }: { data: GetSubscriptionResponse; ba
 
       {canceling && (
         <CancelSubscriptionDialog subscription={subscription} onOpenChange={(open) => !open && setCanceling(false)} />
+      )}
+      {deleting && (
+        <DeleteSubscriptionDialog
+          subscription={subscription}
+          purchased={!!purchase}
+          onDeleted={() => navigate({ to: "/subscriptions", search })}
+          onOpenChange={setDeleting}
+        />
       )}
     </>
   );

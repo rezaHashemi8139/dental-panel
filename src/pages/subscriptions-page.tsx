@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { create } from "@bufbuild/protobuf";
-import { getRouteApi, Link } from "@tanstack/react-router";
-import { ArrowLeftIcon, BanIcon, PlusIcon, UserIcon, UserXIcon } from "lucide-react";
+import { getRouteApi, Link, useRouter } from "@tanstack/react-router";
+import { ArrowLeftIcon, BanIcon, PlusIcon, Trash2Icon, UserIcon, UserXIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { adminClient } from "@/api/client";
 import { hasReason } from "@/api/errors";
@@ -35,6 +35,8 @@ import {
 } from "@/lib/subscription";
 import { uuidToString } from "@/lib/uuid";
 import { CancelSubscriptionDialog } from "@/components/cancel-subscription-dialog";
+import { DeleteSubscriptionDialog } from "@/components/delete-subscription-dialog";
+import { DeleteUserDialog } from "@/components/delete-user-dialog";
 import { Detail } from "@/components/detail";
 import { ListEmpty, ListFilters, ListPage, ListResults } from "@/components/list-page";
 import { ListPagination } from "@/components/list-pagination";
@@ -365,9 +367,13 @@ function UserDetails({
   const format = useFormat();
   // The account's address (with the list's), for coming back from a subscription.
   const search = subscriptionsRoute.useSearch();
+  const navigate = subscriptionsRoute.useNavigate();
+  const router = useRouter();
   const code = fromPersonIdentity(user.identity);
   const [selling, setSelling] = useState(false);
   const [canceling, setCanceling] = useState<Subscription | null>(null);
+  const [deleting, setDeleting] = useState<{ subscription: Subscription; purchased: boolean } | null>(null);
+  const [deletingUser, setDeletingUser] = useState(false);
   const reviews = useMemo(() => toReviews(user, accounts), [user, accounts]);
   const now = Date.now();
   const until = paidUntil(user.subscriptions, now);
@@ -384,11 +390,17 @@ function UserDetails({
           <CardDescription>
             {until ? t("subscriptions.user.paidUntil", { date: format.dateTime(until) }) : t("subscriptions.user.noPaidTime")}
           </CardDescription>
-          <CardAction>
+          <CardAction className="flex flex-wrap gap-2">
             <Button onClick={() => setSelling(true)}>
               <PlusIcon data-icon="inline-start" />
               {t("subscriptions.sell.button")}
             </Button>
+            {user.user && (
+              <Button variant="destructive" onClick={() => setDeletingUser(true)}>
+                <Trash2Icon data-icon="inline-start" />
+                {t("users.delete.button")}
+              </Button>
+            )}
           </CardAction>
         </CardHeader>
         <CardContent>
@@ -474,13 +486,24 @@ function UserDetails({
                     <TableCell className="max-w-48 truncate whitespace-nowrap" title={subscription.note}>
                       {subscription.note || t("common.empty")}
                     </TableCell>
-                    <TableCell className="text-end">
-                      {(status === "active" || status === "upcoming") && (
-                        <Button variant="destructive" size="sm" onClick={() => setCanceling(subscription)}>
-                          <BanIcon data-icon="inline-start" />
-                          {t("subscriptions.cancel.button")}
+                    <TableCell>
+                      <span className="flex justify-end gap-2">
+                        {(status === "active" || status === "upcoming") && (
+                          <Button variant="destructive" size="sm" onClick={() => setCanceling(subscription)}>
+                            <BanIcon data-icon="inline-start" />
+                            {t("subscriptions.cancel.button")}
+                          </Button>
+                        )}
+                        <Button
+                          variant="destructive"
+                          size="icon-sm"
+                          title={t("subscriptions.delete.button")}
+                          aria-label={t("subscriptions.delete.button")}
+                          onClick={() => setDeleting({ subscription, purchased: !!purchase })}
+                        >
+                          <Trash2Icon />
                         </Button>
-                      )}
+                      </span>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -566,6 +589,23 @@ function UserDetails({
       {selling && <SellSubscriptionDialog user={user} plans={plans} onOpenChange={setSelling} />}
       {canceling && (
         <CancelSubscriptionDialog subscription={canceling} onOpenChange={(open) => !open && setCanceling(null)} />
+      )}
+      {deleting && (
+        <DeleteSubscriptionDialog
+          subscription={deleting.subscription}
+          purchased={deleting.purchased}
+          onDeleted={() => router.invalidate({ sync: true })}
+          onOpenChange={(open) => !open && setDeleting(null)}
+        />
+      )}
+      {deletingUser && user.user && (
+        <DeleteUserDialog
+          user={user.user}
+          ownedClinicCount={user.ownedClinics.length}
+          // The account is gone: back to the list, with its filters.
+          onDeleted={() => navigate({ search: { ...search, code: undefined } })}
+          onOpenChange={setDeletingUser}
+        />
       )}
     </>
   );

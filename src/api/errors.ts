@@ -23,6 +23,10 @@ const REASONS: Record<string, ParseKeys> = {
   // An upgrade, but a later subscription was sold after it was reported.
   renewal_queued: "errors.renewalQueued",
   payment_account_not_found: "errors.paymentAccountNotFound",
+  // The administrator's own details and password (UpdateProfile, ChangePassword).
+  username_taken: "errors.usernameTaken",
+  weak_password: "errors.weakPassword",
+  password_unchanged: "errors.passwordUnchanged",
   // The server is up but its database is not ready yet.
   unavailable: "errors.serverUnavailable",
 };
