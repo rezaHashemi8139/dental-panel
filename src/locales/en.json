@@ -289,25 +289,33 @@
       "empty": "This clinic has no devices.",
       "columns": {
         "computer": "Computer",
-        "system": "Operating system",
-        "hardware": "Hardware",
+        "status": "Status",
+        "appVersion": "App version",
+        "lastSeen": "Last seen"
+      },
+      "details": "Full specs",
+      "machine": "Machine {{id}}",
+      "neverLoggedIn": "Never",
+      "active": "Active",
+      "revoked": "Revoked",
+      "revokedAt": "Since {{date}}",
+      "overLimit": "Beyond the device limit",
+      "gigabytes": "{{size}} GB",
+      "fields": {
+        "operatingSystem": "Operating system",
+        "osVersion": "OS version",
+        "cpu": "Processor",
+        "cores": "Cores",
+        "memory": "RAM",
         "mac": "MAC addresses",
         "appVersion": "App version",
         "offlineAccess": "Offline access",
         "createdAt": "Registered",
         "lastSeen": "Last seen",
         "lastLogin": "Last login",
-        "status": "Status"
-      },
-      "machine": "Machine {{id}}",
-      "cores_one": "{{cores}} core",
-      "cores_other": "{{cores}} cores",
-      "memory": "{{size}} GB RAM",
-      "neverLoggedIn": "Never",
-      "active": "Active",
-      "revoked": "Revoked",
-      "revokedAt": "Since {{date}}",
-      "overLimit": "Beyond the device limit"
+        "revokedAt": "Revoked",
+        "machineId": "Machine ID"
+      }
     }
   },
   "payments": {
